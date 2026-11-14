@@ -1,0 +1,87 @@
+[
+  {
+    "id": "woods-studio",
+    "displayName": "Woods Studio",
+    "legacyNames": [
+      "Woods Studio"
+    ],
+    "description": "",
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/abbb1732-b0f0-472d-8bf3-31c0716db77c/WoodsStudioLogoNEW.png?format=1500w",
+    "banner": null,
+    "website": "https://www.woodsstudio.dev/",
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "ws-toasted-studio",
+    "displayName": "WS Toast'ed Studio",
+    "legacyNames": [
+      "WS Toast'ed Studio"
+    ],
+    "description": "",
+    "icon": null,
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "horizongate-network",
+    "displayName": "HorizonGate Network",
+    "legacyNames": [
+      "HorizonGate Network"
+    ],
+    "description": "",
+    "icon": null,
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "skylar-suite",
+    "displayName": "Skylar's Suite",
+    "legacyNames": [
+      "[⛔ Unverified] Skylar's Suite"
+    ],
+    "description": "",
+    "icon": null,
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "woods-studio-labs",
+    "displayName": "Woods Studio Labs",
+    "legacyNames": [
+      "Woods Studio Labs"
+    ],
+    "description": "",
+    "icon": null,
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  }
+]

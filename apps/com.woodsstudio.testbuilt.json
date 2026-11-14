@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.testbuilt",
+  "name": "Test",
+  "category": "HomeUI Apps",
+  "developer": "Woods Studio",
+  "version": "Test",
+  "icon": "https://woodsstudio.dev/notrealimg.png",
+  "downloads": {
+    "windows": "https://woodsstudio.dev/notrealfile.exe",
+    "linux": "https://woodsstudio.dev/notrealfile.dev",
+    "android": "https://woodsstudio.dev/notrealfile.aab"
+  },
+  "description": "This app is a Test App to make sure all our systems work",
+  "timestamp": 1791093856895
+}

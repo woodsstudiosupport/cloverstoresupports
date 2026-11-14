@@ -1,0 +1,15 @@
+{
+  "id": "test",
+  "name": "Test",
+  "category": "Splash Desktop",
+  "developer": "Woods Studio Developers",
+  "version": "0.Test",
+  "icon": "https://woodsstudio.dev/test.png",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  },
+  "description": "Test",
+  "isBuiltin": false
+}

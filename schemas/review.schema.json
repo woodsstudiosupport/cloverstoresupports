@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/review.schema.json",
+  "type": "object",
+  "properties": {
+    "appId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,199}$",
+      "not": {
+        "const": "null"
+      }
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "rating": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "comment": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8000
+    },
+    "date": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "timestamp": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "submissionId": {
+      "type": "string",
+      "maxLength": 100
+    }
+  },
+  "required": [
+    "appId",
+    "name",
+    "rating",
+    "comment"
+  ],
+  "additionalProperties": false
+}

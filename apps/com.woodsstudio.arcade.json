@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.arcade",
+  "name": "Arcade Arena",
+  "category": "Games",
+  "developer": "WS Toast'ed Studio",
+  "version": "1.0",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/3132b58c-99cd-438e-868f-22e0947a1723/com.woodsstudio.collocal.png?content-type=image%2Fpng",
+  "genre": "Retro Gaming",
+  "description": "Toast'ed interactive arcade arena featuring responsive mini-games, speed runs, and pixel challenges.",
+  "downloads": {
+    "windows": "https://example.com/arcade.exe",
+    "linux": "",
+    "android": ""
+  }
+}

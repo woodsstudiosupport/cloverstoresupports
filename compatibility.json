@@ -1,0 +1,23 @@
+{
+  "legacyEntries": [
+    {
+      "id": "null",
+      "sha256": "2826ab9669f899cae71c91b7610102468fa80687019192875aea4fcc0de11c09",
+      "reason": "Existing blank placeholder"
+    },
+    {
+      "id": "com.woodsstudio.core",
+      "sha256": "cf1e070f27f0458913c14ad286615fb24d24e6808e9d151d426d5c761d5140d2",
+      "reason": "Existing downloads.isBuiltin boolean; not a download URL"
+    },
+    {
+      "id": "com.woodsstudio.clover.dashboard.dockoverlay",
+      "sha256": "87b7f827183613c0436dae75b408034004fd3a630e4f1bc534fd873fc9547de1",
+      "reason": "Existing downloads.isBuiltin boolean; not a download URL"
+    }
+  ],
+  "note": "Only exact historical rows are exempt from strict schema checks. New or edited submissions must pass validation. Do not regenerate this allowlist from untrusted submissions.",
+  "legacyReviewAppIds": [
+    "test"
+  ]
+}

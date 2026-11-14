@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.finder",
+  "name": "Finder",
+  "category": "Splash Desktop",
+  "developer": "Woods Studio",
+  "version": "6.5",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
+  "genre": "File Management",
+  "description": "Comprehensive spatial file browser and deep indexing daemon for desktop setups.",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

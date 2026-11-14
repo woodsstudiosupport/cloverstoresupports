@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/app.schema.json",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "developer",
+    "developerId",
+    "category",
+    "version",
+    "description",
+    "icon",
+    "downloads"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,199}$",
+      "not": {
+        "const": "null"
+      }
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 150
+    },
+    "developer": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 150
+    },
+    "developerId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 100
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "icon": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    },
+    "downloads": {
+      "type": "object",
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "const": ""
+          },
+          {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 4096
+          }
+        ]
+      }
+    },
+    "isBuiltin": {
+      "type": "boolean"
+    },
+    "timestamp": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "androidPackageName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$"
+    },
+    "packageName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$"
+    },
+    "androidVersionCode": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "versionCode": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "androidSha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "screenshots": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "oneOf": [
+          {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 4096
+          },
+          {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "maxLength": 4096
+              },
+              "caption": {
+                "type": "string",
+                "maxLength": 300
+              }
+            },
+            "required": [
+              "url"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "changelog": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "minimumAndroidSdk": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sizeBytes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "website": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    },
+    "homepage": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    },
+    "supportUrl": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    },
+    "privacyPolicy": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    }
+  },
+  "additionalProperties": true
+}

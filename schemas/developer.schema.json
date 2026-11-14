@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/developer.schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 100
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "legacyNames": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 150
+      },
+      "uniqueItems": true
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 8000
+    },
+    "icon": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "banner": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "website": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "supportUrl": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "privacyPolicy": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "unverified",
+            "verified"
+          ]
+        },
+        "verifiedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "status",
+        "verifiedAt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id",
+    "displayName",
+    "legacyNames",
+    "description",
+    "icon",
+    "banner",
+    "website",
+    "supportUrl",
+    "privacyPolicy",
+    "verification"
+  ],
+  "additionalProperties": false
+}

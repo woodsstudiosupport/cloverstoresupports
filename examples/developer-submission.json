@@ -1,0 +1,8 @@
+{
+  "id": "example-studio",
+  "displayName": "Example Studio",
+  "description": "Replace with your public developer description.",
+  "icon": "https://example.com/developer-icon.png",
+  "banner": "https://example.com/developer-banner.png",
+  "website": "https://example.com/"
+}

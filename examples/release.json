@@ -1,0 +1,11 @@
+{
+  "id": "example-app-android-stable-1",
+  "appId": "example-listing",
+  "platform": "android",
+  "channel": "stable",
+  "version": "1.0",
+  "versionCode": 1,
+  "packageName": "com.example.android.app",
+  "url": "https://example.com/app.apk",
+  "changelog": "Replace with the release changes."
+}

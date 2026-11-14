@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/release.schema.json",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 100
+    },
+    "appId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,199}$",
+      "not": {
+        "const": "null"
+      }
+    },
+    "platform": {
+      "enum": [
+        "android",
+        "windows",
+        "linux",
+        "macos",
+        "ios",
+        "homeui",
+        "clover-splash",
+        "web"
+      ]
+    },
+    "channel": {
+      "enum": [
+        "stable",
+        "beta",
+        "nightly"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "versionCode": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "packageName": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]*(\\.[A-Za-z][A-Za-z0-9_]*)+$"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "maxLength": 4096
+    },
+    "sizeBytes": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "certificateSha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "minSdk": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "architectures": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "arm64-v8a",
+          "armeabi-v7a",
+          "x86_64",
+          "x86",
+          "universal"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "changelog": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "appId",
+    "platform",
+    "channel",
+    "version",
+    "url"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "platform": {
+            "const": "android"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "versionCode"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.core",
+  "name": "Woods Studio Core Library",
+  "category": "App Suite",
+  "developer": "Woods Studio Labs",
+  "genre": "System",
+  "icon": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.core.png",
+  "version": "1.0",
+  "description": "A system app for Clover Splash, Clover HomeUI, Windows, and Subsystem Beta. This app is just to download & install if your device cannot install Clover Splash Reimagined, Clover HomeUI 6.2, or Subsystem FP3, but can support modernUI 16 apps.",
+  "downloads": {
+    "windows": "",
+    "linux": "https://archive.org/download/woodsstudioplatform/woodsstudioplatform_archive.torrent",
+    "android": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.platform.apk"
+  }
+}

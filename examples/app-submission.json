@@ -1,0 +1,14 @@
+{
+  "id": "example-listing",
+  "developerId": "example-studio",
+  "name": "Example App",
+  "category": "App Suite",
+  "version": "1.0",
+  "description": "Replace with an accurate app description.",
+  "icon": "https://example.com/app-icon.png",
+  "androidPackageName": "com.example.android.app",
+  "androidVersionCode": 1,
+  "downloads": {
+    "android": "https://example.com/app.apk"
+  }
+}

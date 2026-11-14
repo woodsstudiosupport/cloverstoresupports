@@ -5,20 +5,20 @@
     "legacyNames": [
       "Woods Studio"
     ],
-    "description": "",
+    "description": "Welcome to Woods Studio, where creativity meets creators. On Clover Store, you can find apps by anyone, made for Clover, but also Android & Windows! And with Clover Store Create, you can also publish your own apps. Visit Store > Settings > Disclaimers to see how your data is managed. ",
     "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/abbb1732-b0f0-472d-8bf3-31c0716db77c/WoodsStudioLogoNEW.png?format=1500w",
-    "banner": null,
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
     "website": "https://www.woodsstudio.dev/",
-    "supportUrl": null,
-    "privacyPolicy": null,
+    "supportUrl": "mailto:support.woodsstudio@gmail.com",
+    "privacyPolicy": "https://legal.woodsstudio.dev",
     "verification": {
-      "status": "unverified",
-      "verifiedAt": null
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
     }
   },
   {
     "id": "ws-toasted-studio",
-    "displayName": "WS Toast'ed Studio",
+    "displayName": "Toast'ed Studios",
     "legacyNames": [
       "WS Toast'ed Studio"
     ],
@@ -29,8 +29,8 @@
     "supportUrl": null,
     "privacyPolicy": null,
     "verification": {
-      "status": "unverified",
-      "verifiedAt": null
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
     }
   },
   {
@@ -39,8 +39,8 @@
     "legacyNames": [
       "HorizonGate Network"
     ],
-    "description": "",
-    "icon": null,
+    "description": "HorizonGate, the managers of Prism SMP. Please visit their discord for more information, as Woods Studio cannot provide it.",
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/376c8811-9b43-410a-bd00-6daa466101b1/PrismSMP_WoodsStudioAsset.webp?format=2500w",
     "banner": null,
     "website": null,
     "supportUrl": null,
@@ -56,7 +56,7 @@
     "legacyNames": [
       "[⛔ Unverified] Skylar's Suite"
     ],
-    "description": "",
+    "description": "This Developer has been suspended pending action review for the folowing app(s): 'Skylar's PWAs'",
     "icon": null,
     "banner": null,
     "website": null,
@@ -74,14 +74,14 @@
       "Woods Studio Labs"
     ],
     "description": "",
-    "icon": null,
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/8a60cac9-393b-4114-889f-aee205dedaf1/wslabslogo.png?format=100w",
     "banner": null,
     "website": null,
     "supportUrl": null,
     "privacyPolicy": null,
     "verification": {
-      "status": "unverified",
-      "verifiedAt": null
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
     }
   }
 ]

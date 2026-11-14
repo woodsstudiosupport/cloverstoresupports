@@ -1,0 +1,40 @@
+{
+  "sidebar": [
+    "Discover",
+    "Browse",
+    "Search",
+    "Library",
+    "Developers",
+    "Updates",
+    "Downloads",
+    "Compare",
+    "Inspector",
+    "Settings"
+  ],
+  "mobile": [
+    "Discover",
+    "Browse",
+    "Search",
+    "Library"
+  ],
+  "browser": [
+    "Discover",
+    "Browse",
+    "Search",
+    "Library",
+    "Downloads",
+    "Settings"
+  ],
+  "menu": [
+    "Discover",
+    "Browse",
+    "Search",
+    "Library",
+    "Developers",
+    "Updates",
+    "Downloads",
+    "Compare",
+    "Inspector",
+    "Settings"
+  ]
+}

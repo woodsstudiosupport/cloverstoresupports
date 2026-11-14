@@ -80,3 +80,7 @@ For an individual app, use the publisher's support information where available. 
 ---
 
 Clover Store is part of the Woods Studio ecosystem.
+
+## Web interface source
+
+The public web interface is now included in [`web/`](web/README.md). The root [`index.html`](index.html) loads its layout, navigation, styles, code, branding and catalogue from GitHub, then displays a separate five-second finishing phase. See the web guide for editing and hosting instructions.

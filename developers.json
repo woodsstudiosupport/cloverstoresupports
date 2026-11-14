@@ -22,9 +22,9 @@
     "legacyNames": [
       "WS Toast'ed Studio"
     ],
-    "description": "",
+    "description": "The game dev studio, by Woods Studio.",
     "icon": null,
-    "banner": null,
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
     "website": null,
     "supportUrl": null,
     "privacyPolicy": null,
@@ -73,10 +73,10 @@
     "legacyNames": [
       "Woods Studio Labs"
     ],
-    "description": "",
+    "description": "Labs is designed by Woods Studio for creators. Apps asked to be hosted by Woods Studio will use the Labs profile. Click below to find out.",
     "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/8a60cac9-393b-4114-889f-aee205dedaf1/wslabslogo.png?format=100w",
-    "banner": null,
-    "website": null,
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+    "website": "https://labs.woodsstudio.dev",
     "supportUrl": null,
     "privacyPolicy": null,
     "verification": {

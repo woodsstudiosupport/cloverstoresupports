@@ -40,3 +40,7 @@ Run `node --test web/tests/startup.test.cjs`. GitHub Actions runs the same check
 Settings includes an option to open website links in a new tab. With it off, links use the built-in browser. Notification access is requested only from its button, with permission status and a test alert. These alerts work while the store is open; this version does not supply closed-app push notifications.
 
 Enable **Save multiple files together** to save completed downloads as a group. The browser controls automatic-download permission; Clover Store cannot grant it. Supported HTTPS desktop browsers can choose a destination folder for the current session. Folder saves preserve existing filenames by numbering duplicates. Unsupported browsers retain individual file saving. The favicon uses the Clover Store app icon; deploying the updated root HTML restores it.
+
+## Themes
+
+Settings → Themes offers Pure Black, Aurora, Violet Haze, Deep Ocean, Ember, Rose Dawn, and Splash Obsidian Light/Dark. These use code-based gradient wallpapers, including original Obsidian-inspired folds rather than official wallpaper image files. The selected theme adapts text and surfaces to a light or dark palette and is saved locally. Accent, spacing and reduced-motion settings remain separate. Edit the `THEMES` list in `web/app.js` to add backgrounds; layout and preview styles live in `web/style.css`. The small startup and offline screens remain black.

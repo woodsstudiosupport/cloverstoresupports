@@ -34,3 +34,9 @@ All files in this folder are public browser code. Keep passwords, signing keys, 
 ## Check changes
 
 Run `node --test web/tests/startup.test.cjs`. GitHub Actions runs the same checks for web changes. Existing catalogue validation remains separate.
+
+## Browsing and permissions
+
+Settings includes an option to open website links in a new tab. With it off, links use the built-in browser. Notification access is requested only from its button, with permission status and a test alert. These alerts work while the store is open; this version does not supply closed-app push notifications.
+
+Enable **Save multiple files together** to save completed downloads as a group. The browser controls automatic-download permission; Clover Store cannot grant it. Supported HTTPS desktop browsers can choose a destination folder for the current session. Folder saves preserve existing filenames by numbering duplicates. Unsupported browsers retain individual file saving. The favicon uses the Clover Store app icon; deploying the updated root HTML restores it.

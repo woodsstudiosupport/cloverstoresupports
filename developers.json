@@ -83,12 +83,21 @@
       "status": "verified",
       "verifiedAt": "2026-11-14T12:00:00Z"
     },
-  {
-  "id": "telstra-au",
-  "displayName": "Telstra Australia",
-  "description": "Telstra is Australia’s leading telecommunications and technology company, turning our national mobile, 5G, and fibre infrastructure into programmable software products. Through the Telstra Developer Portal, we provide RESTful APIs that let developers embed carrier-grade messaging, real-time identity and fraud verification (CAMARA standards), and IoT device management directly into their applications. Built with OAuth 2.0 security and OpenAPI standards, our platform makes it simple to build, test, and scale connected solutions on Australia's largest network.",
-  "icon": "https://glendalecitycentre.com.au/wp-content/uploads/2024/06/Telstra.png",
-  "banner": "https://www.telstra.com.au/content/dam/tcom/library/cam-campaign/blackfriday26/CAM-bf26-hero-visual-marqueeDesktop-3000x550-2x.jpeg",
-  "website": "https://telstra.com.au"
+    {
+    "id": "telstra-au",
+    "displayName": "Telstra Australia",
+    "legacyNames": [
+      "com.telstra.service5g"
+    ],
+    "description": "Telstra is Australia’s leading telecommunications and technology company, turning our national mobile, 5G, and fibre infrastructure into programmable software products. Through the Telstra Developer Portal, we provide RESTful APIs that let developers embed carrier-grade messaging, real-time identity and fraud verification (CAMARA standards), and IoT device management directly into their applications. Built with OAuth 2.0 security and OpenAPI standards, our platform makes it simple to build, test, and scale connected solutions on Australia's largest network.",
+    "icon": "https://glendalecitycentre.com.au/wp-content/uploads/2024/06/Telstra.png",
+    "banner": "https://www.telstra.com.au/content/dam/tcom/library/cam-campaign/blackfriday26/CAM-bf26-hero-visual-marqueeDesktop-3000x550-2x.jpeg",
+    "website": "https://www.telstra.com.au",
+    "supportUrl": "https://www.telstra.com.au/support",
+    "privacyPolicy": "https://www.telstra.com.au/privacy",
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
+    }
   }
 ]

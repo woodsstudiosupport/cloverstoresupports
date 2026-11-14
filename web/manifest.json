@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "files": {
+    "shell": "web/shell.html",
+    "style": "web/style.css",
+    "app": "web/app.js",
+    "apk": "web/apk.js",
+    "qr": "web/qrcode.js",
+    "navigation": "web/navigation.json"
+  },
+  "assets": {
+    "store-icon": "web/assets/store-icon.png",
+    "woods-logo": "web/assets/woods-logo.png"
+  },
+  "data": {
+    "catalogue": "catalogue.json",
+    "registry": "registry.json",
+    "developers": "developers.json",
+    "reviews": "reviews.json",
+    "announcements": "announcements.json",
+    "collections": "collections.json",
+    "releases": "releases.json"
+  }
+}

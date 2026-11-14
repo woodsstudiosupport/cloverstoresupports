@@ -4,7 +4,7 @@
 
 Clover Store brings applications, developer profiles, releases and community reviews together in one catalogue. Browse apps for Android, Clover HomeUI, Clover Splash, Windows and other supported devices, with availability shown on each listing.
 
-[Explore the catalogue repository](https://github.com/woodsstudiosupport/cloverstore)
+[Explore the catalogue repository](https://github.com/woodsstudiosupport/cloverstoresupports)
 
 ## How Clover Store works
 
@@ -28,7 +28,7 @@ Availability and compatibility vary by app and device. Check the listing and pub
 
 Developer profiles give publishers a consistent identity across their apps. A profile can include a name, icon, banner, description, website and support links. Apps are connected to their developer so compatible Clover Store clients can display developer cards and pages listing their applications.
 
-Profile artwork and links appear when supplied. A verification badge is shown only when verification has been granted; having a profile does not automatically mean a publisher is verified.
+Profile artwork and links appear when supplied. Generic icon and banner defaults are available when artwork has not been provided. A verification badge is shown only when verification has been granted; having a profile does not automatically mean a publisher is verified.
 
 The planned developer website will provide a dedicated place to manage profiles, submit apps and manage releases. It is not included as a running website in this repository.
 
@@ -51,7 +51,9 @@ Apps can provide platform-specific releases and, where available, Stable, Beta o
 | File or folder | Public catalogue information |
 | --- | --- |
 | `registry.json` | Published applications and their listings. |
-| `apps/` | Individual app records. |
+| `apps/` | Individual records matching the published catalogue. |
+| `assets/developers/` | Generic developer artwork defaults. |
+| `archive/` | Historical records retained for reference, outside the published catalogue. |
 | `developers.json` | Developer profiles and public links. |
 | `reviews.json` | Published community reviews and ratings. |
 | `collections.json` | Groups of related applications. |

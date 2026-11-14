@@ -112,21 +112,6 @@
     "developerId": "woods-studio"
   },
   {
-    "id": "null",
-    "name": "",
-    "category": "HomeUI Apps",
-    "developer": "",
-    "version": "",
-    "icon": "",
-    "downloads": {
-      "windows": "",
-      "linux": "",
-      "android": ""
-    },
-    "description": "",
-    "isBuiltin": false
-  },
-  {
     "id": "com.woodsstudio.toasted.games",
     "name": "WS Games Center (Base)",
     "category": "Games",
@@ -222,10 +207,10 @@
     "downloads": {
       "windows": "",
       "linux": "https://archive.org/download/woodsstudioplatform/woodsstudioplatform_archive.torrent",
-      "android": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.platform.apk",
-      "isBuiltin": true
+      "android": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.platform.apk"
     },
-    "developerId": "woods-studio"
+    "developerId": "woods-studio",
+    "isBuiltin": true
   },
   {
     "id": "com.woodsstudio.clover.appstore",
@@ -255,10 +240,10 @@
     "downloads": {
       "windows": "",
       "linux": "",
-      "android": "",
-      "isBuiltin": true
+      "android": ""
     },
-    "developerId": "woods-studio-labs"
+    "developerId": "woods-studio-labs",
+    "isBuiltin": true
   },
   {
     "id": "com.woodsstudio.clover.forge",

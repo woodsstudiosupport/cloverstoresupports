@@ -1,0 +1,16 @@
+{
+  "id": "com.woodsstudio.prism.news",
+  "name": "Prism News",
+  "category": "App Suite",
+  "developer": "Woods Studio",
+  "version": "2.5",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/f2a68b4c-2df1-4a78-bcb2-cf191dd317e7/com.woodsstudio.prism.news.assets.main.header.logo.png?StorePlatform",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": "https://archive.org/download/woodsstudio.news/com.woodsstudio.prism.news.apk"
+  },
+  "description": "On the Prism SMP Platform",
+  "isBuiltin": false,
+  "timestamp": 1791102345173
+}

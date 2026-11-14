@@ -1,15 +1,16 @@
 {
   "id": "com.woodsstudio.android.store",
-  "name": "Store (Nightly)",
+  "name": "Store (Android)",
   "category": "App Suite",
   "developer": "Woods Studio Labs",
   "genre": "Android Only",
   "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/a39c8047-e201-4c66-887b-2badf5e668c0/com.woodsstudio.android.store.png?format=100w",
-  "version": "1.0",
-  "description": "A Signed app (CN=WoodsStudioDevs O=WoodsStudio), only for testing, and will be published on Google Play Store",
+  "version": "1.3googleRelease",
+  "description": "Clover Store for Android is the best way to get the latest apps and updates from Woods Studio, plus other developers! You can also publish your own app, for everyone to see, if it's for Clover Splash, Clover HomeUI, Windows, Subsystem, and even Android, it's one of the fastest ways to get it out.",
   "downloads": {
     "windows": "",
-    "linux": "",
+    "linux": "https://archive.org/download/app-release_20261004/6.apk",
     "android": "https://archive.org/download/clover-store-splash-aligned-signed/CloverStore-splash-aligned-signed.apk"
-  }
+  },
+  "developerId": "woods-studio-labs"
 }

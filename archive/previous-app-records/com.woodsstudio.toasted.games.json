@@ -1,0 +1,16 @@
+{
+  "id": "com.woodsstudio.toasted.games",
+  "name": "WS Games Center (Base)",
+  "category": "Games",
+  "developer": "WS Toast'ed Studio",
+  "version": "14.5",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/4d789649-8cf3-48b8-a4ff-50c582570a92/com.woodsstudio.games.png",
+  "downloads": {
+    "windows": "https://archive.org/download/woodsstudiogamesinstallerbase/wsgamesinstaller.exe",
+    "linux": "",
+    "android": ""
+  },
+  "description": "This edition brings a Rollback System, where if you like the look of an older version (currently supported: v14.1, v14.2, v14.3), you can go to Settings > Beta Testing and you can change. PLEASE NOTE: Your launcher will NOT connect to WS Game Services below v14.2. If you aren’t able to see below 14.2, it is because your launcher was given a PCSU (Patch Client System Update) because of system integrity. Plus a bunch of bugfixes and UI updates.",
+  "isBuiltin": false,
+  "timestamp": 1791101874240
+}

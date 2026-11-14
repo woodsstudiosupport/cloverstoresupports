@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/collection.schema.json",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/main/schemas/collection.schema.json",
   "type": "object",
   "properties": {
     "id": {

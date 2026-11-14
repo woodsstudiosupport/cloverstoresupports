@@ -83,6 +83,9 @@ def prepare_submission(root, issue, number, now=None):
         for name in PUBLIC_FILES:
             shutil.copyfile(root/name,staged/name)
         shutil.copytree(root/'schemas',staged/'schemas')
+        shutil.copytree(root/'apps',staged/'apps')
+        if (root/'assets').exists():
+            shutil.copytree(root/'assets',staged/'assets')
         for name,value in updates.items():
             path=staged/name
             path.parent.mkdir(parents=True,exist_ok=True)

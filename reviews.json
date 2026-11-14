@@ -1,12 +1,4 @@
 {
-  "test": [
-    {
-      "name": "Woods Studio",
-      "rating": 1,
-      "comment": "Test app (would not recommend",
-      "date": "10/4/2026"
-    }
-  ],
   "com.woodsstudio.prism.news": [
     {
       "name": "Nice server",

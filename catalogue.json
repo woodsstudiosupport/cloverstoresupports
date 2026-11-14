@@ -21,5 +21,9 @@
     "reviewSubmission": null,
     "reports": null,
     "devicePairing": null
+  },
+  "profileDefaults": {
+    "icon": "assets/developers/default-icon.png",
+    "banner": "assets/developers/default-banner.png"
   }
 }

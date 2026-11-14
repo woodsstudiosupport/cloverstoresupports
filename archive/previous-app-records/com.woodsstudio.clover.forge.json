@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.clover.forge",
+  "name": "Clover FORGE",
+  "category": "Splash Desktop",
+  "developer": "Woods Studio Labs",
+  "genre": "Obsidian Apps",
+  "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/000c0baf-d1d4-405c-b3fa-ec7ca2ea7629/com.woodsstudio.clover.forge.png?format=300w",
+  "version": "1.0",
+  "description": "Create an app on the Clover Experience ecosystem, in the easiest way. Create Clover WTA Apps, FrameUI Kits, and more. Please Note!!!: FORGE APIs and some other dependencies (like FrameUI Agent, Platform Agent, etc), plus very important stuff may not work due to Clover FORGE for Windows not currently live. We are  working on setTEX builds.",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

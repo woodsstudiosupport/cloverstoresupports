@@ -3,13 +3,14 @@
   "name": "Platform Agent",
   "category": "Splash Desktop",
   "developer": "Woods Studio",
-  "version": "25.0",
-  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
-  "genre": "Diagnostics",
-  "description": "Hardware telemetry and platform application compatibility layer for Splash devices.",
+  "version": "25 (app v22)",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/e31bb72d-d335-4cfc-b74d-108a36d97953/com.woodsstudio.platformassetsicon.png?content-type=image%2Fpng",
   "downloads": {
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "description": "Android application compatibility layer and platform services support runtime.",
+  "isBuiltin": true,
+  "developerId": "woods-studio"
 }

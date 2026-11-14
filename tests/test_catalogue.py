@@ -17,6 +17,8 @@ class CatalogueTests(unittest.TestCase):
         for name in PUBLIC_FILES:
             shutil.copyfile(ROOT/name,self.root/name)
         shutil.copytree(ROOT/'schemas',self.root/'schemas')
+        shutil.copytree(ROOT/'apps',self.root/'apps')
+        shutil.copytree(ROOT/'assets',self.root/'assets')
     def save(self,name,data):
         (self.root/name).write_text(json.dumps(data))
     def issue(self,kind,data,approved=True):
@@ -25,9 +27,24 @@ class CatalogueTests(unittest.TestCase):
         app=copy.deepcopy(next(a for a in read(self.root,'registry.json') if a.get('name')))
         app.update(id='com.example.app',name='New app',developerId='horizongate-network',developer='HorizonGate Network',downloads={'android':'https://example.com/app.apk'})
         return app
-    def test_current_catalogue_preserves_known_legacy_rows(self):
+    def test_current_catalogue_has_no_compatibility_warnings(self):
         warnings=validate(self.root)
-        self.assertEqual(4,len(warnings))
+        self.assertEqual([],warnings)
+    def test_missing_profile_default_asset_rejected(self):
+        (self.root/'assets/developers/default-icon.png').unlink()
+        with self.assertRaises(InvalidCatalogue):validate(self.root)
+    def test_missing_per_app_record_rejected(self):
+        app=read(self.root,'registry.json')[0]
+        (self.root/'apps'/f"{app['id']}.json").unlink()
+        with self.assertRaises(InvalidCatalogue):validate(self.root)
+    def test_different_per_app_record_rejected(self):
+        app=read(self.root,'registry.json')[0]
+        app['name']='Different name'
+        self.save('apps/'+app['id']+'.json',app)
+        with self.assertRaises(InvalidCatalogue):validate(self.root)
+    def test_unpublished_record_rejected_in_active_apps(self):
+        self.save('apps/unpublished.json',{'id':'unpublished'})
+        with self.assertRaises(InvalidCatalogue):validate(self.root)
     def test_unknown_developer_rejected(self):
         apps=read(self.root,'registry.json');apps[0]['developerId']='not-registered';self.save('registry.json',apps)
         with self.assertRaises(InvalidCatalogue):validate(self.root)
@@ -52,7 +69,7 @@ class CatalogueTests(unittest.TestCase):
     def test_path_traversal_id_rejected_without_writes(self):
         app=self.app();app['id']='../../README'
         with self.assertRaises(InvalidCatalogue):prepare_submission(self.root,self.issue('app',app),3)
-        self.assertFalse((self.root/'apps').exists())
+        self.assertFalse((self.root/'apps/README.json').exists())
     def test_http_download_rejected(self):
         app=self.app();app['downloads']['android']='http://example.com/app.apk'
         with self.assertRaises(InvalidCatalogue):prepare_submission(self.root,self.issue('app',app),4)

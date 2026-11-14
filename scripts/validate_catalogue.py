@@ -94,6 +94,13 @@ def validate(root=ROOT):
         verification=dev['verification']
         if (verification['status']=='verified') != (verification['verifiedAt'] is not None):
             raise InvalidCatalogue('Verified developers require a verification timestamp')
+    defaults=manifest.get('profileDefaults',{})
+    if defaults:
+        if set(defaults)!={'icon','banner'}:
+            raise InvalidCatalogue('Developer defaults must include icon and banner')
+        for name in defaults.values():
+            if not isinstance(name,str) or not name.startswith('assets/developers/') or '..' in Path(name).parts or not (root/name).is_file():
+                raise InvalidCatalogue('Developer fallback asset is missing or has an unsafe path')
     policy=manifest['installationPolicy']
     if policy.get('thirdPartyAndroidPackageIdRequired') is not True or policy.get('androidSignatureValidationRequired') is not True:
         raise InvalidCatalogue('Installation safety settings must stay enabled')
@@ -119,6 +126,16 @@ def validate(root=ROOT):
                 if profile is None or app.get('developer') not in [profile['displayName'],*profile['legacyNames']]:
                     raise InvalidCatalogue('Legacy listing must retain its registered publisher')
             warnings.append('Preserved historical row: '+app['id'])
+    canonical_ids={app['id'] for app in registry if app.get('name')}
+    if (root/'apps').exists():
+        for path in (root/'apps').glob('*.json'):
+            record=read(root,str(path.relative_to(root)))
+            if not isinstance(record,dict) or record.get('id') not in canonical_ids:
+                raise InvalidCatalogue('Unpublished app records belong in archive/, not apps/')
+    for app_id in canonical_ids:
+        path='apps/'+app_id+'.json'
+        if not (root/path).is_file() or read(root,path)!=apps[app_id]:
+            raise InvalidCatalogue('Per-app record differs from registry: '+app_id)
     releases=index(read(root,'releases.json'),'release')
     channels=set()
     for release in releases.values():

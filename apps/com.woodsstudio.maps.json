@@ -3,13 +3,14 @@
   "name": "Maps",
   "category": "HomeUI Apps",
   "developer": "Woods Studio",
-  "version": "6.0",
-  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
-  "genre": "Navigation",
-  "description": "Vector cartography and spatial routing services tailored directly for HomeUI mobile and desktop setups.",
+  "version": "6.1",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/011b47a8-437b-4754-ba88-3797913e1d59/com.woodsstudio.maps.png?content-type=image%2Fpng",
   "downloads": {
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "description": "Explore coordinates, navigations, and global environments built directly for HomeUI devices.",
+  "isBuiltin": true,
+  "developerId": "woods-studio"
 }

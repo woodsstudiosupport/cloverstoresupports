@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.widgets",
+  "name": "Widgets",
+  "category": "HomeUI Apps",
+  "developer": "Woods Studio",
+  "version": "6.2",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
+  "genre": "System Utilities",
+  "description": "Customizable dynamic desktop glanceables for telemetry, weather, and background services.",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "com.skylar.pwa",
+  "name": "Skylar's PWA's",
+  "category": "App Suite",
+  "developer": "Skylar Bahjala",
+  "genre": "Web Based Apps",
+  "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSndZDXk7xVKqSRhLfvKcQEusnPF2Ce1S1JTDDZJxqVA&s=10",
+  "version": "1.0",
+  "description": "Designed for Clover devices, a PWA Save State replacing my old version on their old platform.\nDown for Updates",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

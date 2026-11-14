@@ -1,15 +1,16 @@
 {
   "id": "com.woodsstudio.service",
   "name": "Service",
-  "category": "App Suite",
+  "category": "Splash Desktop",
   "developer": "Woods Studio",
-  "version": "17.0",
-  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
-  "genre": "Core Daemon",
-  "description": "Diagnostics, assistance, and inter-process service coordinator for managing system status.",
+  "version": "18",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/816bfeed-925a-426f-8b35-37ab1c874e0b/com.woodsstudio.helpassetsicon.png?content-type=image%2Fpng",
   "downloads": {
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "description": "Device information, support, recovery. Service is the go to for help.",
+  "isBuiltin": false,
+  "developerId": "woods-studio"
 }

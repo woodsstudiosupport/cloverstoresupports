@@ -1,15 +1,16 @@
 {
   "id": "com.woodsstudio.finder",
   "name": "Finder",
-  "category": "Splash Desktop",
+  "category": "HomeUI Apps",
   "developer": "Woods Studio",
-  "version": "6.5",
-  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
-  "genre": "File Management",
-  "description": "Comprehensive spatial file browser and deep indexing daemon for desktop setups.",
+  "version": "6.6",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/b0339484-67f3-4dd9-897f-24e5b1df5bfb/com.woodsstudio.finder.png?content-type=image%2Fpng",
   "downloads": {
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "description": "For finding and seeing all your Woods Studio devices, even if they get lost or stolen.",
+  "isBuiltin": true,
+  "developerId": "woods-studio"
 }

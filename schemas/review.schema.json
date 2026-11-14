@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstore/main/schemas/review.schema.json",
+  "$id": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/main/schemas/review.schema.json",
   "type": "object",
   "properties": {
     "appId": {

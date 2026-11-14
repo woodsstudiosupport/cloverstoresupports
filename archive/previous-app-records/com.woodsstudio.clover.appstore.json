@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.clover.appstore",
+  "name": "Clover Splash Obsidian App Store",
+  "category": "Splash Desktop",
+  "developer": "Woods Studio Labs",
+  "genre": "Clover Splash Obsidian",
+  "icon": "https://cloversplash-woodsstudio.edgeone.dev/assets/com.woodsstudio.clover.appstore.png",
+  "version": "1.0",
+  "description": "Clover Store for Obby is designed for the brand new Clover Splash Obsidian desktop, that releases in December. App v1.9 for Obby isn't available to download on  Clover Splash 6.2 and below, but the Clover Store Registry is. (Registry & any modernUI 16 apps won't function on Splash Obby (modernUI 17) without Core Library, avalible on Store Registry and Obby App Store",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

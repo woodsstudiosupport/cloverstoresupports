@@ -2,13 +2,13 @@
 
 ## Compatibility and synchronisation
 
-`registry.json` stays an array; `reviews.json` stays an object whose keys are listing IDs. Existing app names, IDs, developer text, versions, descriptions, artwork, downloads and review content are preserved by this migration. All named published listings receive a stable `developerId`. The blank historical row remains unchanged and must be skipped by clients.
+`registry.json` stays an array; `reviews.json` stays an object whose keys are listing IDs. Existing app names, IDs, developer text, versions, descriptions, artwork, downloads and review content are preserved by this migration. All named published listings receive a stable `developerId`. The old blank placeholder is retained under archive/ and is no longer part of the published array.
 
 Read `catalogue.json` for relative endpoint paths. Poll catalogue/profile/review metadata every 30 seconds while the store is active; use conditional requests and refresh on resume/reconnect. A client should retain the last valid data on a failed response, avoid overlapping requests, and update affected rows without resetting navigation. These are client requirements; this repository does not implement Android UI or polling.
 
 ## Developer identity
 
-Profiles have `id`, `displayName`, `legacyNames`, `description`, nullable `icon`, `banner`, `website`, `supportUrl`, `privacyPolicy`, and `verification`. Artwork and links use HTTPS. Missing values mean no information has been supplied; use a neutral fallback, not a borrowed app logo. Profile app lists are derived from each listing's `developerId`.
+Profiles have `id`, `displayName`, `legacyNames`, `description`, nullable `icon`, `banner`, `website`, `supportUrl`, `privacyPolicy`, and `verification`. Artwork and links use HTTPS. Missing values mean no information has been supplied; use the generic assets in catalogue.json.profileDefaults, not a borrowed app logo. These relative paths resolve from the repository root. Profile app lists are derived from each listing's `developerId`.
 
 IDs are stable identifiers, not proof of ownership. `legacyNames` supports older clients, not authentication. Names/aliases must be unambiguous across profiles. Verification defaults to `unverified` with `verifiedAt: null`. Only a documented maintainer verification process can award a badge. Do not let public submissions set verification or installation policy.
 
@@ -38,6 +38,6 @@ Announcements contain a unique ID, developer ID, title/body and ISO timestamp, w
 
 ## Reviews
 
-Published groups preserve existing review fields. New review submissions require `appId`, `name`, an integer `rating` from 1 to 5, and `comment`. The publisher stamps server-side date/timestamp and `submissionId: github-issue-N`, so retries are idempotent. An unlisted historical `test` group remains readable, but new reviews require a currently published app.
+Published groups preserve existing review fields. New review submissions require `appId`, `name`, an integer `rating` from 1 to 5, and `comment`. The publisher stamps server-side date/timestamp and `submissionId: github-issue-N`, so retries are idempotent. Historical test reviews are retained under archive/reviews.json, outside the published review feed. New reviews require a currently published app.
 
 Names are public display names, not authenticated reviewer identities. Existing reviews are not independently verified. The issue workflow does not provide private user accounts, app-side review editing/deletion, moderation appeals, or a rate-limited review API. A future service must implement those controls before enabling an in-app submission button. Do not put device identifiers or private account details into public review JSON.

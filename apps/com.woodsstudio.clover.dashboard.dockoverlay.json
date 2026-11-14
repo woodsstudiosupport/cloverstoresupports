@@ -2,7 +2,7 @@
   "id": "com.woodsstudio.clover.dashboard.dockoverlay",
   "name": "CloverSplash Obby Desktop Launcher",
   "category": "Splash Desktop",
-  "developer": "Woods Studio Developers",
+  "developer": "Woods Studio Labs",
   "genre": "Under Development",
   "icon": "https://cloversplash-woodsstudio.edgeone.dev/assets/clover-dock.png",
   "version": "1.0",
@@ -11,5 +11,7 @@
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "developerId": "woods-studio-labs",
+  "isBuiltin": true
 }

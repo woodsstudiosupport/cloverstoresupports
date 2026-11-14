@@ -1,0 +1,16 @@
+{
+  "id": "com.woodsstudio.toastedgames.sandbox",
+  "name": "Sandb☐x",
+  "category": "Games",
+  "developer": "WS Toast'ed Studio",
+  "version": "6.44.8.0",
+  "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/84eb9232-d216-469c-8e98-61a6e3890316/com.woodsstudio.clover.store.png",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  },
+  "description": "Not currently available for download without the launcher",
+  "isBuiltin": false,
+  "timestamp": 1791102912784
+}

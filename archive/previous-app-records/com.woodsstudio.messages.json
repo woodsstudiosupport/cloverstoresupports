@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.messages",
+  "name": "Messages",
+  "category": "HomeUI Apps",
+  "developer": "Woods Studio",
+  "version": "6.1",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
+  "genre": "Communication",
+  "description": "Official messaging client for HomeUI environment. Stay connected with end-to-end encrypted synchronization.",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

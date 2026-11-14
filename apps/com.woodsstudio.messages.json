@@ -3,13 +3,14 @@
   "name": "Messages",
   "category": "HomeUI Apps",
   "developer": "Woods Studio",
-  "version": "6.1",
-  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
-  "genre": "Communication",
-  "description": "Official messaging client for HomeUI environment. Stay connected with end-to-end encrypted synchronization.",
+  "version": "6.2",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/544cca58-6fe9-49a1-b879-87364f940db9/com.woodsstudio.messages.png?content-type=image%2Fpng",
   "downloads": {
     "windows": "",
     "linux": "",
     "android": ""
-  }
+  },
+  "description": "Messages is the place to go for conversations, groups, and more, with Google's RCS chat support, you can communicate with people on Android. Plus, with Aikumi AI, you can talk with Aikumi inside Messages. ",
+  "isBuiltin": true,
+  "developerId": "woods-studio"
 }

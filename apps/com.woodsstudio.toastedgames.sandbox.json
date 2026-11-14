@@ -11,6 +11,7 @@
     "android": ""
   },
   "description": "Not currently available for download without the launcher",
-  "isBuiltin": false,
-  "timestamp": 1791102912784
+  "isBuiltin": true,
+  "timestamp": 1791102912784,
+  "developerId": "ws-toasted-studio"
 }

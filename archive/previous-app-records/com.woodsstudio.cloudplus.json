@@ -1,0 +1,15 @@
+{
+  "id": "com.woodsstudio.cloudplus",
+  "name": "Cloud +",
+  "category": "App Suite",
+  "developer": "Woods Studio",
+  "version": "12.0",
+  "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/bf0c630f-3e61-440a-96fb-e29fc9e9439c/WoodsStudioUpdated2024.webp?content-type=image%2Fwebp",
+  "genre": "Cloud Storage",
+  "description": "Seamless personal cloud storage, device backup, and synchronizer node across the ecosystem.",
+  "downloads": {
+    "windows": "",
+    "linux": "",
+    "android": ""
+  }
+}

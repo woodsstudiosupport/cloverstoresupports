@@ -4,7 +4,8 @@ import hashlib
 import json
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, unquote
+import re
 from jsonschema import Draft202012Validator, FormatChecker
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,11 +26,21 @@ def validate_record(kind, record, root=ROOT):
         if isinstance(value, dict):
             for key, child in value.items():
                 if key in {'icon','banner','website','homepage','supportUrl','privacyPolicy','url'} and child is not None and child != '':
-                    check_url(child)
+                    if kind=='developer' and key=='supportUrl' and isinstance(child,str) and child.startswith('mailto:'):
+                        check_support_email(child)
+                    else:
+                        check_url(child)
                 walk(child)
         elif isinstance(value, list):
             for child in value:
                 walk(child)
+    def check_support_email(value):
+        # Only an explicit single-recipient mailto is permitted, without headers.
+        u=urlsplit(value)
+        address=unquote(u.path)
+        if (u.scheme!='mailto' or u.netloc or u.query or u.fragment
+                or not re.fullmatch(r'[^\s@<>:,;/?#]+@(?:[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?\.)+[A-Za-z]{2,63}',address)):
+            raise InvalidCatalogue('Support email must be a simple mailto address without headers or multiple recipients')
     def check_url(value):
         if not isinstance(value, str):
             raise InvalidCatalogue('URL must be a string')
@@ -185,3 +196,4 @@ if __name__=='__main__':
     except (InvalidCatalogue,KeyError,ValueError,OSError) as error:
         print('ERROR:',error,file=sys.stderr)
         sys.exit(1)
+

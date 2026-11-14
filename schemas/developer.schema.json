@@ -75,6 +75,12 @@
         },
         {
           "type": "null"
+        },
+        {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^mailto:[^\\s@?#]+@[^\\s@?#]+\\.[^\\s@?#]+$",
+          "maxLength": 4096
         }
       ]
     },

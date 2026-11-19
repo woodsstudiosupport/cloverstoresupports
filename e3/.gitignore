@@ -1,0 +1,9 @@
+android/build/
+dist/
+.openai/
+*.aab
+*.apks
+*.jks
+*.keystore
+*.pem
+__pycache__/

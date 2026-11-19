@@ -12,3 +12,4 @@
 :root[data-motion=reduce] *,:root[data-motion=reduce] *::before,:root[data-motion=reduce] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 /* Editorial artwork retains its dark palette in both interface modes. */
 .collection{color:#edf5ef}.filter-chip{min-height:44px}.theme-choice{min-height:44px}
+@media(max-width:640px){.hero-copy h1{font-size:clamp(44px,12vw,52px);margin:22px 0 18px}}

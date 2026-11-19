@@ -1,0 +1,11 @@
+const KEY='woods-e3:personal:v1';
+export const defaultPersonal=()=>({schemaVersion:1,saved:[],follows:[],recent:[],theme:'obsidian-dark',accent:'mint',motion:'auto',channels:{},lists:[],filters:[],migration:{from:null}});
+function ids(value){return Array.isArray(value)?[...new Set(value.filter(x=>typeof x==='string'&&x.length<=256))]:[]}
+export function readPersonal(storage=localStorage){let raw;try{raw=JSON.parse(storage.getItem(KEY))}catch{}if(raw?.schemaVersion===1)return {...defaultPersonal(),...raw,saved:ids(raw.saved),follows:ids(raw.follows),recent:ids(raw.recent).slice(0,20)};const read=(key,fallback)=>{try{return JSON.parse(storage.getItem('clover-html-v5:'+key))??fallback}catch{return fallback}};const previous=read('preferences',{});const personal={...defaultPersonal(),saved:ids(read('favorites',[])),follows:ids(read('follows',[])),recent:ids(read('recent',[])).slice(0,20),theme:typeof previous.wallpaper==='string'?previous.wallpaper:'obsidian-dark',accent:previous.accent||'mint',motion:previous.motion||'auto',migration:{from:'clover-html-v5'}};storage.setItem(KEY,JSON.stringify(personal));return personal}
+export function writePersonal(value,storage=localStorage){storage.setItem(KEY,JSON.stringify(value))}
+export class SnapshotStore{
+ constructor(factory=globalThis.indexedDB){this.factory=factory;this.memory=new Map()}
+ async db(){if(!this.factory)throw Error('Persistent storage unavailable');return new Promise((resolve,reject)=>{const r=this.factory.open('woods-e3-v1',1);r.onupgradeneeded=()=>r.result.createObjectStore('snapshots');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
+ async read(key='catalogue'){try{const db=await this.db();return await new Promise(resolve=>{const tx=db.transaction('snapshots');const r=tx.objectStore('snapshots').get(key);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>resolve(null);tx.oncomplete=()=>db.close()})}catch{return this.memory.get(key)||null}}
+ async write(value,key='catalogue'){const db=await this.db();await new Promise((resolve,reject)=>{const tx=db.transaction('snapshots','readwrite');tx.objectStore('snapshots').put(value,key);tx.oncomplete=()=>{db.close();this.memory.set(key,value);resolve()};tx.onerror=()=>{db.close();reject(tx.error)}})}
+}

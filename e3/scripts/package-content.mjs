@@ -1,0 +1,7 @@
+// Signing keys stay outside the repository. This tool never generates or logs them.
+import fs from 'node:fs/promises';import path from 'node:path';import crypto from 'node:crypto';
+const [root,revision,version,keyId,keyPath,output]=process.argv.slice(2);
+if(!root||!revision||!version||!keyId||!keyPath||!output)throw Error('Usage: node package-content.mjs PROJECT_ROOT COMMIT VERSION KEY_ID PRIVATE_KEY_PEM OUTPUT');
+if(!/^[a-f0-9]{40}$/.test(revision)||!/^\d+\.\d+\.\d+$/.test(version))throw Error('A full commit and semantic version are required');
+const files=[];for(const [name,kind]of [['layout','layout'],['themes','themes'],['editorial','editorial'],['app-metadata','metadata']]){const bytes=await fs.readFile(path.join(root,'content',name+'.json'));files.push({path:'e3/content/'+name+'.json',kind,bytes:bytes.length,sha256:crypto.createHash('sha256').update(bytes).digest('hex')})}
+const manifest={format:'woods-e3-content',schemaVersion:1,version,minimumRuntime:'0.1.0',revision,files};const bytes=Buffer.from(JSON.stringify(manifest)),key=await fs.readFile(keyPath);const signature=crypto.sign('sha256',bytes,{key,dsaEncoding:'ieee-p1363'});await fs.mkdir(path.dirname(output),{recursive:true});await fs.writeFile(output,JSON.stringify({keyId,payload:bytes.toString('base64'),signature:signature.toString('base64')},null,2)+'\n');console.log('Signed E3 content envelope written. No private key was copied.');

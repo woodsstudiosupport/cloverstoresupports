@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "f08a3850054cb45443a6e058127a14b9ac0e40c9",
+  "generatedAt": "2026-11-19T12:18:14.869198+00:00",
+  "data": {
+    "registry": [
+      {
+        "id": "com.woodsstudio.messages",
+        "name": "Messages",
+        "category": "HomeUI Apps",
+        "developer": "Woods Studio",
+        "version": "6.2",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/544cca58-6fe9-49a1-b879-87364f940db9/com.woodsstudio.messages.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Messages is the place to go for conversations, groups, and more, with Google's RCS chat support, you can communicate with people on Android. Plus, with Aikumi AI, you can talk with Aikumi inside Messages. ",
+        "isBuiltin": true,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.maps",
+        "name": "Maps",
+        "category": "HomeUI Apps",
+        "developer": "Woods Studio",
+        "version": "6.1",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/011b47a8-437b-4754-ba88-3797913e1d59/com.woodsstudio.maps.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Explore coordinates, navigations, and global environments built directly for HomeUI devices.",
+        "isBuiltin": true,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.widgets",
+        "name": "Widgets",
+        "category": "HomeUI Apps",
+        "developer": "Woods Studio",
+        "version": "6.3",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/e5b24e4b-505b-454c-952b-1ecc26a31c2c/com.woodsstudio.widgets.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Customizable widgets and dynamic desktop glanceables for system monitoring and weather, plus third party apps!",
+        "isBuiltin": true,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.finder",
+        "name": "Finder",
+        "category": "HomeUI Apps",
+        "developer": "Woods Studio",
+        "version": "6.6",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/b0339484-67f3-4dd9-897f-24e5b1df5bfb/com.woodsstudio.finder.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "For finding and seeing all your Woods Studio devices, even if they get lost or stolen.",
+        "isBuiltin": true,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.cloudplus",
+        "name": "Cloud +",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio",
+        "version": "12.1 Preview Build",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/901164b4-c969-413c-8a9f-15e44c15baf2/com.woodsstudio.cloud.plusassetsicon.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Seamless file synchronization, backups, and cross-device storage for Splash Desktop.",
+        "isBuiltin": false,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.service",
+        "name": "Service",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio",
+        "version": "18",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/816bfeed-925a-426f-8b35-37ab1c874e0b/com.woodsstudio.helpassetsicon.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Device information, support, recovery. Service is the go to for help.",
+        "isBuiltin": false,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.platformagent",
+        "name": "Platform Agent",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio",
+        "version": "25 (app v22)",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/e31bb72d-d335-4cfc-b74d-108a36d97953/com.woodsstudio.platformassetsicon.png?content-type=image%2Fpng",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Android application compatibility layer and platform services support runtime.",
+        "isBuiltin": true,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.toasted.games",
+        "name": "WS Games Center (Base)",
+        "category": "Games",
+        "developer": "WS Toast'ed Studio",
+        "version": "14.3",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/4d789649-8cf3-48b8-a4ff-50c582570a92/com.woodsstudio.games.png",
+        "downloads": {
+          "windows": "https://archive.org/download/woodsstudiogamesinstallerbase/wsgamesinstaller.exe",
+          "linux": "",
+          "android": ""
+        },
+        "description": "This edition brings a Rollback System, where if you like the look of an older version (currently supported: v14.1, v14.2, v14.3), you can go to Settings > Beta Testing and you can change. PLEASE NOTE: Your launcher will NOT connect to WS Game Services below v14.2. If you aren’t able to see below 14.2, it is because your launcher was given a PCSU (Patch Client System Update) because of system integrity. Plus a bunch of bugfixes and UI updates.",
+        "isBuiltin": false,
+        "timestamp": 1791101874240,
+        "developerId": "ws-toasted-studio"
+      },
+      {
+        "id": "com.woodsstudio.prism.news",
+        "name": "Prism News",
+        "category": "App Suite",
+        "developer": "HorizonGate Network",
+        "version": "3",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/f2a68b4c-2df1-4a78-bcb2-cf191dd317e7/com.woodsstudio.prism.news.assets.main.header.logo.png?StorePlatform",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": "https://archive.org/download/woodsstudio.news/com.woodsstudio.prism.news.apk"
+        },
+        "description": "Get all the latest news from the Prism SMP! From Shard Prices, who's online, and the status of our network, HorizonGate! We hope to see you on the Prism SMP.",
+        "isBuiltin": false,
+        "timestamp": 1791102345173,
+        "developerId": "horizongate-network"
+      },
+      {
+        "id": "com.woodsstudio.toastedgames.sandbox",
+        "name": "Sandb☐x",
+        "category": "Games",
+        "developer": "WS Toast'ed Studio",
+        "version": "6.44.8.0",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/84eb9232-d216-469c-8e98-61a6e3890316/com.woodsstudio.clover.store.png",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Not currently available for download without the launcher",
+        "isBuiltin": true,
+        "timestamp": 1791102912784,
+        "developerId": "ws-toasted-studio"
+      },
+      {
+        "id": "com.woodsstudio.store",
+        "name": "Clover Store App",
+        "category": "HomeUI Apps",
+        "developer": "Woods Studio",
+        "version": "2 (Web) | 6.1 (Clover)",
+        "icon": "https://archive.org/download/app-release_20261004/com.woodsstudio.clover.store.png",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": "https://archive.org/download/app-release_20261004/app-release.apk"
+        },
+        "description": "For Android only. Download all your favorite CloverUI apps, on  more OSs! You can also publish your own apps on this platform, completely free! You just need a Clover Account. (For Beta versions if you did upload an app, we updated our service workers. Please reupload. By downloading this app on Android, you agree to the Store Terms of Use, Privacy Policy, and Security Policy (meaning we can deactivate and remove your apps if you violate our terms). © Woods Studio.",
+        "isBuiltin": true,
+        "timestamp": 1791105104773,
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.skylar.pwa",
+        "name": "Skylar's PWA's",
+        "category": "App Suite",
+        "developer": "[⛔ Unverified] Skylar's Suite",
+        "genre": "N/A",
+        "icon": "https://scottgriv.github.io/PWA-Demo-App/icons/logo.png",
+        "version": "N/A",
+        "description": "[RESTRICTED APP] (This app is restricted by Woods Studio due to nonfatal data inside the app file (.wsa) that could damage your device.) Designed for Clover HomeUI 2+",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "developerId": "skylar-suite"
+      },
+      {
+        "id": "com.woodsstudio.core",
+        "name": "Woods Studio Core Library",
+        "category": "App Suite",
+        "developer": "Woods Studio",
+        "genre": "System",
+        "icon": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.core.png",
+        "version": "6.2",
+        "description": "A system app for Clover Splash, Clover HomeUI, Windows, and Subsystem Beta. This app is just to download & install if your device cannot install Clover Splash Reimagined, Clover HomeUI 6.2, or Subsystem FP3, but can support modernUI 16 apps.",
+        "downloads": {
+          "windows": "",
+          "linux": "https://archive.org/download/woodsstudioplatform/woodsstudioplatform_archive.torrent",
+          "android": "https://archive.org/download/woodsstudioplatform/com.woodsstudio.platform.apk"
+        },
+        "developerId": "woods-studio",
+        "isBuiltin": true
+      },
+      {
+        "id": "com.woodsstudio.clover.appstore",
+        "name": "Clover Splash Obsidian App Store",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio",
+        "genre": "Clover Splash Obsidian",
+        "icon": "https://cloversplash-woodsstudio.edgeone.dev/assets/com.woodsstudio.clover.appstore.png",
+        "version": "1.9 for Obby",
+        "description": "Clover Store for Obby is designed for the brand new Clover Splash Obsidian desktop, that releases in December. App v1.9 for Obby isn't available to download on  Clover Splash 6.2 and below, but the Clover Store Registry is. (Registry & any modernUI 16 apps won't function on Splash Obby (modernUI 17) without Core Library, avalible on Store Registry and Obby App Store",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "developerId": "woods-studio"
+      },
+      {
+        "id": "com.woodsstudio.clover.dashboard.dockoverlay",
+        "name": "CloverSplash Obby Desktop Launcher",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio Labs",
+        "genre": "Under Development",
+        "icon": "https://cloversplash-woodsstudio.edgeone.dev/assets/clover-dock.png",
+        "version": "1.0",
+        "description": "[Packages Under Development]",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "developerId": "woods-studio-labs",
+        "isBuiltin": true
+      },
+      {
+        "id": "com.woodsstudio.clover.forge",
+        "name": "Clover FORGE",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio Labs",
+        "genre": "Obsidian Apps",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/000c0baf-d1d4-405c-b3fa-ec7ca2ea7629/com.woodsstudio.clover.forge.png?format=300w",
+        "version": "1.0",
+        "description": "Create an app on the Clover Experience ecosystem, in the easiest way. Create Clover WTA Apps, FrameUI Kits, and more. Please Note!!!: FORGE APIs and some other dependencies (like FrameUI Agent, Platform Agent, etc), plus very important stuff may not work due to Clover FORGE for Windows not currently live. We are  working on setTEX builds.",
+        "downloads": {
+          "windows": "",
+          "linux": "",
+          "android": ""
+        },
+        "developerId": "woods-studio-labs"
+      },
+      {
+        "id": "com.woodsstudio.android.store",
+        "name": "Store (Android)",
+        "category": "App Suite",
+        "developer": "Woods Studio Labs",
+        "genre": "Android Only",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/a39c8047-e201-4c66-887b-2badf5e668c0/com.woodsstudio.android.store.png?format=100w",
+        "version": "1.3googleRelease",
+        "description": "Clover Store for Android is the best way to get the latest apps and updates from Woods Studio, plus other developers! You can also publish your own app, for everyone to see, if it's for Clover Splash, Clover HomeUI, Windows, Subsystem, and even Android, it's one of the fastest ways to get it out.",
+        "downloads": {
+          "windows": "",
+          "linux": "https://archive.org/download/app-release_20261004/6.apk",
+          "android": "https://archive.org/download/clover-store-splash-aligned-signed/CloverStore-splash-aligned-signed.apk"
+        },
+        "developerId": "woods-studio-labs"
+      }
+    ],
+    "developers": [
+      {
+        "id": "woods-studio",
+        "displayName": "Woods Studio",
+        "legacyNames": [
+          "Woods Studio"
+        ],
+        "description": "Welcome to Woods Studio, where creativity meets creators. On Clover Store, you can find apps by anyone, made for Clover, but also Android & Windows! And with Clover Store Create, you can also publish your own apps. Visit Store > Settings > Disclaimers to see how your data is managed. ",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/abbb1732-b0f0-472d-8bf3-31c0716db77c/WoodsStudioLogoNEW.png?format=1500w",
+        "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+        "website": "https://www.woodsstudio.dev/",
+        "supportUrl": "mailto:support.woodsstudio@gmail.com",
+        "privacyPolicy": "https://legal.woodsstudio.dev",
+        "verification": {
+          "status": "verified",
+          "verifiedAt": "2026-11-14T12:00:00Z"
+        }
+      },
+      {
+        "id": "ws-toasted-studio",
+        "displayName": "Toast'ed Studios",
+        "legacyNames": [
+          "WS Toast'ed Studio"
+        ],
+        "description": "The game dev studio, by Woods Studio.",
+        "icon": null,
+        "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+        "website": null,
+        "supportUrl": null,
+        "privacyPolicy": null,
+        "verification": {
+          "status": "verified",
+          "verifiedAt": "2026-11-14T12:00:00Z"
+        }
+      },
+      {
+        "id": "horizongate-network",
+        "displayName": "HorizonGate Network",
+        "legacyNames": [
+          "HorizonGate Network"
+        ],
+        "description": "HorizonGate, the managers of Prism SMP. Please visit their discord for more information, as Woods Studio cannot provide it.",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/376c8811-9b43-410a-bd00-6daa466101b1/PrismSMP_WoodsStudioAsset.webp?format=2500w",
+        "banner": null,
+        "website": null,
+        "supportUrl": null,
+        "privacyPolicy": null,
+        "verification": {
+          "status": "unverified",
+          "verifiedAt": null
+        }
+      },
+      {
+        "id": "skylar-suite",
+        "displayName": "Skylar's Suite",
+        "legacyNames": [
+          "[⛔ Unverified] Skylar's Suite"
+        ],
+        "description": "This Developer has been suspended pending action review for the folowing app(s): 'Skylar's PWAs'",
+        "icon": null,
+        "banner": null,
+        "website": null,
+        "supportUrl": null,
+        "privacyPolicy": null,
+        "verification": {
+          "status": "unverified",
+          "verifiedAt": null
+        }
+      },
+      {
+        "id": "woods-studio-labs",
+        "displayName": "Woods Studio Labs",
+        "legacyNames": [
+          "Woods Studio Labs"
+        ],
+        "description": "Labs is designed by Woods Studio for creators. Apps asked to be hosted by Woods Studio will use the Labs profile. Click below to find out.",
+        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/8a60cac9-393b-4114-889f-aee205dedaf1/wslabslogo.png?format=100w",
+        "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+        "website": "https://labs.woodsstudio.dev",
+        "supportUrl": null,
+        "privacyPolicy": null,
+        "verification": {
+          "status": "verified",
+          "verifiedAt": "2026-11-14T12:00:00Z"
+        }
+      },
+      {
+        "id": "telstra-au",
+        "displayName": "Telstra Australia",
+        "legacyNames": [
+          "com.telstra.service5g"
+        ],
+        "description": "Telstra is Australia’s leading telecommunications and technology company, turning our national mobile, 5G, and fibre infrastructure into programmable software products. Through the Telstra Developer Portal, we provide RESTful APIs that let developers embed carrier-grade messaging, real-time identity and fraud verification (CAMARA standards), and IoT device management directly into their applications. Built with OAuth 2.0 security and OpenAPI standards, our platform makes it simple to build, test, and scale connected solutions on Australia's largest network.",
+        "icon": "https://glendalecitycentre.com.au/wp-content/uploads/2024/06/Telstra.png",
+        "banner": "https://www.telstra.com.au/content/dam/tcom/library/cam-campaign/blackfriday26/CAM-bf26-hero-visual-marqueeDesktop-3000x550-2x.jpeg",
+        "website": "https://www.telstra.com.au",
+        "supportUrl": "https://www.telstra.com.au/support",
+        "privacyPolicy": "https://www.telstra.com.au/privacy",
+        "verification": {
+          "status": "verified",
+          "verifiedAt": "2026-11-14T12:00:00Z"
+        }
+      }
+    ],
+    "reviews": {
+      "com.woodsstudio.prism.news": [
+        {
+          "name": "Nice server",
+          "rating": 4,
+          "comment": "The app is good, and the server is very nice",
+          "date": "2026-10-05T02:52:06.212Z"
+        },
+        {
+          "name": "Zoe (Cloverbook Amythest 4 Air)",
+          "rating": 5,
+          "comment": "great app, great server, super nice people",
+          "date": "10/4/2026",
+          "timestamp": 1791102543518
+        },
+        {
+          "name": "Anonymous",
+          "rating": 2,
+          "comment": "app wont download on apple",
+          "date": "10/4/2026",
+          "timestamp": 1791102491391
+        },
+        {
+          "name": "Nathan (Samsung Galaxy S23 Ultra)",
+          "rating": 4,
+          "comment": "works great, sometimes doesn't show news stuff, cant wait to join the server, but i cant use the horizon gate thing",
+          "date": "10/4/2026",
+          "timestamp": 1791102447782
+        }
+      ],
+      "com.woodsstudio.toastedgames.sandbox": [
+        {
+          "name": "Good",
+          "rating": 4,
+          "comment": "Good game IG",
+          "date": "2026-10-07T02:13:50.825Z"
+        },
+        {
+          "name": "Peak game",
+          "rating": 5,
+          "comment": "It's a good game",
+          "date": "2026-10-05T02:49:12.260Z"
+        }
+      ],
+      "com.woodsstudio.cloudplus": [
+        {
+          "name": "Tester",
+          "rating": 5,
+          "comment": "Great app!",
+          "date": "2026-11-12T12:51:42.312Z"
+        }
+      ]
+    },
+    "collections": [
+      {
+        "id": "homeui",
+        "title": "HomeUI Apps",
+        "description": "Apps listed in HomeUI Apps.",
+        "appIds": [
+          "com.woodsstudio.messages",
+          "com.woodsstudio.maps",
+          "com.woodsstudio.widgets",
+          "com.woodsstudio.finder",
+          "com.woodsstudio.store"
+        ]
+      },
+      {
+        "id": "splash-desktop",
+        "title": "Splash Desktop",
+        "description": "Apps listed in Splash Desktop.",
+        "appIds": [
+          "com.woodsstudio.cloudplus",
+          "com.woodsstudio.service",
+          "com.woodsstudio.platformagent",
+          "com.woodsstudio.clover.appstore",
+          "com.woodsstudio.clover.dashboard.dockoverlay",
+          "com.woodsstudio.clover.forge"
+        ]
+      },
+      {
+        "id": "games",
+        "title": "Games",
+        "description": "Apps listed in Games.",
+        "appIds": [
+          "com.woodsstudio.toasted.games",
+          "com.woodsstudio.toastedgames.sandbox"
+        ]
+      },
+      {
+        "id": "app-suite",
+        "title": "App Suite",
+        "description": "Apps listed in App Suite.",
+        "appIds": [
+          "com.woodsstudio.prism.news",
+          "com.skylar.pwa",
+          "com.woodsstudio.core",
+          "com.woodsstudio.android.store"
+        ]
+      }
+    ],
+    "releases": [],
+    "announcements": [
+      {
+        "id": "cloverstore-android-v1-5",
+        "developerId": "woods-studio-labs",
+        "appIds": [
+          "com.woodsstudio.android.store"
+        ],
+        "title": "Clover Store for Android v1.5 — More to discover",
+        "body": "A bigger, cleaner Clover Store is on its way. Building on v1.3.4, version 1.5 is planned to bring a refreshed Woods Studio interface, smoother navigation and layouts that adapt to phones and tablets.\n\nMeet the makers through developer cards and profile pages, explore app collections, follow developers and find applications with improved search, filters and sorting. Redesigned app pages will put your Android download first, with other platforms under Other Downloads, alongside richer release information and shared community reviews.\n\nKeep favourites close with an expanded Library, recently viewed apps and saved-app import/export. New comparison and release-tracking tools will help you explore your options and follow published updates.\n\nDownload improvements are planned to include clearer progress and failure information, queue controls and APK details. Android will continue to control installation permissions and confirmation.\n\nMake Clover Store yours with appearance, spacing, text-size and motion controls. Settings will also include Disclaimers explaining privacy, permissions, third-party sources and your data controls.\n\nThe catalogue will continue checking GitHub for published changes every 30 seconds while the store is open. Features remain subject to Android testing and release readiness. Account sync, automatic cross-device delivery and the dedicated developer publishing website are separate services still in development.",
+        "publishedAt": "2026-11-14T12:00:00Z",
+        "expiresAt": "2026-12-31T23:59:59Z",
+        "url": "https://play.google.com/store/apps/details?id=com.woodsstudio.clover.apps&hl=en-US"
+      }
+    ],
+    "catalogue": {
+      "schemaVersion": 2,
+      "endpoints": {
+        "registry": "registry.json",
+        "developers": "developers.json",
+        "reviews": "reviews.json",
+        "releases": "releases.json",
+        "announcements": "announcements.json",
+        "collections": "collections.json"
+      },
+      "refreshIntervalSeconds": 30,
+      "installationPolicy": {
+        "supplierDeveloperIds": [
+          "woods-studio"
+        ],
+        "thirdPartyAndroidPackageIdRequired": true,
+        "androidSignatureValidationRequired": true
+      },
+      "services": {
+        "developerPortal": null,
+        "reviewSubmission": null,
+        "reports": null,
+        "devicePairing": null
+      },
+      "profileDefaults": {
+        "icon": "assets/developers/default-icon.png",
+        "banner": "assets/developers/default-banner.png"
+      }
+    }
+  }
+}

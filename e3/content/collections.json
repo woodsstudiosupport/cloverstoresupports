@@ -1,0 +1,47 @@
+[
+  {
+    "id": "homeui",
+    "title": "HomeUI Apps",
+    "description": "Apps listed in HomeUI Apps.",
+    "appIds": [
+      "com.woodsstudio.messages",
+      "com.woodsstudio.maps",
+      "com.woodsstudio.widgets",
+      "com.woodsstudio.finder",
+      "com.woodsstudio.store"
+    ]
+  },
+  {
+    "id": "splash-desktop",
+    "title": "Splash Desktop",
+    "description": "Apps listed in Splash Desktop.",
+    "appIds": [
+      "com.woodsstudio.cloudplus",
+      "com.woodsstudio.service",
+      "com.woodsstudio.platformagent",
+      "com.woodsstudio.clover.appstore",
+      "com.woodsstudio.clover.dashboard.dockoverlay",
+      "com.woodsstudio.clover.forge"
+    ]
+  },
+  {
+    "id": "games",
+    "title": "Games",
+    "description": "Apps listed in Games.",
+    "appIds": [
+      "com.woodsstudio.toasted.games",
+      "com.woodsstudio.toastedgames.sandbox"
+    ]
+  },
+  {
+    "id": "app-suite",
+    "title": "App Suite",
+    "description": "Apps listed in App Suite.",
+    "appIds": [
+      "com.woodsstudio.prism.news",
+      "com.skylar.pwa",
+      "com.woodsstudio.core",
+      "com.woodsstudio.android.store"
+    ]
+  }
+]

@@ -1,5 +1,31 @@
 'use strict';
 const VERSION='1.5', BASE='https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/main/', REPO='https://github.com/woodsstudiosupport/cloverstoresupports';
+async function showCloverUpgradeNotice() {
+  if (location.hostname !== 'appstore-woodsstudio.edgeone.dev' || window.CloverAndroid) return;
+  let config;
+  try {
+    const response = await fetch(BASE + 'web/deployment.json?_=' + Date.now(), {
+      cache: 'no-store',
+      credentials: 'omit',
+      signal: AbortSignal.timeout(3500)
+    });
+    if (!response.ok) return;
+    config = await response.json();
+  } catch {
+    return;
+  }
+  if (config?.tag !== 'under-upgrades' || document.getElementById('clover-maintenance')) return;
+
+  const dialog = document.createElement('dialog');
+  dialog.id = 'clover-upgrade-dialog';
+  dialog.setAttribute('aria-labelledby', 'clover-maintenance-title');
+  dialog.addEventListener('cancel', event => event.preventDefault());
+  dialog.innerHTML = "<style id=\"clover-maintenance-style\">\n#clover-maintenance {\n  position: fixed;\n  inset: 0;\n  z-index: 2147483647;\n  box-sizing: border-box;\n  display: grid;\n  overflow: auto;\n  padding: clamp(16px, 5vw, 40px);\n  background: radial-gradient(ellipse at 50% 0%, #203c2f, #080c0b 74%);\n  color: #edf5ef;\n  font: 1rem/1.5 Inter, system-ui, sans-serif;\n}\n#clover-maintenance article {\n  box-sizing: border-box;\n  width: min(100%, 40rem);\n  margin: auto;\n  padding: clamp(24px, 7vw, 64px);\n  border: 1px solid #34463b;\n  border-radius: 28px;\n  background: #111816;\n  text-align: center;\n}\n#clover-maintenance h1 {\n  margin: 0;\n  font-size: clamp(1.65rem, 5vw, 3rem);\n  line-height: 1.1;\n  letter-spacing: -0.035em;\n}\n#clover-maintenance p {\n  margin: 16px 0 0;\n  color: #bce8a5;\n  font-size: 1.125rem;\n}\n</style><style>\n#clover-upgrade-dialog { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #080c0b; }\n#clover-upgrade-dialog::backdrop { background: #080c0b; }\n</style><main id=\"clover-maintenance\" aria-labelledby=\"clover-maintenance-title\">\n  <article>\n    <h1 id=\"clover-maintenance-title\">Clover Store is undergoing upgrades</h1>\n    <p>Please come back soon</p>\n  </article>\n</main>";
+  document.body.append(dialog);
+  dialog.showModal();
+}
+void showCloverUpgradeNotice();
+
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const E=escapeHTML;

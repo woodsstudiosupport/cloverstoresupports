@@ -1,9 +1,15 @@
+import {declarationEvidence} from './declarations.mjs';
 export const DATA_NAMES=['registry','developers','reviews','collections','releases','announcements','catalogue'];
 export const FILTERS={noAds:'No ads',noAccount:'No account',offline:'Works offline',noSubscriptions:'No subscriptions',openSource:'Open source'};
 export function safeURL(value,{email=false}={}){try{const u=new URL(value);if(email&&u.protocol==='mailto:'&&/^[^\s?]+@[^\s?]+$/.test(u.pathname)&&!u.search&&!u.hash)return u.href;return u.protocol==='https:'&&!u.username&&!u.password?u.href:''}catch{return ''}}
 export function validateSnapshot(data){if(!data||typeof data!=='object')throw Error('Missing catalogue');for(const key of ['registry','developers','collections','releases','announcements'])if(!Array.isArray(data[key]))throw Error('Invalid '+key);if(!data.reviews||typeof data.reviews!=='object'||Array.isArray(data.reviews)||data.catalogue?.schemaVersion!==2)throw Error('Invalid catalogue metadata');const ids=new Set();for(const a of data.registry){if(!a||typeof a.id!=='string'||!a.id.trim()||typeof a.name!=='string'||ids.has(a.id))throw Error('Invalid or duplicate listing');ids.add(a.id)}return data}
-export function fact(app,key){const item=app.e3?.facts?.[key];return item&&typeof item.value==='boolean'&&['publisher','inspection','independent'].includes(item.source)?item.value:null}
-export function evidence(app,key){const item=app.e3?.facts?.[key];return fact(app,key)===null?'Not provided':({publisher:'Publisher declared',inspection:'File inspected',independent:'Independent report'})[item.source]}
+function evidenceFor(app,key){
+ const item=app.e3?.facts?.[key];
+ if(item&&typeof item.value==='boolean'&&['publisher','inspection','independent'].includes(item.source))return item;
+ return declarationEvidence(app.e3,key);
+}
+export function fact(app,key){return evidenceFor(app,key)?.value??null}
+export function evidence(app,key){const item=evidenceFor(app,key);return !item?'Not provided':({publisher:'Publisher declared',inspection:'File inspected',independent:'Independent report'})[item.source]}
 export function matchApps(apps,{query='',category='All',filters=[],savedOnly=false,saved=[]}={}){const q=query.trim().toLowerCase();return apps.filter(a=>(category==='All'||a.category===category)&&(!q||[a.name,a.description,a.developer,a.id,...(a.e3?.tags||[])].join(' ').toLowerCase().includes(q))&&filters.every(key=>fact(a,key)===true)&&(!savedOnly||saved.includes(a.id)))}
 export function publisher(app,developers){return developers.find(d=>d.id===app.developerId)||null}
 export function isVerified(dev){return dev?.verification?.status==='verified'}

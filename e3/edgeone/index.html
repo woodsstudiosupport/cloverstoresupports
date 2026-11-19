@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-mode="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080c0b">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; object-src 'none'; base-uri 'none'; frame-src https:; form-action 'none'">
+  <title>Clover Store</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png">
+  <style>
+    html, body { margin: 0; background: #080c0b; color: #edf5ef; font: 1rem/1.5 system-ui, sans-serif; }
+    #store-launch { box-sizing: border-box; min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 1.5rem; background: radial-gradient(ellipse at 50% 0%, #203c2f, #080c0b 74%); }
+    #store-launch article { box-sizing: border-box; width: min(100%, 40rem); padding: clamp(1.5rem, 7vw, 4rem); border: 1px solid #34463b; border-radius: 1.75rem; background: #111816; text-align: center; }
+    #store-launch h1 { margin: 0; font-size: clamp(1.65rem, 5vw, 3rem); line-height: 1.1; }
+    #store-launch p { margin: 1rem 0 0; color: #bce8a5; }
+  </style>
+</head>
+<body>
+  <div id="e3-root">
+    <main id="store-launch" aria-labelledby="launch-title">
+      <article>
+        <h1 id="launch-title">Clover Store is undergoing upgrades</h1>
+        <p>Please come back soon</p>
+      </article>
+    </main>
+  </div>
+  <div id="e3-toast" role="status" hidden></div>
+  <dialog id="e3-dialog" aria-label="Clover Store dialog"></dialog>
+  <script type="module">
+    const repository = 'woodsstudiosupport/cloverstoresupports';
+
+    async function requestJSON(url) {
+      const response = await fetch(url, {
+        cache: 'no-store',
+        credentials: 'omit',
+        signal: AbortSignal.timeout(8000)
+      });
+      if (!response.ok) throw Error('Store configuration unavailable');
+      return response.json();
+    }
+
+    async function launch() {
+      const config = await requestJSON('https://raw.githubusercontent.com/' + repository + '/main/web/deployment.json?_=' + Date.now());
+      if (config?.tag === 'under-upgrades' || config?.storefront !== 'e3') return;
+
+      const ref = typeof config.tag === 'string' && config.tag.trim() ? config.tag.trim() : 'main';
+      const {sha} = await requestJSON('https://api.github.com/repos/' + repository + '/commits/' + encodeURIComponent(ref));
+      if (!/^[a-f0-9]{40}$/.test(sha || '')) throw Error('Invalid storefront revision');
+
+      const base = 'https://cdn.jsdelivr.net/gh/' + repository + '@' + sha + '/e3/';
+      const stylesheet = document.createElement('link');
+      stylesheet.rel = 'stylesheet';
+      stylesheet.href = base + 'ui/design.css';
+      await new Promise((resolve, reject) => {
+        stylesheet.onload = resolve;
+        stylesheet.onerror = reject;
+        document.head.append(stylesheet);
+      });
+      await import(base + 'runtime/app.mjs');
+    }
+
+    launch().catch(() => {
+      document.getElementById('launch-title')?.setAttribute('role', 'status');
+    });
+  </script>
+</body>
+</html>

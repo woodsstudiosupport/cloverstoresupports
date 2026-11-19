@@ -23,11 +23,11 @@ The package remains `com.woodsstudio.clover.apps`. The preview is `2.0-e3.1`, co
 
 ## GitHub content delivery
 
-The catalogue is one JSON snapshot containing all seven existing catalogue documents and its source commit. Clients poll that complete file every 30 seconds while visible, validate it and replace the last cache only as a whole. A failed refresh leaves the previous snapshot available. Native app code is never downloaded by this path.
+The catalogue is one JSON snapshot containing all seven existing catalogue documents, publisher declarations and its source commit. Clients poll that complete file every 30 seconds while visible, validate it and replace the last cache only as a whole. A failed refresh leaves the previous snapshot available. Native app code is never downloaded by this path.
 
 The proposed GitHub workflow regenerates `e3/content/catalogue-snapshot.json` after changes to the root catalogue documents. The workflow and new files remain in the E3 development branch until reviewed and merged. Consequently the development preview can show its bundled snapshot and report that the main-branch E3 feed is unavailable before deployment. This is not reported as a successful sync.
 
-Themes, editorial collections, supported layout sections and app metadata can use signed content packages. The shipped `content/trust.json` deliberately has no publishing key: signed content updates are not enabled until the team chooses a publishing identity and pins its public key in a build. Private keys must remain outside this repository and outside client packages.
+Publisher declarations are part of the catalogue snapshot. Additional attributed evidence, themes, editorial collections and supported layout sections can use signed content packages. The shipped `content/trust.json` deliberately has no publishing key: signed content updates are not enabled until the team chooses a publishing identity and pins its public key in a build. Private keys must remain outside this repository and outside client packages.
 
 A signed envelope contains `keyId`, Base64 `payload`, and Base64 ECDSA-P256/P1363 `signature`. The signature covers the exact decoded payload bytes. The payload declares runtime compatibility, content version, an immutable GitHub commit and all files with byte counts, kinds and SHA-256 hashes. Supported content kinds are `layout`, `themes`, `editorial` and `metadata`, all JSON. Paths cannot escape the commit root. Files are bounded to 4 MB each and 20 MB total. Content cannot introduce JavaScript, native libraries, arbitrary components or new Android capabilities.
 
@@ -47,7 +47,7 @@ Personal data moves from legacy `clover-html-v5:` local-storage keys into `woods
 
 ## Evidence model
 
-No Ads, No Account, Works Offline, No Subscriptions and Open Source are tri-state: yes, no or unknown. Only an explicit true value with an allowed evidence source satisfies a filter. RAM requirements, pricing, setup time, release dates, scan results and tracker statements are not inferred from absence. Related apps are labelled as category-related unless explicit alternatives are published. Community reviews are not labelled as install-verified.
+Publishers declare whether their app contains ads, requires an account, works offline, offers subscriptions or is open source. Yes and No are explicit answers. N/A is unknown. The preference filters account for the inverse wording of No Ads, No Account and No Subscriptions. Only an explicit true value with an allowed evidence source satisfies a filter. RAM requirements, pricing, setup time, release dates, scan results and tracker statements are not inferred from absence. Related apps are labelled as category-related unless explicit alternatives are published. Community reviews are not labelled as install-verified.
 
 ## Included in this preview
 

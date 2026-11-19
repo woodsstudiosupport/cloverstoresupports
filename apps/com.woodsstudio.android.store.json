@@ -4,7 +4,7 @@
   "category": "App Suite",
   "developer": "Woods Studio Labs",
   "genre": "Android Only",
-  "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/a39c8047-e201-4c66-887b-2badf5e668c0/com.woodsstudio.android.store.png?format=100w",
+  "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
   "version": "1.3googleRelease",
   "description": "Clover Store for Android is the best way to get the latest apps and updates from Woods Studio, plus other developers! You can also publish your own app, for everyone to see, if it's for Clover Splash, Clover HomeUI, Windows, Subsystem, and even Android, it's one of the fastest ways to get it out.",
   "downloads": {

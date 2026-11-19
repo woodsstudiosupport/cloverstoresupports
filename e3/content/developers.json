@@ -1,0 +1,104 @@
+[
+  {
+    "id": "woods-studio",
+    "displayName": "Woods Studio",
+    "legacyNames": [
+      "Woods Studio"
+    ],
+    "description": "Welcome to Woods Studio, where creativity meets creators. On Clover Store, you can find apps by anyone, made for Clover, but also Android & Windows! And with Clover Store Create, you can also publish your own apps. Visit Store > Settings > Disclaimers to see how your data is managed. ",
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/abbb1732-b0f0-472d-8bf3-31c0716db77c/WoodsStudioLogoNEW.png?format=1500w",
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+    "website": "https://www.woodsstudio.dev/",
+    "supportUrl": "mailto:support.woodsstudio@gmail.com",
+    "privacyPolicy": "https://legal.woodsstudio.dev",
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
+    }
+  },
+  {
+    "id": "ws-toasted-studio",
+    "displayName": "Toast'ed Studios",
+    "legacyNames": [
+      "WS Toast'ed Studio"
+    ],
+    "description": "The game dev studio, by Woods Studio.",
+    "icon": null,
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
+    }
+  },
+  {
+    "id": "horizongate-network",
+    "displayName": "HorizonGate Network",
+    "legacyNames": [
+      "HorizonGate Network"
+    ],
+    "description": "HorizonGate, the managers of Prism SMP. Please visit their discord for more information, as Woods Studio cannot provide it.",
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/376c8811-9b43-410a-bd00-6daa466101b1/PrismSMP_WoodsStudioAsset.webp?format=2500w",
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "skylar-suite",
+    "displayName": "Skylar's Suite",
+    "legacyNames": [
+      "[⛔ Unverified] Skylar's Suite"
+    ],
+    "description": "This Developer has been suspended pending action review for the folowing app(s): 'Skylar's PWAs'",
+    "icon": null,
+    "banner": null,
+    "website": null,
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "unverified",
+      "verifiedAt": null
+    }
+  },
+  {
+    "id": "woods-studio-labs",
+    "displayName": "Woods Studio Labs",
+    "legacyNames": [
+      "Woods Studio Labs"
+    ],
+    "description": "Labs is designed by Woods Studio for creators. Apps asked to be hosted by Woods Studio will use the Labs profile. Click below to find out.",
+    "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/8a60cac9-393b-4114-889f-aee205dedaf1/wslabslogo.png?format=100w",
+    "banner": "https://archive.org/download/app-release_20261004/ltvxm.png",
+    "website": "https://labs.woodsstudio.dev",
+    "supportUrl": null,
+    "privacyPolicy": null,
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
+    }
+  },
+  {
+    "id": "telstra-au",
+    "displayName": "Telstra Australia",
+    "legacyNames": [
+      "com.telstra.service5g"
+    ],
+    "description": "Telstra is Australia’s leading telecommunications and technology company, turning our national mobile, 5G, and fibre infrastructure into programmable software products. Through the Telstra Developer Portal, we provide RESTful APIs that let developers embed carrier-grade messaging, real-time identity and fraud verification (CAMARA standards), and IoT device management directly into their applications. Built with OAuth 2.0 security and OpenAPI standards, our platform makes it simple to build, test, and scale connected solutions on Australia's largest network.",
+    "icon": "https://glendalecitycentre.com.au/wp-content/uploads/2024/06/Telstra.png",
+    "banner": "https://www.telstra.com.au/content/dam/tcom/library/cam-campaign/blackfriday26/CAM-bf26-hero-visual-marqueeDesktop-3000x550-2x.jpeg",
+    "website": "https://www.telstra.com.au",
+    "supportUrl": "https://www.telstra.com.au/support",
+    "privacyPolicy": "https://www.telstra.com.au/privacy",
+    "verification": {
+      "status": "verified",
+      "verifiedAt": "2026-11-14T12:00:00Z"
+    }
+  }
+]

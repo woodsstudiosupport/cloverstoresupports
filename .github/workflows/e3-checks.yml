@@ -1,0 +1,17 @@
+name: Validate E3 foundation
+on:
+  push:
+    paths: ['e3/**', '.github/workflows/e3-checks.yml']
+  pull_request:
+    paths: ['e3/**', '.github/workflows/e3-checks.yml']
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test e3/tests/*.test.mjs

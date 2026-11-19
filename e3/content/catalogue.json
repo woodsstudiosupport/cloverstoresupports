@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "endpoints": {
+    "registry": "registry.json",
+    "developers": "developers.json",
+    "reviews": "reviews.json",
+    "releases": "releases.json",
+    "announcements": "announcements.json",
+    "collections": "collections.json"
+  },
+  "refreshIntervalSeconds": 30,
+  "installationPolicy": {
+    "supplierDeveloperIds": [
+      "woods-studio"
+    ],
+    "thirdPartyAndroidPackageIdRequired": true,
+    "androidSignatureValidationRequired": true
+  },
+  "services": {
+    "developerPortal": null,
+    "reviewSubmission": null,
+    "reports": null,
+    "devicePairing": null
+  },
+  "profileDefaults": {
+    "icon": "assets/developers/default-icon.png",
+    "banner": "assets/developers/default-banner.png"
+  }
+}

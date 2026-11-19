@@ -1,1 +1,158 @@
-{"schemaVersion":1,"apps":{}}
+{
+  "schemaVersion": 1,
+  "apps": {
+    "com.woodsstudio.messages": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.maps": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.widgets": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.finder": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.cloudplus": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.service": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.platformagent": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.toasted.games": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.prism.news": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.toastedgames.sandbox": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.store": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.skylar.pwa": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.core": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.clover.appstore": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.clover.dashboard.dockoverlay": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.clover.forge": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    },
+    "com.woodsstudio.android.store": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
+    }
+  }
+}

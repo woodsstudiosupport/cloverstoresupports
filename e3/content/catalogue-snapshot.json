@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "f08a3850054cb45443a6e058127a14b9ac0e40c9",
-  "generatedAt": "2026-11-19T12:18:14.869198+00:00",
+  "sourceRevision": "dd1324912c3fb687fc69e66f2f921ed841741e2f",
+  "generatedAt": "2026-11-19T13:40:48.107341+00:00",
   "data": {
     "registry": [
       {
@@ -272,7 +272,7 @@
         "category": "App Suite",
         "developer": "Woods Studio Labs",
         "genre": "Android Only",
-        "icon": "https://images.squarespace-cdn.com/content/v1/6ab52351cfb6e609df15be60/a39c8047-e201-4c66-887b-2badf5e668c0/com.woodsstudio.android.store.png?format=100w",
+        "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
         "version": "1.3googleRelease",
         "description": "Clover Store for Android is the best way to get the latest apps and updates from Woods Studio, plus other developers! You can also publish your own app, for everyone to see, if it's for Clover Splash, Clover HomeUI, Windows, Subsystem, and even Android, it's one of the fastest ways to get it out.",
         "downloads": {
@@ -495,8 +495,8 @@
         "appIds": [
           "com.woodsstudio.android.store"
         ],
-        "title": "Clover Store for Android v1.5 — More to discover",
-        "body": "A bigger, cleaner Clover Store is on its way. Building on v1.3.4, version 1.5 is planned to bring a refreshed Woods Studio interface, smoother navigation and layouts that adapt to phones and tablets.\n\nMeet the makers through developer cards and profile pages, explore app collections, follow developers and find applications with improved search, filters and sorting. Redesigned app pages will put your Android download first, with other platforms under Other Downloads, alongside richer release information and shared community reviews.\n\nKeep favourites close with an expanded Library, recently viewed apps and saved-app import/export. New comparison and release-tracking tools will help you explore your options and follow published updates.\n\nDownload improvements are planned to include clearer progress and failure information, queue controls and APK details. Android will continue to control installation permissions and confirmation.\n\nMake Clover Store yours with appearance, spacing, text-size and motion controls. Settings will also include Disclaimers explaining privacy, permissions, third-party sources and your data controls.\n\nThe catalogue will continue checking GitHub for published changes every 30 seconds while the store is open. Features remain subject to Android testing and release readiness. Account sync, automatic cross-device delivery and the dedicated developer publishing website are separate services still in development.",
+        "title": "Woods Studio E3 App Framework - Expanding for More",
+        "body": "A brand new build of Clover Store is arriving, plus updates to most of our SDKs, apps, and more. E3 is designed for more power, bridging the gap that we created with Collocal's Platform. E3 will include the Aikumi Playform SDK, which will soon intergrate AIkumi AI into our core services. Store E3.01 will release very soon, but please download (if applicable) Store 1.7 from the Google Play Store for the support to upgrade to the E3 Platform.",
         "publishedAt": "2026-11-14T12:00:00Z",
         "expiresAt": "2026-12-31T23:59:59Z",
         "url": "https://play.google.com/store/apps/details?id=com.woodsstudio.clover.apps&hl=en-US"
@@ -529,6 +529,164 @@
       "profileDefaults": {
         "icon": "assets/developers/default-icon.png",
         "banner": "assets/developers/default-banner.png"
+      }
+    },
+    "appMetadata": {
+      "schemaVersion": 1,
+      "apps": {
+        "com.woodsstudio.messages": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.maps": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.widgets": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.finder": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.cloudplus": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.service": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.platformagent": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.toasted.games": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.prism.news": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.toastedgames.sandbox": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.store": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.skylar.pwa": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.core": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.clover.appstore": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.clover.dashboard.dockoverlay": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.clover.forge": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
+        "com.woodsstudio.android.store": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        }
       }
     }
   }

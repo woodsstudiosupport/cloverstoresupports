@@ -26,3 +26,19 @@ test('activation failure keeps previous content and explicit recovery restores i
 test('Android handshake rejects messages from app preview origins',()=>{const listeners={};const p=new E3Platform({location:{origin:'https://appassets.androidplatform.net'},addEventListener:(type,callback)=>listeners[type]=callback});listeners.message({data:{type:'e3:connect'},origin:'https://publisher.example',source:{},ports:[{}]});assert.equal(p.kind,'web')});
 test('unknown native actions fail without dispatch',async()=>{const p=new E3Platform({addEventListener(){}});await assert.rejects(p.request('permissions.grant',{permission:'camera'}),/Unsupported/)});
 test('the new Android build has no legacy interface or UI asset imports',()=>{const host=fs.readFileSync(new URL('../android/src/com/woodsstudio/clover/apps/MainActivity.java',import.meta.url),'utf8');assert.doesNotMatch(host,/addJavascriptInterface|CloverAndroid|nativeRefresh|evaluateJavascript/);assert.match(host,/createWebMessageChannel/);assert.match(host,/USER_ACTION_REQUIRED/);assert.match(host,/setAllowFileAccess\(false\)/);assert.match(host,/setMixedContentMode\(WebSettings.MIXED_CONTENT_NEVER_ALLOW\)/)});
+
+test('publisher declarations are complete and do not treat N/A as evidence', async () => {
+ const {DECLARATIONS,validateDeclarations}=await import('../runtime/declarations.mjs');
+ const {fact,evidence}=await import('../runtime/catalogue.mjs');
+ const snapshot=JSON.parse(fs.readFileSync(new URL('../content/catalogue-snapshot.json',import.meta.url)));
+ assert.deepEqual(Object.keys(snapshot.data.appMetadata.apps).sort(),snapshot.data.registry.map(app=>app.id).sort());
+ for(const metadata of Object.values(snapshot.data.appMetadata.apps))validateDeclarations(metadata.declarations);
+ const unknown=Object.fromEntries(Object.keys(DECLARATIONS).map(key=>[key,'n/a']));
+ assert.equal(fact({e3:{declarations:unknown}},'noAds'),null);
+ const app={e3:{declarations:{...unknown,ads:'no',account:'yes',offline:'yes'}}};
+ assert.equal(fact(app,'noAds'),true);
+ assert.equal(fact(app,'noAccount'),false);
+ assert.equal(fact(app,'offline'),true);
+ assert.equal(evidence(app,'noAds'),'Publisher declared');
+ assert.throws(()=>validateDeclarations({...unknown,ads:'maybe'}));
+});

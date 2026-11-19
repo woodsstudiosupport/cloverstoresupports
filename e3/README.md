@@ -1,6 +1,6 @@
 # Clover Store · E3 foundation
 
-A separate rebuild of Clover Store on Woods Studio E3 Core 0.1. The working 1.7 application and the existing public catalogue are not replaced by this branch.
+A separate rebuild of Clover Store on Woods Studio E3 Core 0.1. The public web deployment is controlled separately through the GitHub deployment setting.
 
 This project includes a new interface, runtime, design system, structured content engine, offline snapshots and Android message-port host. It does not load the previous application screen framework or JavaScript bridge. Existing app/developer/review records are preserved; personal data is migrated without deleting its source.
 
@@ -15,10 +15,31 @@ Android build requirements: JDK 21, SDK platform 36, build-tools 35.0.0 and bund
 ## Editing public content
 
 - Existing catalogue records remain in the repository root JSON documents.
-- `content/app-metadata.json` adds attributed E3-specific facts keyed by listing ID. It starts empty so no privacy, pricing or compatibility claims are fabricated.
+- `content/app-metadata.json` adds attributed E3-specific facts keyed by listing ID. The five publisher declarations default to `n/a` for each listed app. The snapshot generator supplies the same defaults for newly listed apps.
 - `content/editorial.json` contains editorial collections using existing listing IDs.
 - `content/layout.json` selects supported Discover components.
 - `content/themes.json` contains validated theme colours and modes.
 - `content/trust.json` contains public verification keys only. It is currently unconfigured.
 
 The snapshot generator gathers the root documents into one E3 feed. Signed content delivery additionally requires a configured publishing key and channel. App code and platform capabilities ship through an app release.
+
+## Publisher declarations
+
+Use **Settings → Publisher declarations** in E3 to export a Yes / No / N/A draft alongside a listing submission. For a new listing, add its app ID to `registry.json` before approving its declarations. A repository maintainer reviews the publisher and applies the draft with:
+
+```sh
+python3 e3/scripts/approve-declarations.py path/to/declarations.json
+```
+
+Review and commit the resulting `e3/content/app-metadata.json` change. The main-branch snapshot workflow republishes the declarations with the catalogue, and clients check the feed every 30 seconds while visible. `n/a` does not count as evidence for a preference filter.
+
+## EdgeOne cutover
+
+Publish `edgeone/index.html` as the existing EdgeOne project's root `index.html` once. This launcher shows the upgrade notice immediately and checks `web/deployment.json` on GitHub before loading any storefront code.
+
+- Keep `{"tag":"under-upgrades"}` while the public storefront is closed.
+- After validating and merging the E3 source, use `{"tag":"","storefront":"e3"}` to open E3 from `main`.
+- Set a non-empty tag or branch with `"storefront":"e3"` to load another E3 revision. The launcher resolves it to a commit and loads that commit's CSS and ES modules through jsDelivr.
+- Restore `{"tag":"under-upgrades"}` to close the public storefront again. Visitors pick up the change on reload.
+
+For local preview, serve the E3 directory and open its top-level `index.html`. The public launcher and local E3 preview use different entry points. The new Android icon is staged from the checked-in `web/assets/store-icon.png` when a build is explicitly requested.

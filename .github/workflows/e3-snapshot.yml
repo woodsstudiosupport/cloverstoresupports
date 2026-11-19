@@ -2,7 +2,7 @@ name: Refresh E3 catalogue snapshot
 on:
   push:
     branches: [main]
-    paths: ['registry.json', 'developers.json', 'reviews.json', 'collections.json', 'releases.json', 'announcements.json', 'catalogue.json']
+    paths: ['registry.json', 'developers.json', 'reviews.json', 'collections.json', 'releases.json', 'announcements.json', 'catalogue.json', 'e3/content/app-metadata.json', 'e3/scripts/snapshot.py']
   workflow_dispatch:
 permissions:
   contents: write

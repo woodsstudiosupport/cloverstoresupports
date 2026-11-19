@@ -10,7 +10,11 @@ See [E3 Core](docs/E3-CORE.md) for the component contracts, delivered features a
 
 Run `node --test tests/*.test.mjs` from this directory. Serve `index.html` and the `runtime`, `ui` and `content` directories using a normal HTTPS/static development host. There is no Node dependency installation or frontend framework build step.
 
-Android build requirements: JDK 21, SDK platform 36, build-tools 35.0.0 and bundletool 1.18.2. Configure their locations near the top of `android/build.py`, then run `python3 android/build.py`. The output is an unsigned `CloverStore-2.0-E3-foundation-unsigned.aab`. Sign only for testing with the appropriate existing upload key. No production signing keys or credentials are included.
+Run `python3 e3/android/build.py --check` from the repository root to check the shared runtime and Android source contracts without building a package. This check requires Python and Node.js.
+
+Android packaging also requires JDK 21, SDK platform 36, build-tools 35.0.0 and bundletool 1.18.2. Set `JAVA_HOME` and `ANDROID_HOME` or pass `--java-home` and `--sdk`. Use `--bundletool` for a local bundletool JAR. A separate build command without `--check` produces an unsigned AAB. Use the existing Clover Store signing identity for an in-place update.
+
+The adaptive launcher icon and the Android storefront use the same PNG under `android/res/drawable-nodpi/`. For device validation, check the launcher artwork, launch and offline catalogue, existing-install data migration, notification permission, and the download and install confirmation flows.
 
 ## Editing public content
 
@@ -42,4 +46,4 @@ Publish `edgeone/index.html` as the existing EdgeOne project's root `index.html`
 - Set a non-empty tag or branch with `"storefront":"e3"` to load another E3 revision. The launcher resolves it to a commit and loads that commit's CSS and ES modules through jsDelivr.
 - Restore `{"tag":"under-upgrades"}` to close the public storefront again. Visitors pick up the change on reload.
 
-For local preview, serve the E3 directory and open its top-level `index.html`. The public launcher and local E3 preview use different entry points. The new Android icon is staged from the checked-in `web/assets/store-icon.png` when a build is explicitly requested.
+For local preview, serve the E3 directory and open its top-level `index.html`. The public launcher and local E3 preview use different entry points. The Android build uses its own icon source independently of the public web storefront.

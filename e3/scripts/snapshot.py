@@ -6,6 +6,8 @@ import subprocess
 import sys
 
 DECLARATIONS = ('ads', 'account', 'offline', 'subscriptions', 'openSource')
+DECLARATION_FILES = {key: key for key in DECLARATIONS}
+DECLARATION_FILES['openSource'] = 'open-source'
 VALUES = {'yes', 'no', 'n/a'}
 DATA = ('registry', 'developers', 'reviews', 'collections', 'releases', 'announcements', 'catalogue')
 
@@ -50,6 +52,11 @@ def main():
     data = {name: read(root / (name + '.json')) for name in DATA}
     data['appMetadata'] = metadata_for(data['registry'], read(root / 'e3/content/app-metadata.json'))
     output = Path(sys.argv[3]) if len(sys.argv) > 3 else root / 'e3/content/catalogue-snapshot.json'
+    for key, name in DECLARATION_FILES.items():
+        write(output.with_name(name + '.json'), {
+            app_id: record['declarations'][key]
+            for app_id, record in data['appMetadata']['apps'].items()
+        })
     write(output, {
         'schemaVersion': 1,
         'sourceRevision': revision,

@@ -1,6 +1,6 @@
 {
-  "com.woodsstudio.messages": "n/a",
-  "com.woodsstudio.maps": "n/a",
+  "com.woodsstudio.messages": "no",
+  "com.woodsstudio.maps": "no",
   "com.woodsstudio.widgets": "n/a",
   "com.woodsstudio.finder": "n/a",
   "com.woodsstudio.cloudplus": "n/a",
@@ -10,7 +10,7 @@
   "com.woodsstudio.prism.news": "n/a",
   "com.woodsstudio.toastedgames.sandbox": "n/a",
   "com.woodsstudio.store": "n/a",
-  "com.skylar.pwa": "n/a",
+  "com.skylar.pwa": "yes",
   "com.woodsstudio.core": "n/a",
   "com.woodsstudio.clover.appstore": "n/a",
   "com.woodsstudio.clover.dashboard.dockoverlay": "n/a",

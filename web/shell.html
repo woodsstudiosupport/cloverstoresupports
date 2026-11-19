@@ -18,3 +18,46 @@
 
 <div id="toast" class="toast" hidden role="status"></div>
 <dialog id="feature-dialog" class="native-sheet feature-dialog" aria-labelledby="feature-title"><div class="sheet-heading"><h2 id="feature-title"></h2><button class="sheet-close" data-close-dialog="feature-dialog" aria-label="Close dialog">×</button></div><div id="feature-content"></div></dialog><input type="file" id="library-file" accept="application/json,.json" hidden>
+<style id="clover-maintenance-style">
+#clover-maintenance {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  display: grid;
+  overflow: auto;
+  padding: clamp(16px, 5vw, 40px);
+  background: radial-gradient(ellipse at 50% 0%, #203c2f, #080c0b 74%);
+  color: #edf5ef;
+  font: 1rem/1.5 Inter, system-ui, sans-serif;
+}
+#clover-maintenance article {
+  box-sizing: border-box;
+  width: min(100%, 40rem);
+  margin: auto;
+  padding: clamp(24px, 7vw, 64px);
+  border: 1px solid #34463b;
+  border-radius: 28px;
+  background: #111816;
+  text-align: center;
+}
+#clover-maintenance h1 {
+  margin: 0;
+  font-size: clamp(1.65rem, 5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+#clover-maintenance p {
+  margin: 16px 0 0;
+  color: #bce8a5;
+  font-size: 1.125rem;
+}
+#store-root > :not(#clover-maintenance) { visibility: hidden !important; }
+#store-root > #clover-maintenance { padding: clamp(16px, 5vw, 40px); }
+</style>
+<main id="clover-maintenance" aria-labelledby="clover-maintenance-title">
+  <article>
+    <h1 id="clover-maintenance-title">Clover Store is undergoing upgrades</h1>
+    <p>Please come back soon</p>
+  </article>
+</main>

@@ -34,19 +34,16 @@ export function createPreferences({ catalogue, render, escape }) {
     const { registry, developers } = catalogue();
     const categories = [...new Set(registry.map(app => app.category).filter(Boolean))].sort();
     const publishers = developers.filter(dev => registry.some(app => app.developerId === dev.id));
-    const chip = (name, value, label) =>
-      `<label class="ui64-choice"><input type="checkbox" name="${name}" value="${escape(value)}" ${selected[name].includes(value) ? 'checked' : ''}><span>${escape(label)}</span></label>`;
-    dialog.innerHTML = `<form class="ui64-preferences-form">
-      <header><h2 id="ui64-preferences-title">${firstRun ? 'Make Clover Store yours' : 'Discovery preferences'}</h2>
-        <p>Choose categories and publishers you want to see in your Discover feed.</p></header>
-      <fieldset><legend>Favourite categories</legend><div class="ui64-choice-grid">${categories.map(label => chip('categories', label, label)).join('')}</div></fieldset>
-      <fieldset><legend>Favourite publishers</legend><div class="ui64-choice-grid">${publishers.map(dev => chip('publishers', dev.id, dev.displayName || dev.name || dev.id)).join('')}</div></fieldset>
-      <p class="ui64-preferences-status" role="status"></p>
-      <footer><button type="button" class="e3-button" data-preferences-dismiss>${firstRun ? 'Skip for now' : 'Cancel'}</button>
-        <button class="e3-button primary">Save preferences</button></footer>
-    </form>`;
-    const form = dialog.querySelector('form');
-    const commit = choice => {
+    const stages = [
+      { key: 'categories', title: 'What do you enjoy exploring?', text: 'Pick the categories you want in your Discover feed.', choices: categories.map(label => [label, label]) },
+      { key: 'publishers', title: 'Who makes your favourite apps?', text: 'Choose publishers you want to see more often.', choices: publishers.map(dev => [dev.id, dev.displayName || dev.name || dev.id]) },
+      { title: 'Your store is ready', text: 'Your choices shape the For you shelf. You can change them any time.' }
+    ];
+    const draft = { categories: [...selected.categories], publishers: [...selected.publishers] };
+    let step = 0;
+    dialog.classList.toggle('ui64-onboarding', firstRun);
+
+    function finish(choice) {
       try {
         localStorage.setItem(storageKey, JSON.stringify(choice));
         selected = choice;
@@ -56,17 +53,55 @@ export function createPreferences({ catalogue, render, escape }) {
       } catch {
         dialog.querySelector('[role="status"]').textContent = 'Windows could not save your preferences.';
       }
-    };
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const fields = new FormData(form);
-      commit({ categories: fields.getAll('categories'), publishers: fields.getAll('publishers') });
-    });
-    form.querySelector('[data-preferences-dismiss]').addEventListener('click', () => {
-      if (firstRun) commit(selected);
-      else dialog.close();
-    });
+    }
+
+    function draw(focusHeading = true) {
+      const stage = stages[step];
+      const choices = stage.key
+        ? `<label class="ui64-onboarding-search">Filter choices<input type="search" placeholder="Search ${stage.key}"></label>
+          <fieldset><legend>${stage.key === 'categories' ? 'Favourite categories' : 'Favourite publishers'}</legend>
+          <div class="ui64-choice-grid">${stage.choices.map(([value, label]) =>
+            `<label class="ui64-choice"><input type="checkbox" value="${escape(value)}" ${draft[stage.key].includes(value) ? 'checked' : ''}><span>${escape(label)}</span></label>`).join('')}</div></fieldset>`
+        : `<div class="panel"><p>Categories selected · ${draft.categories.length}</p><p>Publishers selected · ${draft.publishers.length}</p></div>`;
+      dialog.innerHTML = `<form class="ui64-preferences-form">
+        <header><p>Clover Store · ${step + 1} of ${stages.length}</p>
+          <progress aria-label="Onboarding progress" value="${step + 1}" max="${stages.length}"></progress>
+          <h2 id="ui64-preferences-title" tabindex="-1">${stage.title}</h2><p>${stage.text}</p></header>
+        ${choices}
+        <p class="ui64-preferences-status" role="status"></p>
+        <footer><button type="button" class="e3-button" data-dismiss>${firstRun ? 'Skip setup' : 'Cancel'}</button>
+          ${step ? '<button type="button" class="e3-button" data-back>Back</button>' : ''}
+          <button class="e3-button primary">${stage.key ? 'Continue' : 'Save and explore'}</button></footer>
+      </form>`;
+      const form = dialog.querySelector('form');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (step === stages.length - 1) finish(draft);
+        else { step++; draw(); }
+      });
+      form.addEventListener('change', event => {
+        if (event.target.type !== 'checkbox') return;
+        const values = new Set(draft[stage.key]);
+        if (event.target.checked) values.add(event.target.value);
+        else values.delete(event.target.value);
+        draft[stage.key] = [...values];
+      });
+      form.querySelector('input[type="search"]')?.addEventListener('input', event => {
+        const query = event.target.value.trim().toLowerCase();
+        for (const option of form.querySelectorAll('.ui64-choice'))
+          option.hidden = !option.textContent.toLowerCase().includes(query);
+      });
+      form.querySelector('[data-back]')?.addEventListener('click', () => { step--; draw(); });
+      form.querySelector('[data-dismiss]').addEventListener('click', () => {
+        if (firstRun) finish(selected);
+        else dialog.close();
+      });
+      if (focusHeading) dialog.querySelector('h2').focus();
+    }
+
+    draw(false);
     dialog.showModal();
+    dialog.querySelector('h2').focus();
   }
 
   document.addEventListener('click', event => {

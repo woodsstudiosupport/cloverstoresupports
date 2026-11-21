@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 
@@ -50,14 +49,7 @@ internal sealed class StoreWindow : Window
         Content = view;
         Loaded += async (_, _) => await StartAsync();
         Closed += (_, _) => { desktop.Dispose(); view.Dispose(); };
-        PreviewKeyDown += (_, e) =>
-        {
-            if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                e.Handled = true;
-                ShowTools();
-            }
-        };
+
     }
 
     private async Task StartAsync()
@@ -119,7 +111,10 @@ internal sealed class StoreWindow : Window
                 "website.open" => DesktopActions.OpenWebsite(payload),
                 "files.open" => desktop.Reveal(payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
-                "windows.tools" => ShowTools(),
+                "windows.summary" => DesktopActions.SystemSummary().ToArray(),
+                "windows.transfer-settings" => TransferSettings(payload),
+                "windows.completed" => desktop.CompletedDownloads().Select(item => new { id = item.Id, name = item.Name }).ToArray(),
+                "windows.bundle-export" => await ExportBundleAsync(payload),
                 "windows.hardware" => DesktopActions.Hardware(),
                 "windows.inventory" => await Task.Run(() => DesktopActions.InstalledApps().ToArray()),
                 _ => throw new InvalidOperationException("This Windows action is unavailable.")
@@ -138,113 +133,34 @@ internal sealed class StoreWindow : Window
             view.CoreWebView2.PostWebMessageAsJson(JsonSerializer.Serialize(message));
     }
 
-    private object ShowTools()
+    private object TransferSettings(JsonElement payload)
     {
-        var panel = new StackPanel { Margin = new Thickness(18) };
-        var dialog = new Window
+        if (payload.TryGetProperty("limit", out var limit))
         {
-            Owner = this, Title = "Clover Store · Windows tools",
-            Width = 680, Height = 640, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
-        };
-        var inventory = new TextBox
-        {
-            IsReadOnly = true, Height = 270, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            Text = string.Join(Environment.NewLine, DesktopActions.InstalledApps())
-        };
-        panel.Children.Add(new TextBlock
-        {
-            Text = string.Join(Environment.NewLine, DesktopActions.SystemSummary()),
-            Margin = new Thickness(0, 0, 0, 12), TextWrapping = TextWrapping.Wrap
-        });
-        panel.Children.Add(new TextBlock { Text = "Installed Windows programs", Margin = new Thickness(0, 0, 0, 8) });
-        panel.Children.Add(inventory);
-        var actions = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 12, 0, 0) };
-        panel.Children.Add(actions);
-        AddButton("Open Windows downloads", () => Navigate("downloads"));
-        AddButton("Open updates", () => Navigate("updates"));
-        AddButton("Copy installed list", () => Clipboard.SetText(inventory.Text));
-        var export = new Button { Content = "Choose packages for an offline ZIP", Padding = new Thickness(8), Margin = new Thickness(0, 8, 0, 0) };
-        export.Click += async (_, _) =>
-        {
-            var available = desktop.CompletedDownloads();
-            if (available.Length == 0)
-            {
-                MessageBox.Show(dialog, "Download at least one Windows package first.", "Offline bundle");
-                return;
-            }
-            var choices = new ListBox
-            {
-                ItemsSource = available, DisplayMemberPath = "Name",
-                SelectionMode = SelectionMode.Multiple, MinHeight = 180
-            };
-            var choose = new Button { Content = "Continue with selected packages", IsDefault = true, Margin = new Thickness(0, 10, 0, 0) };
-            var layout = new StackPanel { Margin = new Thickness(16) };
-            layout.Children.Add(choices);
-            layout.Children.Add(choose);
-            var selection = new Window
-            {
-                Owner = dialog, Title = "Choose offline packages", Width = 480, Height = 300,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                Content = new ScrollViewer { Content = layout }
-            };
-            choose.Click += (_, _) =>
-            {
-                if (choices.SelectedItems.Count != 0) selection.DialogResult = true;
-            };
-            if (selection.ShowDialog() != true) return;
-            var ids = choices.SelectedItems.Cast<DesktopActions.CompletedDownload>().Select(item => item.Id).ToHashSet();
-            var picker = new Microsoft.Win32.SaveFileDialog
-            {
-                FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
-                AddExtension = true, OverwritePrompt = true
-            };
-            if (picker.ShowDialog(dialog) != true) return;
-            export.IsEnabled = false;
-            try
-            {
-                var count = await desktop.ExportOfflineBundleAsync(picker.FileName, ids);
-                MessageBox.Show(dialog, $"Exported {count} packages.", "Offline bundle");
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(dialog, error.Message, "Offline bundle");
-            }
-            finally { export.IsEnabled = true; }
-        };
-        panel.Children.Add(export);
-        var lowBattery = new CheckBox
-        {
-            Content = "Pause downloads on battery at 20% or lower",
-            IsChecked = desktop.PauseOnLowBattery, Margin = new Thickness(0, 8, 0, 0)
-        };
-        lowBattery.Checked += (_, _) => desktop.PauseOnLowBattery = true;
-        lowBattery.Unchecked += (_, _) => desktop.PauseOnLowBattery = false;
-        panel.Children.Add(lowBattery);
-        var speed = new ComboBox { Margin = new Thickness(0, 8, 0, 0) };
-        var limits = new[] { 0, 256, 1024, 5120, 10240 };
-        foreach (var limit in limits)
-            speed.Items.Add(limit == 0 ? "Download speed per transfer · Unlimited" : $"Download speed per transfer · {limit} KiB/s");
-        speed.SelectedIndex = Array.IndexOf(limits, desktop.DownloadLimitKiB);
-        speed.SelectionChanged += (_, _) =>
-        {
-            if (speed.SelectedIndex >= 0) desktop.DownloadLimitKiB = limits[speed.SelectedIndex];
-        };
-        panel.Children.Add(speed);
-        dialog.Show();
-        return new { opened = true };
-
-        void AddButton(string title, Action action)
-        {
-            var button = new Button { Content = title, Padding = new Thickness(8), Margin = new Thickness(0, 0, 8, 0) };
-            button.Click += (_, _) => action();
-            actions.Children.Add(button);
+            var value = limit.GetInt32();
+            if (value is not (0 or 256 or 1024 or 5120 or 10240))
+                throw new ArgumentException("Unsupported transfer limit.");
+            var pause = payload.GetProperty("pause").GetBoolean();
+            desktop.DownloadLimitKiB = value;
+            desktop.PauseOnLowBattery = pause;
         }
+        return new { limit = desktop.DownloadLimitKiB, pause = desktop.PauseOnLowBattery };
+    }
 
-        void Navigate(string page)
+    private async Task<object> ExportBundleAsync(JsonElement payload)
+    {
+        var ids = payload.GetProperty("ids").EnumerateArray()
+            .Select(item => item.GetString() ?? "").ToHashSet();
+        var available = desktop.CompletedDownloads().Select(item => item.Id).ToHashSet();
+        if (ids.Count == 0 || !ids.IsSubsetOf(available))
+            throw new InvalidOperationException("Select completed downloads.");
+        var picker = new Microsoft.Win32.SaveFileDialog
         {
-            view.CoreWebView2?.Navigate(Entry + "#/" + page);
-            dialog.Close();
-        }
+            FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
+            AddExtension = true, OverwritePrompt = true
+        };
+        if (picker.ShowDialog(this) != true) return new { cancelled = true, count = 0 };
+        return new { cancelled = false, count = await desktop.ExportOfflineBundleAsync(picker.FileName, ids) };
     }
 
     private static void AddJumpList()

@@ -8,7 +8,6 @@ html[data-client="ui64"] body {background: var(--ui64-background)}
   display:grid;
   gap:0; padding:0;
   height:100dvh;
-  grid-template: "head head" 64px "nav main" minmax(0,1fr) "status status" 28px / 176px minmax(0,1fr);
   color:#edf4fb;
   background:var(--ui64-background);
 }
@@ -18,32 +17,16 @@ html[data-client="ui64"] body {background: var(--ui64-background)}
 .ui64-header button {display:flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #ffffff24;border-radius:8px;background:#ffffff0a;color:#edf4fb;white-space:nowrap}
 .ui64-header [data-action="search"] {margin-left:auto}
 .ui64-header svg {width:17px;height:17px}
-.ui64-sidebar {grid-area:nav;padding:12px;overflow:auto;background:#ffffff05;border-right:1px solid #ffffff17}
-.ui64-sidebar nav {display:flex;flex-direction:column;gap:3px}
-.ui64-sidebar nav+nav {margin-top:16px;padding-top:16px;border-top:1px solid #ffffff17}
-.ui64-sidebar a {padding:8px 12px;color:#c7d4e0;border-radius:7px;white-space:nowrap}
-.ui64-sidebar a:hover,.ui64-sidebar a[aria-current="page"] {background:#ffffff13;color:var(--ui64-accent)}
 .ui64-shell #e3-main {grid-area:main;min-width:0;min-height:0;overflow:auto;padding:0}
 .ui64-shell .e3-page {max-width:1560px;padding:clamp(18px,3vw,48px);margin:auto}
 .ui64-status {grid-area:status;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 14px;background:var(--ui64-surface);font-size:11px}
-@media (max-width:900px) {
-  .ui64-shell.e3-shell {grid-template:"head" 56px "nav" auto "main" minmax(0,1fr) "status" 28px / minmax(0,1fr)}
-  .ui64-sidebar {display:flex;gap:8px;overflow:auto;padding:6px 10px;border-right:0;border-bottom:1px solid #ffffff17}
-  .ui64-sidebar nav {flex-direction:row}
-  .ui64-sidebar nav+nav {margin:0;padding:0;border:0}
-  .ui64-sidebar a {padding:6px 8px}
-}
 @media (max-width:560px) {
   .ui64-header {padding:0 10px;gap:8px}
   .ui64-header kbd,.ui64-header [data-action="search"] span {display:none}
   .ui64-shell .e3-page {padding:12px}
 }
 
-.ui64-shell.e3-shell {grid-template-columns:208px minmax(0,1fr)}
 .ui64-header {background:color-mix(in srgb,var(--ui64-surface),var(--ui64-background) 30%);}
-.ui64-sidebar {padding:18px 12px}
-.ui64-nav-label {padding:4px 12px;color:#a8b9ca;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
-.ui64-sidebar a[aria-current="page"] {box-shadow:inset 3px 0 var(--ui64-accent)}
 .ui64-shell #e3-main {background:radial-gradient(ellipse at 90% 0%,color-mix(in srgb,var(--ui64-accent),transparent 94%),transparent 62%)}
 .ui64-workspace {display:grid;gap:18px;min-width:0}
 .ui64-workspace header {padding:clamp(18px,4vw,42px);background:var(--ui64-surface);border:1px solid #ffffff18;border-radius:18px}
@@ -64,11 +47,6 @@ html[data-client="ui64"] body {background: var(--ui64-background)}
 #ui64-palette nav {display:grid;gap:5px;margin-top:12px}
 #ui64-palette nav :is(a,button) {padding:10px;text-align:left;border:0;border-radius:8px;background:#ffffff0a;color:inherit}
 #ui64-palette nav :is(a,button):hover {background:#ffffff19}
-@media(max-width:900px) {
-  .ui64-shell.e3-shell {grid-template-columns:minmax(0,1fr)}
-  .ui64-sidebar {padding:6px 10px}
-  .ui64-nav-label {display:none}
-}
 
 .ui64-discovery {display:grid;gap:24px}
 .ui64-discovery-heading {
@@ -99,3 +77,53 @@ html[data-client="ui64"] body {background: var(--ui64-background)}
 @media(max-width:560px) {.ui64-header .ui64-preferences-button {display:none}}
 .ui64-memory.meets {color:#9ee9c6}
 .ui64-memory.below {color:#ffd28b}
+
+.ui64-shell.e3-shell {
+  grid-template:"head" 64px "main" minmax(0,1fr) "dock" auto "status" 24px / minmax(0,1fr);
+  background:var(--wallpaper,var(--ui64-background));
+}
+.ui64-dock {
+  grid-area:dock;display:flex;justify-content:safe center;gap:4px;overflow-x:auto;
+  width:max-content;max-width:calc(100% - 20px);margin:0 auto 8px;padding:6px;
+  border:1px solid var(--border);border-radius:21px;background:var(--surface);
+  box-shadow:0 12px 36px #02061055;scrollbar-width:thin;
+}
+.ui64-dock :is(a,button) {
+  flex:0 0 auto;display:grid;justify-items:center;align-content:center;gap:4px;
+  padding:8px clamp(7px,1.5vw,18px);min-height:50px;
+  border:0;border-radius:14px;background:none;color:var(--text);font-size:.72rem;white-space:nowrap;
+}
+.ui64-dock svg {width:20px;height:20px}
+.ui64-dock :is(a,button):hover,.ui64-dock [aria-current="page"] {background:var(--raised);color:var(--accent)}
+.ui64-dock :focus-visible {outline:2px solid var(--accent);outline-offset:-2px}
+.ui64-shell .compare-dock {bottom:110px}
+.ui64-inventory li {display:flex;align-items:center;gap:12px}
+.ui64-inventory li[hidden] {display:none}
+.ui64-inventory li small {display:block;color:var(--muted);margin-top:4px}
+.ui64-app-monogram {display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:var(--raised);color:var(--accent);font-weight:700}
+@media(max-width:560px) {
+  .ui64-shell.e3-shell {grid-template-rows:52px minmax(0,1fr) auto 22px}
+  .ui64-dock {max-width:calc(100% - 12px);margin-bottom:4px}
+}
+.ui64-preferences.ui64-onboarding {
+  position:fixed;inset:0;margin:0;width:100%;height:100%;max-width:none;max-height:none;
+  border:0;border-radius:0;overflow:auto;
+  background:radial-gradient(ellipse at 85% 0%,#372d6355,transparent 60%),var(--wallpaper,var(--ui64-background));
+}
+.ui64-onboarding .ui64-preferences-form {
+  width:min(900px,100%);min-height:min(650px,100dvh);margin:auto;
+  align-content:center;padding:clamp(20px,6vw,70px);
+  animation:e3-onboarding-enter .36s ease-out both;
+}
+.ui64-onboarding h2 {font-size:clamp(1.9rem,5vw,3.75rem);letter-spacing:-.055em}
+.ui64-preferences-form progress {width:100%;margin:10px 0;accent-color:var(--accent)}
+.ui64-onboarding-search {display:grid;gap:6px}
+.ui64-onboarding-search input {padding:10px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:10px}
+.ui64-choice[hidden] {display:none}
+@keyframes e3-onboarding-enter {from {opacity:0;transform:translateY(12px)} to {opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce) {.ui64-onboarding .ui64-preferences-form {animation:none}}
+html[data-motion="reduce"] .ui64-onboarding .ui64-preferences-form {animation:none}
+.ui64-tool-form {display:grid;justify-items:start;gap:12px}
+.ui64-tool-form h2 {margin:0}
+.ui64-tool-form label {display:flex;align-items:center;gap:8px}
+.ui64-tool-form select {color:var(--text);background:var(--surface);border:1px solid var(--border);padding:6px;border-radius:8px}

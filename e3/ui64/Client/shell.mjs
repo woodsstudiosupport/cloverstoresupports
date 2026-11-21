@@ -29,16 +29,15 @@ export function startAppearance(document) {
 }
 
 export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
-  const primary = [
-    ['discover', 'Discover'], ['explore', 'Explore'], ['collections', 'Collections'],
-    ['developers', 'Publishers'], ['library', 'Library']
+  const tabs = [
+    ['discover', 'Discover', 'discover'], ['explore', 'Explore', 'explore'],
+    ['library', 'Library', 'library'], ['installed', 'Installed', 'check'],
+    ['updates', 'Updates', 'updates'], ['downloads', 'Downloads', 'download'],
+    ['settings', 'Settings', 'settings']
   ];
-  const workspace = [
-    ['installed', 'Installed'], ['updates', 'Updates'], ['downloads', 'Downloads'],
-    ['releases', 'Release Watch'], ['compare', 'Compare'], ['settings', 'Settings']
-  ];
-  const links = list => list.map(([id, title]) =>
-    `<a href="#/${id}" ${page === id ? 'aria-current="page"' : ''}>${title}</a>`).join('');
+  const links = tabs.map(([id, title, symbol]) =>
+    `<a href="#/${id}" ${page === id ? 'aria-current="page"' : ''}>${icon(symbol)}<span>${title}</span></a>`).join('');
+
   return `<div class="e3-shell ui64-shell">
     <header class="ui64-header">
       <a class="ui64-brand" href="#/discover"><img src="${storeIcon}" alt="">Clover Store</a>
@@ -46,11 +45,10 @@ export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
       <button class="ui64-preferences-button" type="button" data-preferences-open>Preferences</button>
       <button type="button" data-palette-open aria-label="Command palette" title="Command palette (Ctrl+P)"><span>Commands</span><kbd>Ctrl P</kbd></button>
     </header>
-    <aside class="ui64-sidebar">
-      <nav aria-label="Storefront"><span class="ui64-nav-label">Browse</span>${links(primary)}</nav>
-      <nav aria-label="Workspace"><span class="ui64-nav-label">Manage</span>${links(workspace)}</nav>
-    </aside>
     <main id="e3-main"><div class="e3-page">${body}</div></main>
+    <nav class="ui64-dock" aria-label="Store navigation">${links}
+      <button type="button" data-palette-open>${icon('menu')}<span>More</span></button>
+    </nav>
     <footer class="ui64-status"><span>${status}</span><span>E3.UI64 · Windows x64</span></footer>
     ${compare}
   </div>`;

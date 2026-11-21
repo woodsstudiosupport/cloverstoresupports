@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "4a9fa94fb4db92e82d0e95758a8cd4def44abba5",
-  "generatedAt": "2026-11-21T12:00:08.256642+00:00",
+  "sourceRevision": "c477e7138921d2b04e1da72a1654efa71dcf33de",
+  "generatedAt": "2026-11-21T12:30:24.874611+00:00",
   "data": {
     "registry": [
       {
@@ -14,7 +14,7 @@
         "downloads": {
           "windows": "https://github.com/woodsstudiosupport/cloverstoresupports/releases/download/release2.0E3.UI64/CloverStoreE3.2.0.exe",
           "linux": "",
-          "android": ""
+          "android": "https://play.google.com/store/apps/details?id=com.woodsstudio.clover.apps&hl=en-US"
         },
         "description": "Clover Store Experience 3 (E3) for Windows brings app discovery, downloads, and updates into one desktop storefront. Personalise your feed, manage software with WinGet, Scoop, or Chocolatey, and try installers in Windows Sandbox before installing them on your PC.",
         "isBuiltin": false,

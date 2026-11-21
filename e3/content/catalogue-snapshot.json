@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "324ab2cebf811f05d14ffbb1851142b7873ad695",
-  "generatedAt": "2026-11-21T10:58:27.993Z",
+  "sourceRevision": "86d3f3d0100e68e7ee2d5079b0d13a0a829f33ec",
+  "generatedAt": "2026-11-21T11:01:19.184626+00:00",
   "data": {
     "registry": [
       {
@@ -550,6 +550,15 @@
     "appMetadata": {
       "schemaVersion": 1,
       "apps": {
+        "com.woodsstudio.windows.store.e3": {
+          "declarations": {
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
+          }
+        },
         "com.woodsstudio.messages": {
           "declarations": {
             "ads": "n/a",
@@ -695,15 +704,6 @@
           }
         },
         "com.woodsstudio.android.store": {
-          "declarations": {
-            "ads": "n/a",
-            "account": "n/a",
-            "offline": "n/a",
-            "subscriptions": "n/a",
-            "openSource": "n/a"
-          }
-        },
-        "com.woodsstudio.windows.store.e3": {
           "declarations": {
             "ads": "n/a",
             "account": "n/a",

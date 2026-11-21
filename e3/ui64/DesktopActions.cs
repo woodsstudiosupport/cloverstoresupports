@@ -43,6 +43,13 @@ internal sealed class DesktopActions : IDisposable
     [DllImport("shell32.dll", ExactSpelling = true)]
     private static extern int SHQueryUserNotificationState(out int state);
 
+    public (int Active, long Bytes, int Complete) WidgetStats()
+    {
+        return (transfers.Values.Count(item => item.Status == "Downloading"),
+                transfers.Values.Sum(item => item.Done),
+                transfers.Values.Count(item => item.Status == "Downloaded"));
+    }
+
     public object Snapshot() => transfers.Values.Reverse().Select(item => new
     {
         id = item.Id, name = item.Name, platform = "windows", status = item.Status,

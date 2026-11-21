@@ -144,7 +144,7 @@ export function installPalette() {
       <a href="#/explore">Explore apps</a><a href="#/updates">Check updates</a>
       <a href="#/downloads">Open downloads</a><a href="#/installed">Scan installed apps</a>
       <a href="#/collections">Collections</a><a href="#/developers">Publishers</a>
-      <a href="#/compare">Compare apps</a><a href="#/releases">Watch GitHub releases</a><a href="#/windows-tools">Windows tools and offline export</a>
+      <a href="#/compare">Compare apps</a><a href="#/themes">Desktop palettes</a><a href="#/packages">Package managers</a><a href="#/releases">Watch GitHub releases</a><a href="#/windows-tools">Windows tools and offline export</a>
 
     </nav>`;
   document.body.append(dialog);
@@ -177,6 +177,8 @@ export function transferWorkspace(platform, render, escape) {
   }
   document.addEventListener('click', event => {
     if (event.target.closest('[data-transfer-refresh]')) void refresh();
+    if (event.target.closest('[data-download-widget]'))
+      platform.request('windows.widget').catch(error=>{status=error.message;render();});
   });
   document.addEventListener('submit', async event => {
     const id = event.target.id;
@@ -207,6 +209,7 @@ export function transferWorkspace(platform, render, escape) {
   return () => `<section class="ui64-workspace">
     <header><h1>Windows tools</h1><p>Manage transfers and prepare offline bundles.</p></header>
     <div class="ui64-actions"><button class="e3-button" data-transfer-refresh>Refresh Windows details</button>
+      <button class="e3-button" data-download-widget>Show download widget</button>
       <p role="status">${escape(status || (state ? '' : 'Refresh to load available packages and Windows details.'))}</p></div>
     ${state ? `<section class="panel"><h2>This PC</h2>${state.summary.map(item => '<p>' + escape(item) + '</p>').join('')}</section>
       <form class="panel ui64-tool-form" id="ui64-transfer-settings"><h2>Transfers</h2>

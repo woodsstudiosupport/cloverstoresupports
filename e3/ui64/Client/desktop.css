@@ -131,3 +131,4 @@ html[data-motion="reduce"] .ui64-onboarding .ui64-preferences-form {animation:no
 #ui64-adoption::backdrop {background:#080d16b8}
 #ui64-adoption select {max-width:100%}
 #ui64-adoption label {flex-wrap:wrap}
+.ui64-command-output {white-space:pre-wrap;overflow-wrap:anywhere;min-height:5rem}

@@ -36,6 +36,7 @@ internal sealed class StoreWindow : Window
     private readonly WebView2 view = new();
     private readonly DesktopActions desktop = new();
     private readonly string route;
+    private Window? downloadWidget;
 
     public StoreWindow(string route)
     {
@@ -112,6 +113,9 @@ internal sealed class StoreWindow : Window
                 "files.open" => desktop.Reveal(payload),
                 "windows.install" => await desktop.InstallAsync(this, payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
+                "windows.widget" => ShowDownloadWidget(),
+                "windows.package-manager" => await PackageManagers.RunAsync(this, payload),
+                "windows.pick-folder" => PickFolder(),
                 "windows.summary" => DesktopActions.SystemSummary().ToArray(),
                 "windows.transfer-settings" => TransferSettings(payload),
                 "windows.completed" => desktop.CompletedDownloads().Select(item => new { id = item.Id, name = item.Name }).ToArray(),
@@ -132,6 +136,50 @@ internal sealed class StoreWindow : Window
     {
         if (view.CoreWebView2 is not null && IsEntry(view.Source?.AbsoluteUri ?? ""))
             view.CoreWebView2.PostWebMessageAsJson(JsonSerializer.Serialize(message));
+    }
+
+    private object ShowDownloadWidget()
+    {
+        if (downloadWidget is not null)
+        {
+            downloadWidget.Activate();
+            return new { opened = true };
+        }
+
+        var label = new TextBlock { Margin = new Thickness(20), FontSize = 16, TextWrapping = TextWrapping.Wrap,
+            Foreground = System.Windows.Media.Brushes.White };
+        var window = new Window
+        {
+            Owner = this, Title = "Clover Store · Downloads", Width = 320, Height = 145,
+            ResizeMode = ResizeMode.NoResize, Topmost = true, Content = label,
+            Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(18, 27, 37))
+        };
+        downloadWidget = window;
+        var previous = desktop.WidgetStats().Bytes;
+        var previousAt = System.Diagnostics.Stopwatch.GetTimestamp();
+        var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        timer.Tick += (_, _) => Refresh();
+        window.Closed += (_, _) => { timer.Stop(); downloadWidget = null; };
+        Refresh();
+        timer.Start();
+        window.Show();
+        return new { opened = true };
+
+        void Refresh()
+        {
+            var stats = desktop.WidgetStats();
+            var seconds = System.Diagnostics.Stopwatch.GetElapsedTime(previousAt).TotalSeconds;
+            var throughput = Math.Max(0, stats.Bytes - previous) / Math.Max(1, seconds) / 1024d;
+            label.Text = $"E3.UI64 · Downloads\n{stats.Active} active · {stats.Complete} complete\n{throughput:0} KiB/s";
+            previous = stats.Bytes;
+            previousAt = System.Diagnostics.Stopwatch.GetTimestamp();
+        }
+    }
+
+    private object PickFolder()
+    {
+        var picker = new Microsoft.Win32.OpenFolderDialog { Title = "Choose a Windows install directory" };
+        return new { path = picker.ShowDialog(this) == true ? picker.FolderName : "" };
     }
 
     private object TransferSettings(JsonElement payload)

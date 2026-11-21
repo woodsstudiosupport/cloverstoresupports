@@ -16,10 +16,17 @@ export function startAppearance(document) {
   const refresh = async () => {
     if (document.hidden) return;
     try {
+      const local = JSON.parse(localStorage.getItem('e3.ui64.palette.v1'));
+      if (local?.schemaVersion === 1) { applyAppearance(local, style); return; }
+    } catch { /* Continue with the public palette. */ }
+    try {
       const response = await fetch(appearanceURL, {
         credentials: 'omit', cache: 'no-cache', signal: AbortSignal.timeout(5000)
       });
-      if (response.ok) applyAppearance(await response.json(), style);
+      if (response.ok) {
+        const palette = await response.json();
+        if (!localStorage.getItem('e3.ui64.palette.v1')) applyAppearance(palette, style);
+      }
     } catch {
       // Keep the last working palette when the remote configuration is unavailable.
     }

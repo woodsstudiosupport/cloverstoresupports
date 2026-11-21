@@ -1,4 +1,4 @@
 {
-  "title": "Store is unavalible on Web",
-  "message": "Woods Studio is having service outtages, and Store E3 on Web is currently down. Please use the Android & Windows app"
+  "title": "Store is offline",
+  "message": "Server returned: ERR_CONNECTION_REFUSED. We are working on a fix. Please use the Android & Windows app for now"
 }

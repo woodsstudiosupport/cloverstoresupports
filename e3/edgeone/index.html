@@ -22,6 +22,7 @@
     .startup-logo { width: 84px; height: 84px; object-fit: contain; animation: logo-rise 1.05s .28s both; }
     .startup-studio { font-size: clamp(1.05rem, 4vw, 1.5rem); letter-spacing: .1em; animation: studio-centre 1s .12s both; }
     .startup-title { margin: 0; font-size: clamp(2rem, 8vw, 4rem); font-weight: 650; letter-spacing: -.055em; animation: store-draw .76s 1s both; }
+    .startup-progress { margin: 10px 0 0; color: #bed0c9; font-size: .95rem; }
     .startup-spinner { width: 34px; aspect-ratio: 1; margin-top: 20px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 10%, #ab75ff 29%, #568bff 49%, #59d8c4 65%, #ffe379 81%, #fb7baa); animation: spinner-in .24s 1.72s both, spinner-turn 1s linear infinite; position: relative; }
     .startup-spinner::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: #000; }
     @keyframes logo-rise { from { opacity: 0; transform: translateY(35px); } 45% { opacity: 1; } to { opacity: 1; transform: translateY(-12px); } }
@@ -35,11 +36,12 @@
 <body>
   <div id="e3-root" inert></div>
   <main id="store-launch" data-state="opening" aria-label="Clover Store startup">
-      <div class="startup-brand" role="status" aria-label="Opening Clover Store">
+      <div class="startup-brand">
         <img class="startup-logo" src="https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/main/e3/ui/assets/woods-logo.png" alt="" width="84" height="84">
         <div class="startup-studio">Woods Studio</div>
         <div class="startup-title">Clover Store</div>
         <div class="startup-spinner" aria-hidden="true"></div>
+        <p class="startup-progress" id="startup-progress" role="status"></p>
       </div>
       <article>
         <h1 id="launch-title">Opening Clover Store</h1>
@@ -67,7 +69,10 @@
 
     const startup = document.getElementById('store-launch');
     const storefront = document.getElementById('e3-root');
-    const startedAt = performance.now();
+    const progress = document.getElementById('startup-progress');
+    const intro = matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? Promise.resolve()
+      : new Promise(resolve => setTimeout(resolve, 2000));
 
     async function showMaintenance() {
       startup.dataset.state = 'notice';
@@ -90,11 +95,14 @@
         return;
       }
 
+      await intro;
+      progress.textContent = 'Finding the latest store version…';
       const ref = typeof config.tag === 'string' && config.tag.trim() ? config.tag.trim() : 'main';
       const {sha} = await requestJSON('https://api.github.com/repos/' + repository + '/commits/' + encodeURIComponent(ref));
       if (!/^[a-f0-9]{40}$/.test(sha || '')) throw Error('Invalid storefront revision');
 
       const base = 'https://cdn.jsdelivr.net/gh/' + repository + '@' + sha + '/e3/';
+      progress.textContent = 'Loading storefront styles…';
       const stylesheet = document.createElement('link');
       stylesheet.rel = 'stylesheet';
       stylesheet.href = base + 'ui/design.css';
@@ -103,11 +111,10 @@
         stylesheet.onerror = reject;
         document.head.append(stylesheet);
       });
+      progress.textContent = 'Loading storefront files…';
       await import(base + 'runtime/app.mjs');
+      progress.textContent = 'Initialising the catalogue…';
       await waitForStorefront();
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        await new Promise(resolve => setTimeout(resolve, Math.max(0, 2300 - (performance.now() - startedAt))));
-      }
       storefront.inert = false;
       startup.remove();
     }

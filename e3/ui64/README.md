@@ -23,3 +23,9 @@ Keep the entire publish folder together. Windows Sandbox also needs to be enable
 - The Windows tools panel can export completed downloads into an offline ZIP. Installers that need network access or extra dependencies retain those requirements.
 
 The preview has no claim of a complete pre-install diff. A future preview can show publisher-declared changes or observed sandbox changes, with the source stated for each change. Restore points, activity-aware downloads, category install paths, package-manager reconciliation, startup and shell-extension controls, compatibility ratings, package adoption, config sync, version pinning, widget support, selected-app and single-EXE bundles, bandwidth and mirrors, release watching, and a theme/plugin marketplace still need implementation and Windows testing.
+
+## Desktop layout and palette
+
+The Windows build uses a separate E3.UI64 shell with shared E3 catalogue views. It uses a sidebar above 900 px, a scrollable navigation strip at smaller sizes, and a compact toolbar below 560 px. The desktop palette is read on launch and refreshed every 30 seconds while the window is visible from `e3/ui64/Client/appearance.json` on `e3/ui64-preview`. Version 1 accepts only six-digit hex colours for accent, surface, and background. Shell code and other executable assets ship in the Windows build.
+
+Windows tools also provides an optional pause at 20% battery or below while unplugged and a per-transfer bandwidth limit of 256, 1024, 5120, or 10240 KiB/s. These controls apply to the current session. A paused request can still time out if its download server closes the connection. Full-screen game and call detection are pending.

@@ -1,0 +1,40 @@
+html[data-client="ui64"] {
+  --ui64-accent: #96e6cd;
+  --ui64-surface: #121b25;
+  --ui64-background: #0b1017;
+}
+html[data-client="ui64"] body {background: var(--ui64-background)}
+.ui64-shell.e3-shell {
+  display:grid;
+  gap:0; padding:0;
+  height:100dvh;
+  grid-template: "head head" 64px "nav main" minmax(0,1fr) "status status" 28px / 176px minmax(0,1fr);
+  color:#edf4fb;
+  background:var(--ui64-background);
+}
+.ui64-header {grid-area:head;display:flex;align-items:center;gap:16px;padding:0 22px;background:var(--ui64-surface);border-bottom:1px solid #ffffff17}
+.ui64-brand {display:flex;align-items:center;gap:10px;font-weight:700;white-space:nowrap;color:#edf4fb}
+.ui64-brand img {width:32px;height:32px;border-radius:8px}
+.ui64-header button {display:flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid #ffffff24;border-radius:8px;background:#ffffff0a;color:#edf4fb;white-space:nowrap}
+.ui64-header [data-action="search"] {margin-left:auto}
+.ui64-header svg {width:17px;height:17px}
+.ui64-sidebar {grid-area:nav;padding:12px;overflow:auto;background:#ffffff05;border-right:1px solid #ffffff17}
+.ui64-sidebar nav {display:flex;flex-direction:column;gap:3px}
+.ui64-sidebar nav+nav {margin-top:16px;padding-top:16px;border-top:1px solid #ffffff17}
+.ui64-sidebar a {padding:8px 12px;color:#c7d4e0;border-radius:7px;white-space:nowrap}
+.ui64-sidebar a:hover,.ui64-sidebar a[aria-current="page"] {background:#ffffff13;color:var(--ui64-accent)}
+.ui64-shell #e3-main {grid-area:main;min-width:0;min-height:0;overflow:auto;padding:0}
+.ui64-shell .e3-page {max-width:1560px;padding:clamp(18px,3vw,48px);margin:auto}
+.ui64-status {grid-area:status;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 14px;background:var(--ui64-surface);font-size:11px}
+@media (max-width:900px) {
+  .ui64-shell.e3-shell {grid-template:"head" 56px "nav" auto "main" minmax(0,1fr) "status" 28px / minmax(0,1fr)}
+  .ui64-sidebar {display:flex;gap:8px;overflow:auto;padding:6px 10px;border-right:0;border-bottom:1px solid #ffffff17}
+  .ui64-sidebar nav {flex-direction:row}
+  .ui64-sidebar nav+nav {margin:0;padding:0;border:0}
+  .ui64-sidebar a {padding:6px 8px}
+}
+@media (max-width:560px) {
+  .ui64-header {padding:0 10px;gap:8px}
+  .ui64-header kbd,.ui64-header [data-action="search"] span {display:none}
+  .ui64-shell .e3-page {padding:12px}
+}

@@ -143,7 +143,7 @@ internal sealed class StoreWindow : Window
         var dialog = new Window
         {
             Owner = this, Title = "Clover Store · Windows tools",
-            Width = 680, Height = 570, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
+            Width = 680, Height = 640, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
         var inventory = new TextBox
         {
@@ -184,6 +184,24 @@ internal sealed class StoreWindow : Window
             finally { export.IsEnabled = true; }
         };
         panel.Children.Add(export);
+        var lowBattery = new CheckBox
+        {
+            Content = "Pause downloads on battery at 20% or lower",
+            IsChecked = desktop.PauseOnLowBattery, Margin = new Thickness(0, 8, 0, 0)
+        };
+        lowBattery.Checked += (_, _) => desktop.PauseOnLowBattery = true;
+        lowBattery.Unchecked += (_, _) => desktop.PauseOnLowBattery = false;
+        panel.Children.Add(lowBattery);
+        var speed = new ComboBox { Margin = new Thickness(0, 8, 0, 0) };
+        var limits = new[] { 0, 256, 1024, 5120, 10240 };
+        foreach (var limit in limits)
+            speed.Items.Add(limit == 0 ? "Download speed per transfer · Unlimited" : $"Download speed per transfer · {limit} KiB/s");
+        speed.SelectedIndex = Array.IndexOf(limits, desktop.DownloadLimitKiB);
+        speed.SelectionChanged += (_, _) =>
+        {
+            if (speed.SelectedIndex >= 0) desktop.DownloadLimitKiB = limits[speed.SelectedIndex];
+        };
+        panel.Children.Add(speed);
         dialog.Show();
         return new { opened = true };
 

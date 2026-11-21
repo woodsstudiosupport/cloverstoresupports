@@ -19,6 +19,9 @@ internal sealed class DesktopActions : IDisposable
     public static string DataDirectory { get; } = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Woods Studio", "Clover Store UI64");
 
+    public int DownloadLimitKiB { get; set; }
+    public bool PauseOnLowBattery { get; set; }
+
     public object Snapshot() => transfers.Values.Reverse().Select(item => new
     {
         id = item.Id, name = item.Name, platform = "windows", status = item.Status,
@@ -85,13 +88,28 @@ internal sealed class DesktopActions : IDisposable
             await using (var output = new FileStream(partial, FileMode.CreateNew, FileAccess.Write, FileShare.None, 65536, true))
             {
                 var buffer = new byte[65536];
-                int count;
-                while ((count = await input.ReadAsync(buffer, token)) != 0)
+                while (true)
                 {
+                    while (PauseOnLowBattery && GetSystemPowerStatus(out var power) &&
+                           power.ACLineStatus == 0 && power.BatteryLifePercent <= 20)
+                    {
+                        item.Status = "Paused on low battery";
+                        await Task.Delay(3000, token);
+                    }
+                    item.Status = "Downloading";
+                    var started = Stopwatch.GetTimestamp();
+                    var count = await input.ReadAsync(buffer, token);
+                    if (count == 0) break;
                     if (item.Done + count > MaximumBytes) throw new IOException("The download exceeds the 8 GiB limit.");
                     hash.AppendData(buffer, 0, count);
                     await output.WriteAsync(buffer.AsMemory(0, count), token);
                     item.Done += count;
+                    if (DownloadLimitKiB > 0)
+                    {
+                        var delay = TimeSpan.FromSeconds(count / (1024d * DownloadLimitKiB))
+                            - Stopwatch.GetElapsedTime(started);
+                        if (delay > TimeSpan.Zero) await Task.Delay(delay, token);
+                    }
                 }
             }
             var digest = Convert.ToHexString(hash.GetHashAndReset());
@@ -288,6 +306,17 @@ internal sealed class DesktopActions : IDisposable
     [DllImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool GlobalMemoryStatusEx(ref MemoryStatus status);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct PowerStatus
+    {
+        public byte ACLineStatus, BatteryFlag, BatteryLifePercent, SystemStatusFlag;
+        public uint BatteryLifeTime, BatteryFullLifeTime;
+    }
+
+    [DllImport("kernel32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool GetSystemPowerStatus(out PowerStatus status);
 
     private Transfer Get(JsonElement payload) =>
         transfers.TryGetValue(payload.GetProperty("id").GetString() ?? "", out var item)

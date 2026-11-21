@@ -42,3 +42,25 @@ test('publisher declarations are complete and do not treat N/A as evidence', asy
  assert.equal(evidence(app,'noAds'),'Publisher declared');
  assert.throws(()=>validateDeclarations({...unknown,ads:'maybe'}));
 });
+
+test('E3.UI64 uses the Windows bridge only on the packaged storefront origin', async () => {
+ let receiver;
+ const webview = {
+  addEventListener(name, handler) { assert.equal(name, 'message'); receiver = handler; },
+  postMessage(message) {
+   assert.equal(message.protocol, 1);
+   const result = message.action === 'capabilities' ? {capabilities: ['sandbox.test']} : {opened: true};
+   queueMicrotask(() => receiver({data: {id: message.id, ok: true, result}}));
+  }
+ };
+ const host = new E3Platform({
+  chrome: {webview},
+  location: {origin: 'https://store.e3-ui64.invalid'},
+  dispatchEvent() {}
+ });
+ assert.equal(host.kind, 'windows');
+ assert.deepEqual(await host.request('sandbox.test', {id: 'download'}), {opened: true});
+ const web = new E3Platform({chrome: {webview},location: {origin: 'https://example.com'}});
+ assert.equal(web.kind,'web');
+ await assert.rejects(web.request('sandbox.test'), /Android host/);
+});

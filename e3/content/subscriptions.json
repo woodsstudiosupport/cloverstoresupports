@@ -3,7 +3,7 @@
   "com.woodsstudio.maps": "n/a",
   "com.woodsstudio.widgets": "n/a",
   "com.woodsstudio.finder": "n/a",
-  "com.woodsstudio.cloudplus": "yes",
+  "com.woodsstudio.cloudplus": "n/a",
   "com.woodsstudio.service": "n/a",
   "com.woodsstudio.platformagent": "n/a",
   "com.woodsstudio.toasted.games": "n/a",
@@ -15,5 +15,6 @@
   "com.woodsstudio.clover.appstore": "n/a",
   "com.woodsstudio.clover.dashboard.dockoverlay": "n/a",
   "com.woodsstudio.clover.forge": "n/a",
-  "com.woodsstudio.android.store": "n/a"
+  "com.woodsstudio.android.store": "n/a",
+  "com.woodsstudio.windows.store.e3": "n/a"
 }

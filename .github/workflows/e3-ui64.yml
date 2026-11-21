@@ -1,0 +1,30 @@
+name: Build E3.UI64 Windows preview
+on:
+  push:
+    branches: [e3/ui64-preview]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Test shared runtime
+        run: node --test e3/tests/core.test.mjs e3/tests/updater.test.mjs
+      - name: Publish Windows x64
+        run: dotnet publish e3/ui64/CloverStore.UI64.csproj -c Release --self-contained true -o publish
+      - name: Check packaged E3 assets
+        shell: pwsh
+        run: |
+          foreach ($path in @('CloverStore.UI64.exe', 'store/index.html', 'store/runtime/app.mjs', 'store/ui/design.css', 'store/content/catalogue-snapshot.json')) {
+            if (!(Test-Path "publish/$path" -PathType Leaf)) { throw "Missing $path" }
+          }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CloverStore-E3.UI64-win-x64
+          path: publish
+          if-no-files-found: error

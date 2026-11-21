@@ -114,6 +114,12 @@
                   "inspection",
                   "independent"
                 ]
+              },
+              "trackerIds": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -163,6 +169,19 @@
                   "n/a"
                 ]
               }
+            }
+          },
+          "lastReleaseLabel": {
+            "type": "string"
+          },
+          "partialDeclarations": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "offline",
+                "openSource"
+              ]
             }
           }
         }

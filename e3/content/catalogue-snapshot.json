@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "f40dca8a39ab7d7c5f3f6df57f86ec8621543d6f",
-  "generatedAt": "2026-11-21T11:45:16.463268+00:00",
+  "sourceRevision": "4a9fa94fb4db92e82d0e95758a8cd4def44abba5",
+  "generatedAt": "2026-11-21T12:00:08.256642+00:00",
   "data": {
     "registry": [
       {
@@ -512,8 +512,8 @@
           "com.woodsstudio.android.store",
           "com.woodsstudio.windows.store.e3"
         ],
-        "title": "Under Development",
-        "body": "We’re working on Clover Store E3. Please check back for updates.",
+        "title": "⚠️ Service Outtage",
+        "body": "Woods Studio Service Outtage may affect Clover Store for Android & Windows. Please expect degraded service, and issues across platforms.",
         "publishedAt": "2026-11-21T11:44:37.297Z"
       },
       {
@@ -565,9 +565,9 @@
           "declarations": {
             "ads": "no",
             "account": "no",
-            "offline": "yes",
+            "offline": "n/a",
             "subscriptions": "no",
-            "openSource": "yes"
+            "openSource": "n/a"
           },
           "partialDeclarations": [
             "offline",
@@ -591,33 +591,33 @@
               "com.woodsstudio.Lists.PingService"
             ],
             "collectionSummary": "Collects: Device Information, Internet Status",
-            "source": "Woods Studio"
+            "source": "publisher"
           }
         },
         "com.woodsstudio.messages": {
           "declarations": {
-            "ads": "no",
-            "account": "yes",
-            "offline": "yes",
-            "subscriptions": "no",
-            "openSource": "no"
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
+            "openSource": "n/a"
           }
         },
         "com.woodsstudio.maps": {
           "declarations": {
-            "ads": "no",
-            "account": "no",
-            "offline": "yes",
-            "subscriptions": "no",
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
             "openSource": "n/a"
           }
         },
         "com.woodsstudio.widgets": {
           "declarations": {
-            "ads": "no",
-            "account": "no",
-            "offline": "no",
-            "subscriptions": "no",
+            "ads": "n/a",
+            "account": "n/a",
+            "offline": "n/a",
+            "subscriptions": "n/a",
             "openSource": "n/a"
           }
         },
@@ -633,7 +633,7 @@
         "com.woodsstudio.cloudplus": {
           "declarations": {
             "ads": "n/a",
-            "account": "yes",
+            "account": "n/a",
             "offline": "n/a",
             "subscriptions": "n/a",
             "openSource": "n/a"

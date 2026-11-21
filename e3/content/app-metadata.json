@@ -153,6 +153,15 @@
         "subscriptions": "n/a",
         "openSource": "n/a"
       }
+    },
+    "com.woodsstudio.windows.store.e3": {
+      "declarations": {
+        "ads": "n/a",
+        "account": "n/a",
+        "offline": "n/a",
+        "subscriptions": "n/a",
+        "openSource": "n/a"
+      }
     }
   }
 }

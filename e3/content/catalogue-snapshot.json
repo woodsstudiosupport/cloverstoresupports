@@ -565,9 +565,9 @@
           "declarations": {
             "ads": "no",
             "account": "no",
-            "offline": "n/a",
+            "offline": "yes",
             "subscriptions": "no",
-            "openSource": "n/a"
+            "openSource": "yes"
           },
           "partialDeclarations": [
             "offline",
@@ -591,33 +591,33 @@
               "com.woodsstudio.Lists.PingService"
             ],
             "collectionSummary": "Collects: Device Information, Internet Status",
-            "source": "publisher"
+            "source": "Woods Studio"
           }
         },
         "com.woodsstudio.messages": {
           "declarations": {
-            "ads": "n/a",
-            "account": "n/a",
-            "offline": "n/a",
-            "subscriptions": "n/a",
-            "openSource": "n/a"
+            "ads": "no",
+            "account": "yes",
+            "offline": "yes",
+            "subscriptions": "no",
+            "openSource": "no"
           }
         },
         "com.woodsstudio.maps": {
           "declarations": {
-            "ads": "n/a",
-            "account": "n/a",
-            "offline": "n/a",
-            "subscriptions": "n/a",
+            "ads": "no",
+            "account": "no",
+            "offline": "yes",
+            "subscriptions": "no",
             "openSource": "n/a"
           }
         },
         "com.woodsstudio.widgets": {
           "declarations": {
-            "ads": "n/a",
-            "account": "n/a",
-            "offline": "n/a",
-            "subscriptions": "n/a",
+            "ads": "no",
+            "account": "no",
+            "offline": "no",
+            "subscriptions": "no",
             "openSource": "n/a"
           }
         },
@@ -633,7 +633,7 @@
         "com.woodsstudio.cloudplus": {
           "declarations": {
             "ads": "n/a",
-            "account": "n/a",
+            "account": "yes",
             "offline": "n/a",
             "subscriptions": "n/a",
             "openSource": "n/a"

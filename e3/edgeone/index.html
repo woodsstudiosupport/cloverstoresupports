@@ -14,17 +14,38 @@
     #store-launch h1 { margin: 0; font-size: clamp(1.65rem, 5vw, 3rem); line-height: 1.1; }
     #store-launch p { margin: 1rem 0 0; color: #bce8a5; white-space: pre-wrap; }
     #store-launch p:empty { display: none; }
+
+    #store-launch[data-state="opening"] { position: fixed; inset: 0; z-index: 2147483647; background: #000; overflow: auto; }
+    #store-launch[data-state="opening"] article { display: none; }
+    #store-launch:not([data-state="opening"]) .startup-brand { display: none; }
+    .startup-brand { display: grid; min-height: 250px; place-items: center; text-align: center; }
+    .startup-logo { width: 84px; height: 84px; object-fit: contain; animation: logo-rise 1.05s .28s both; }
+    .startup-studio { font-size: clamp(1.05rem, 4vw, 1.5rem); letter-spacing: .1em; animation: studio-centre 1s .12s both; }
+    .startup-title { margin: 0; font-size: clamp(2rem, 8vw, 4rem); font-weight: 650; letter-spacing: -.055em; animation: store-draw .76s 1s both; }
+    .startup-spinner { width: 34px; aspect-ratio: 1; margin-top: 20px; border-radius: 50%; background: conic-gradient(from 0deg, transparent 10%, #ab75ff 29%, #568bff 49%, #59d8c4 65%, #ffe379 81%, #fb7baa); animation: spinner-in .24s 1.72s both, spinner-turn 1s linear infinite; position: relative; }
+    .startup-spinner::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: #000; }
+    @keyframes logo-rise { from { opacity: 0; transform: translateY(35px); } 45% { opacity: 1; } to { opacity: 1; transform: translateY(-12px); } }
+    @keyframes studio-centre { from { opacity: 0; transform: translate(-28px, 22px); } to { opacity: 1; transform: translate(0); } }
+    @keyframes store-draw { from { clip-path: inset(0 100% 0 0); opacity: 0; } 25% { opacity: 1; } to { clip-path: inset(0); opacity: 1; } }
+    @keyframes spinner-in { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes spinner-turn { to { transform: rotate(1turn); } }
+    @media (prefers-reduced-motion: reduce) { .startup-brand > * { animation: none; } }
   </style>
 </head>
 <body>
-  <div id="e3-root">
-    <main id="store-launch" aria-labelledby="launch-title">
+  <div id="e3-root" inert></div>
+  <main id="store-launch" data-state="opening" aria-label="Clover Store startup">
+      <div class="startup-brand" role="status" aria-label="Opening Clover Store">
+        <img class="startup-logo" src="https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/main/e3/ui/assets/woods-logo.png" alt="" width="84" height="84">
+        <div class="startup-studio">Woods Studio</div>
+        <div class="startup-title">Clover Store</div>
+        <div class="startup-spinner" aria-hidden="true"></div>
+      </div>
       <article>
         <h1 id="launch-title">Opening Clover Store</h1>
         <p id="launch-message"></p>
       </article>
     </main>
-  </div>
   <div id="e3-toast" role="status" hidden></div>
   <dialog id="e3-dialog" aria-label="Clover Store dialog"></dialog>
   <script type="module">
@@ -44,7 +65,12 @@
     const noticeHeading = document.getElementById('launch-title');
     const noticeMessage = document.getElementById('launch-message');
 
+    const startup = document.getElementById('store-launch');
+    const storefront = document.getElementById('e3-root');
+    const startedAt = performance.now();
+
     async function showMaintenance() {
+      startup.dataset.state = 'notice';
       try {
         const notice = await requestJSON(configBase + 'maintenance-notice.json?_=' + Date.now());
         if (typeof notice?.title !== 'string' || !notice.title.trim() ||
@@ -78,9 +104,35 @@
         document.head.append(stylesheet);
       });
       await import(base + 'runtime/app.mjs');
+      await waitForStorefront();
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        await new Promise(resolve => setTimeout(resolve, Math.max(0, 2300 - (performance.now() - startedAt))));
+      }
+      storefront.inert = false;
+      startup.remove();
+    }
+
+    function waitForStorefront() {
+      return new Promise((resolve, reject) => {
+        const observer = new MutationObserver(check);
+        const timeout = setTimeout(() => finish(new Error('Store startup timed out')), 30000);
+        function finish(error) {
+          observer.disconnect();
+          clearTimeout(timeout);
+          if (error) reject(error);
+          else resolve();
+        }
+        function check() {
+          if (storefront.querySelector('.e3-shell')) finish();
+          else if (storefront.querySelector('.boot [data-action="reload"]')) finish(new Error('Store startup failed'));
+        }
+        observer.observe(storefront, { childList: true, subtree: true });
+        check();
+      });
     }
 
     launch().catch(() => {
+      startup.dataset.state = 'notice';
       noticeHeading.textContent = 'Store temporarily unavailable';
       noticeMessage.textContent = 'Please check back soon.';
     });

@@ -142,7 +142,7 @@ internal sealed class StoreWindow : Window
         var dialog = new Window
         {
             Owner = this, Title = "Clover Store · Windows tools",
-            Width = 680, Height = 520, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
+            Width = 680, Height = 570, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
         var inventory = new TextBox
         {
@@ -161,6 +161,28 @@ internal sealed class StoreWindow : Window
         AddButton("Open Windows downloads", () => Navigate("downloads"));
         AddButton("Open updates", () => Navigate("updates"));
         AddButton("Copy installed list", () => Clipboard.SetText(inventory.Text));
+        var export = new Button { Content = "Export downloaded packages as ZIP", Padding = new Thickness(8), Margin = new Thickness(0, 8, 0, 0) };
+        export.Click += async (_, _) =>
+        {
+            var picker = new Microsoft.Win32.SaveFileDialog
+            {
+                FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
+                AddExtension = true, OverwritePrompt = true
+            };
+            if (picker.ShowDialog(dialog) != true) return;
+            export.IsEnabled = false;
+            try
+            {
+                var count = await desktop.ExportOfflineBundleAsync(picker.FileName);
+                MessageBox.Show(dialog, $"Exported {count} packages.", "Offline bundle");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(dialog, error.Message, "Offline bundle");
+            }
+            finally { export.IsEnabled = true; }
+        };
+        panel.Children.Add(export);
         dialog.Show();
         return new { opened = true };
 

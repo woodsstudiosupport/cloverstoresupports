@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -209,6 +210,40 @@ internal sealed class DesktopActions : IDisposable
         var uri = RequireHttps(payload.GetProperty("url").GetString());
         Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true });
         return new { opened = true };
+    }
+
+    public async Task<int> ExportOfflineBundleAsync(string destination)
+    {
+        var files = transfers.Values.Where(item => item.Status == "Downloaded" && item.File is not null)
+            .Select(item => item.File!).Where(File.Exists).ToArray();
+        if (files.Length == 0) throw new InvalidOperationException("Download at least one Windows package first.");
+
+        var temporary = destination + "." + Guid.NewGuid().ToString("N") + ".partial";
+        try
+        {
+            await using (var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            using (var archive = new ZipArchive(stream, ZipArchiveMode.Create))
+            {
+                for (var index = 0; index < files.Length; index++)
+                {
+                    var file = files[index];
+                    var entry = archive.CreateEntry($"Packages/{index + 1:D3}/{Path.GetFileName(file)}", CompressionLevel.NoCompression);
+                    await using var input = File.OpenRead(file);
+                    await using var output = entry.Open();
+                    await input.CopyToAsync(output);
+                }
+                using var instructions = new StreamWriter(archive.CreateEntry("README.txt").Open());
+                instructions.WriteLine("Clover Store E3.UI64 offline bundle");
+                instructions.WriteLine("Packages are copied as published. Some installers still require Internet access or external dependencies.");
+            }
+            File.WriteAllText(temporary + ":Zone.Identifier", "[ZoneTransfer]\r\nZoneId=3\r\n");
+            File.Move(temporary, destination, overwrite: true);
+            return files.Length;
+        }
+        finally
+        {
+            File.Delete(temporary);
+        }
     }
 
     public static IEnumerable<string> InstalledApps()

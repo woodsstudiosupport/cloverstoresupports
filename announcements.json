@@ -1,5 +1,16 @@
 [
   {
+    "id": "e3-system-maintenance",
+    "developerId": "woods-studio",
+    "appIds": [
+      "com.woodsstudio.android.store",
+      "com.woodsstudio.windows.store.e3"
+    ],
+    "title": "Under Development",
+    "body": "We’re working on Clover Store E3. Please check back for updates.",
+    "publishedAt": "2026-11-21T11:44:37.297Z"
+  },
+  {
     "id": "cloverstore-android-v1-5",
     "developerId": "woods-studio-labs",
     "appIds": [

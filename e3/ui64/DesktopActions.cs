@@ -236,7 +236,8 @@ internal sealed class DesktopActions : IDisposable
                 instructions.WriteLine("Clover Store E3.UI64 offline bundle");
                 instructions.WriteLine("Packages are copied as published. Some installers still require Internet access or external dependencies.");
             }
-            File.WriteAllText(temporary + ":Zone.Identifier", "[ZoneTransfer]\r\nZoneId=3\r\n");
+            if (new DriveInfo(Path.GetPathRoot(destination)!).DriveFormat == "NTFS")
+                File.WriteAllText(temporary + ":Zone.Identifier", "[ZoneTransfer]\r\nZoneId=3\r\n");
             File.Move(temporary, destination, overwrite: true);
             return files.Length;
         }

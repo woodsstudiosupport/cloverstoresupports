@@ -42,6 +42,7 @@ internal sealed class StoreWindow : Window
     {
         this.route = route;
         Title = "Clover Store · E3.UI64";
+        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/Assets/Store.ico"));
         Width = 1200;
         Height = 800;
         MinWidth = 450;

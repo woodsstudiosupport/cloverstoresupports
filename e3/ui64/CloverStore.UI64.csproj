@@ -8,8 +8,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>CloverStore.UI64</AssemblyName>
+    <ApplicationIcon>Assets/Store.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="Assets/Store.ico" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
     <Content Include="../index.html" Link="store/index.html" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="../runtime/**/*" Link="store/runtime/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />

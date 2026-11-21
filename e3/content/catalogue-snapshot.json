@@ -1,9 +1,25 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "9c3b63b1fbefe81073510e3af17e9e74233eb571",
-  "generatedAt": "2026-11-21T10:55:22.177304+00:00",
+  "sourceRevision": "324ab2cebf811f05d14ffbb1851142b7873ad695",
+  "generatedAt": "2026-11-21T10:58:27.993Z",
   "data": {
     "registry": [
+      {
+        "id": "com.woodsstudio.windows.store.e3",
+        "name": "Clover Store E3",
+        "category": "Splash Desktop",
+        "developer": "Woods Studio",
+        "version": "2.0.E3.UI64",
+        "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
+        "downloads": {
+          "windows": "https://github.com/woodsstudiosupport/cloverstoresupports/releases/download/release2.0E3.UI64/CloverStoreE3.2.0.exe",
+          "linux": "",
+          "android": ""
+        },
+        "description": "Clover Store Experience 3 (E3) for Windows brings app discovery, downloads, and updates into one desktop storefront. Personalise your feed, manage software with WinGet, Scoop, or Chocolatey, and try installers in Windows Sandbox before installing them on your PC.",
+        "isBuiltin": false,
+        "developerId": "woods-studio"
+      },
       {
         "id": "com.woodsstudio.messages",
         "name": "Messages",
@@ -281,22 +297,6 @@
           "android": "https://archive.org/download/clover-store-splash-aligned-signed/CloverStore-splash-aligned-signed.apk"
         },
         "developerId": "woods-studio-labs"
-      },
-      {
-        "id": "com.woodsstudio.windows.store.e3",
-        "name": "Clover Store E3",
-        "category": "Splash Desktop",
-        "developer": "Woods Studio",
-        "version": "2.0.E3.UI64",
-        "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
-        "downloads": {
-          "windows": "https://github.com/woodsstudiosupport/cloverstoresupports/releases/download/release2.0E3.UI64/CloverStoreE3.2.0.exe",
-          "linux": "",
-          "android": ""
-        },
-        "description": "Clover Store Experience 3 (E3) for Windows brings app discovery, downloads, and updates into one desktop storefront. Personalise your feed, manage software with WinGet, Scoop, or Chocolatey, and try installers in Windows Sandbox before installing them on your PC.",
-        "isBuiltin": false,
-        "developerId": "woods-studio"
       }
     ],
     "developers": [

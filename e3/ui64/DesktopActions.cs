@@ -230,9 +230,15 @@ internal sealed class DesktopActions : IDisposable
         return new { opened = true };
     }
 
-    public async Task<int> ExportOfflineBundleAsync(string destination)
+    public sealed record CompletedDownload(string Id, string Name);
+
+    public CompletedDownload[] CompletedDownloads() =>
+        transfers.Values.Where(item => item.Status == "Downloaded" && item.File is not null && File.Exists(item.File))
+            .Select(item => new CompletedDownload(item.Id, item.Name)).ToArray();
+
+    public async Task<int> ExportOfflineBundleAsync(string destination, IReadOnlySet<string> selection)
     {
-        var files = transfers.Values.Where(item => item.Status == "Downloaded" && item.File is not null)
+        var files = transfers.Values.Where(item => selection.Contains(item.Id) && item.Status == "Downloaded" && item.File is not null)
             .Select(item => item.File!).Where(File.Exists).ToArray();
         if (files.Length == 0) throw new InvalidOperationException("Download at least one Windows package first.");
 

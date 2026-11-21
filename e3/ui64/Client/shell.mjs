@@ -34,7 +34,8 @@ export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
     ['developers', 'Publishers'], ['library', 'Library']
   ];
   const workspace = [
-    ['updates', 'Updates'], ['downloads', 'Downloads'], ['compare', 'Compare'], ['settings', 'Settings']
+    ['installed', 'Installed'], ['updates', 'Updates'], ['downloads', 'Downloads'],
+    ['releases', 'Release Watch'], ['compare', 'Compare'], ['settings', 'Settings']
   ];
   const links = list => list.map(([id, title]) =>
     `<a href="#/${id}" ${page === id ? 'aria-current="page"' : ''}>${title}</a>`).join('');
@@ -42,11 +43,11 @@ export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
     <header class="ui64-header">
       <a class="ui64-brand" href="#/discover"><img src="${storeIcon}" alt="">Clover Store</a>
       <button type="button" data-action="search">${icon('search')}<span>Search the store</span><kbd>Ctrl K</kbd></button>
-      <button type="button" data-action="windows-tools" title="Windows tools (Ctrl+P)">Windows tools</button>
+      <button type="button" data-palette-open aria-label="Command palette" title="Command palette (Ctrl+P)"><span>Commands</span><kbd>Ctrl P</kbd></button>
     </header>
     <aside class="ui64-sidebar">
-      <nav aria-label="Storefront">${links(primary)}</nav>
-      <nav aria-label="Workspace">${links(workspace)}</nav>
+      <nav aria-label="Storefront"><span class="ui64-nav-label">Browse</span>${links(primary)}</nav>
+      <nav aria-label="Workspace"><span class="ui64-nav-label">Manage</span>${links(workspace)}</nav>
     </aside>
     <main id="e3-main"><div class="e3-page">${body}</div></main>
     <footer class="ui64-status"><span>${status}</span><span>E3.UI64 · Windows x64</span></footer>

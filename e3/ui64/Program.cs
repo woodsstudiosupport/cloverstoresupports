@@ -77,8 +77,7 @@ internal sealed class StoreWindow : Window
             core.NewWindowRequested += (_, e) => e.Handled = true;
             core.PermissionRequested += (_, e) => e.State = CoreWebView2PermissionState.Deny;
             core.WebMessageReceived += OnMessage;
-            core.Navigate(Entry + "#/" + (route == "installed" ? "discover" : route));
-            if (route == "installed") ShowTools();
+            core.Navigate(Entry + "#/" + route);
             AddJumpList();
         }
         catch (Exception error)
@@ -121,6 +120,7 @@ internal sealed class StoreWindow : Window
                 "files.open" => desktop.Reveal(payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
                 "windows.tools" => ShowTools(),
+                "windows.inventory" => await Task.Run(() => DesktopActions.InstalledApps().ToArray()),
                 _ => throw new InvalidOperationException("This Windows action is unavailable.")
             };
             Reply(new { id, ok = true, result });
@@ -162,9 +162,36 @@ internal sealed class StoreWindow : Window
         AddButton("Open Windows downloads", () => Navigate("downloads"));
         AddButton("Open updates", () => Navigate("updates"));
         AddButton("Copy installed list", () => Clipboard.SetText(inventory.Text));
-        var export = new Button { Content = "Export downloaded packages as ZIP", Padding = new Thickness(8), Margin = new Thickness(0, 8, 0, 0) };
+        var export = new Button { Content = "Choose packages for an offline ZIP", Padding = new Thickness(8), Margin = new Thickness(0, 8, 0, 0) };
         export.Click += async (_, _) =>
         {
+            var available = desktop.CompletedDownloads();
+            if (available.Length == 0)
+            {
+                MessageBox.Show(dialog, "Download at least one Windows package first.", "Offline bundle");
+                return;
+            }
+            var choices = new ListBox
+            {
+                ItemsSource = available, DisplayMemberPath = "Name",
+                SelectionMode = SelectionMode.Multiple, MinHeight = 180
+            };
+            var choose = new Button { Content = "Continue with selected packages", IsDefault = true, Margin = new Thickness(0, 10, 0, 0) };
+            var layout = new StackPanel { Margin = new Thickness(16) };
+            layout.Children.Add(choices);
+            layout.Children.Add(choose);
+            var selection = new Window
+            {
+                Owner = dialog, Title = "Choose offline packages", Width = 480, Height = 300,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                Content = new ScrollViewer { Content = layout }
+            };
+            choose.Click += (_, _) =>
+            {
+                if (choices.SelectedItems.Count != 0) selection.DialogResult = true;
+            };
+            if (selection.ShowDialog() != true) return;
+            var ids = choices.SelectedItems.Cast<DesktopActions.CompletedDownload>().Select(item => item.Id).ToHashSet();
             var picker = new Microsoft.Win32.SaveFileDialog
             {
                 FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
@@ -174,7 +201,7 @@ internal sealed class StoreWindow : Window
             export.IsEnabled = false;
             try
             {
-                var count = await desktop.ExportOfflineBundleAsync(picker.FileName);
+                var count = await desktop.ExportOfflineBundleAsync(picker.FileName, ids);
                 MessageBox.Show(dialog, $"Exported {count} packages.", "Offline bundle");
             }
             catch (Exception error)

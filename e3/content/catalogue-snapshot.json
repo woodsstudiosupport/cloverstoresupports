@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "86d3f3d0100e68e7ee2d5079b0d13a0a829f33ec",
-  "generatedAt": "2026-11-21T11:01:19.184626+00:00",
+  "sourceRevision": "705dd1970ac4532146e679ae819e457f0fe98c3a",
+  "generatedAt": "2026-11-21T11:09:12.364Z",
   "data": {
     "registry": [
       {
@@ -552,11 +552,35 @@
       "apps": {
         "com.woodsstudio.windows.store.e3": {
           "declarations": {
-            "ads": "n/a",
-            "account": "n/a",
+            "ads": "no",
+            "account": "no",
             "offline": "n/a",
-            "subscriptions": "n/a",
+            "subscriptions": "no",
             "openSource": "n/a"
+          },
+          "partialDeclarations": [
+            "offline",
+            "openSource"
+          ],
+          "cost": {
+            "label": "Free"
+          },
+          "setupEstimate": "1 minute",
+          "lastReleaseLabel": "1.7APF.HTML",
+          "privacy": {
+            "trackers": true,
+            "trackerIds": [
+              "com.woodsstudio.tracking.DownloadedList",
+              "com.woodsstudio.tracking.HasInternet"
+            ],
+            "permissions": [
+              "com.woodsstudio.Internet",
+              "com.woodsstudio.CloverGARD.PrivacyControll",
+              "com.woodsstudio.Store.RequestAllApps",
+              "com.woodsstudio.Lists.PingService"
+            ],
+            "collectionSummary": "Collects: Device Information, Internet Status",
+            "source": "publisher"
           }
         },
         "com.woodsstudio.messages": {

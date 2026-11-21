@@ -156,11 +156,35 @@
     },
     "com.woodsstudio.windows.store.e3": {
       "declarations": {
-        "ads": "n/a",
-        "account": "n/a",
+        "ads": "no",
+        "account": "no",
         "offline": "n/a",
-        "subscriptions": "n/a",
+        "subscriptions": "no",
         "openSource": "n/a"
+      },
+      "partialDeclarations": [
+        "offline",
+        "openSource"
+      ],
+      "cost": {
+        "label": "Free"
+      },
+      "setupEstimate": "1 minute",
+      "lastReleaseLabel": "1.7APF.HTML",
+      "privacy": {
+        "trackers": true,
+        "trackerIds": [
+          "com.woodsstudio.tracking.DownloadedList",
+          "com.woodsstudio.tracking.HasInternet"
+        ],
+        "permissions": [
+          "com.woodsstudio.Internet",
+          "com.woodsstudio.CloverGARD.PrivacyControll",
+          "com.woodsstudio.Store.RequestAllApps",
+          "com.woodsstudio.Lists.PingService"
+        ],
+        "collectionSummary": "Collects: Device Information, Internet Status",
+        "source": "publisher"
       }
     }
   }

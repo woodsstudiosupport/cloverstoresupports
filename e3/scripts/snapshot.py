@@ -54,7 +54,8 @@ def main():
     output = Path(sys.argv[3]) if len(sys.argv) > 3 else root / 'e3/content/catalogue-snapshot.json'
     for key, name in DECLARATION_FILES.items():
         write(output.with_name(name + '.json'), {
-            app_id: record['declarations'][key]
+            app_id: ('partial' if key in record.get('partialDeclarations', [])
+                     else record['declarations'][key])
             for app_id, record in data['appMetadata']['apps'].items()
         })
     write(output, {

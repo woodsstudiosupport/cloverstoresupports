@@ -3,8 +3,11 @@ on:
   push:
     branches: [e3/ui64-preview]
   workflow_dispatch:
+concurrency:
+  group: e3-ui64-preview
+  cancel-in-progress: false
 permissions:
-  contents: read
+  contents: write
 jobs:
   windows:
     runs-on: windows-latest
@@ -28,3 +31,22 @@ jobs:
           name: CloverStore-E3.UI64-win-x64
           path: publish
           if-no-files-found: error
+      - name: Create versioned Windows release
+        if: github.ref == 'refs/heads/e3/ui64-preview'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [xml]$project = Get-Content e3/ui64/CloverStore.UI64.csproj -Raw
+          $version = [string]($project.Project.PropertyGroup.Version)
+          if ($version -notmatch '^\d+\.\d+\.\d+$') { throw "Invalid Windows version: $version" }
+          $tag = "ui64-v$version"
+          gh release view $tag --repo $env:GITHUB_REPOSITORY 2>$null | Out-Null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release $tag already exists. Bump Version to publish a new build."
+            exit 0
+          }
+          $archive = "CloverStore-E3.UI64-$version-win-x64.zip"
+          Compress-Archive -Path publish/* -DestinationPath $archive
+          gh release create $tag $archive --target $env:GITHUB_SHA --repo $env:GITHUB_REPOSITORY --title "Clover Store E3.UI64 $version" --prerelease --generate-notes
+          if ($LASTEXITCODE -ne 0) { throw "Could not publish $tag" }

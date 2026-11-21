@@ -120,6 +120,7 @@ internal sealed class StoreWindow : Window
                 "files.open" => desktop.Reveal(payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
                 "windows.tools" => ShowTools(),
+                "windows.hardware" => DesktopActions.Hardware(),
                 "windows.inventory" => await Task.Run(() => DesktopActions.InstalledApps().ToArray()),
                 _ => throw new InvalidOperationException("This Windows action is unavailable.")
             };

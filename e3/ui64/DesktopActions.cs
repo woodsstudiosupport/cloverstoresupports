@@ -291,6 +291,12 @@ internal sealed class DesktopActions : IDisposable
         return entries;
     }
 
+    public static object Hardware()
+    {
+        var memory = new MemoryStatus { Length = (uint)Marshal.SizeOf<MemoryStatus>() };
+        return new { memoryBytes = GlobalMemoryStatusEx(ref memory) ? memory.TotalPhysical : 0 };
+    }
+
     public static IEnumerable<string> SystemSummary()
     {
         var memory = new MemoryStatus { Length = (uint)Marshal.SizeOf<MemoryStatus>() };

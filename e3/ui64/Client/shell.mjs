@@ -43,6 +43,7 @@ export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
     <header class="ui64-header">
       <a class="ui64-brand" href="#/discover"><img src="${storeIcon}" alt="">Clover Store</a>
       <button type="button" data-action="search">${icon('search')}<span>Search the store</span><kbd>Ctrl K</kbd></button>
+      <button class="ui64-preferences-button" type="button" data-preferences-open>Preferences</button>
       <button type="button" data-palette-open aria-label="Command palette" title="Command palette (Ctrl+P)"><span>Commands</span><kbd>Ctrl P</kbd></button>
     </header>
     <aside class="ui64-sidebar">
@@ -53,4 +54,16 @@ export function desktopShell({ page, body, icon, storeIcon, status, compare }) {
     <footer class="ui64-status"><span>${status}</span><span>E3.UI64 · Windows x64</span></footer>
     ${compare}
   </div>`;
+}
+
+
+export function discovery(picks, catalogue) {
+  return `<section class="ui64-discovery">
+    <header class="ui64-discovery-heading">
+      <div><h1>Discover apps</h1><p>Explore the catalogue or tune your feed around the software you care about.</p></div>
+      <button type="button" class="e3-button" data-preferences-open>Personalise Discover</button>
+    </header>
+    ${picks ? '<section class="ui64-picks" aria-labelledby="ui64-picks-title"><h2 id="ui64-picks-title">For you</h2>' + picks + '</section>' : ''}
+    ${catalogue}
+  </section>`;
 }

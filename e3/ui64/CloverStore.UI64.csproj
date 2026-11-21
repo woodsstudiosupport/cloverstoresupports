@@ -7,6 +7,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>0.2.0</Version>
     <AssemblyName>CloverStore.UI64</AssemblyName>
     <ApplicationIcon>Assets/Store.ico</ApplicationIcon>
   </PropertyGroup>

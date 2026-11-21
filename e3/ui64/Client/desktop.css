@@ -127,3 +127,7 @@ html[data-motion="reduce"] .ui64-onboarding .ui64-preferences-form {animation:no
 .ui64-tool-form h2 {margin:0}
 .ui64-tool-form label {display:flex;align-items:center;gap:8px}
 .ui64-tool-form select {color:var(--text);background:var(--surface);border:1px solid var(--border);padding:6px;border-radius:8px}
+#ui64-adoption {width:min(560px,calc(100% - 24px));padding:0;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:18px}
+#ui64-adoption::backdrop {background:#080d16b8}
+#ui64-adoption select {max-width:100%}
+#ui64-adoption label {flex-wrap:wrap}

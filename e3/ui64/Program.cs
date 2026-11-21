@@ -110,6 +110,7 @@ internal sealed class StoreWindow : Window
                 "downloads.retry" => desktop.Retry(payload),
                 "website.open" => DesktopActions.OpenWebsite(payload),
                 "files.open" => desktop.Reveal(payload),
+                "windows.install" => await desktop.InstallAsync(this, payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
                 "windows.summary" => DesktopActions.SystemSummary().ToArray(),
                 "windows.transfer-settings" => TransferSettings(payload),
@@ -141,10 +142,12 @@ internal sealed class StoreWindow : Window
             if (value is not (0 or 256 or 1024 or 5120 or 10240))
                 throw new ArgumentException("Unsupported transfer limit.");
             var pause = payload.GetProperty("pause").GetBoolean();
+            var focus = payload.GetProperty("focus").GetBoolean();
             desktop.DownloadLimitKiB = value;
             desktop.PauseOnLowBattery = pause;
+            desktop.PauseInFocusMode = focus;
         }
-        return new { limit = desktop.DownloadLimitKiB, pause = desktop.PauseOnLowBattery };
+        return new { limit = desktop.DownloadLimitKiB, pause = desktop.PauseOnLowBattery, focus = desktop.PauseInFocusMode };
     }
 
     private async Task<object> ExportBundleAsync(JsonElement payload)

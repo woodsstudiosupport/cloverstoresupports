@@ -21,6 +21,27 @@ internal sealed class DesktopActions : IDisposable
 
     public int DownloadLimitKiB { get; set; }
     public bool PauseOnLowBattery { get; set; }
+    public bool PauseInFocusMode { get; set; }
+    private long nextFocusCheck;
+    private bool focusMode;
+
+    private string? PauseReason()
+    {
+        if (PauseOnLowBattery && GetSystemPowerStatus(out var power) &&
+            power.ACLineStatus == 0 && power.BatteryLifePercent <= 20)
+            return "Paused on low battery";
+        if (!PauseInFocusMode) return null;
+        var now = Environment.TickCount64;
+        if (now >= nextFocusCheck)
+        {
+            focusMode = SHQueryUserNotificationState(out var state) == 0 && state is 3 or 4;
+            nextFocusCheck = now + 1000;
+        }
+        return focusMode ? "Paused for full-screen or presentation mode" : null;
+    }
+
+    [DllImport("shell32.dll", ExactSpelling = true)]
+    private static extern int SHQueryUserNotificationState(out int state);
 
     public object Snapshot() => transfers.Values.Reverse().Select(item => new
     {
@@ -90,10 +111,9 @@ internal sealed class DesktopActions : IDisposable
                 var buffer = new byte[65536];
                 while (true)
                 {
-                    while (PauseOnLowBattery && GetSystemPowerStatus(out var power) &&
-                           power.ACLineStatus == 0 && power.BatteryLifePercent <= 20)
+                    while (PauseReason() is { } reason)
                     {
-                        item.Status = "Paused on low battery";
+                        item.Status = reason;
                         await Task.Delay(3000, token);
                     }
                     item.Status = "Downloading";
@@ -149,6 +169,46 @@ internal sealed class DesktopActions : IDisposable
             }
         }
         throw new IOException("The download exceeded the redirect limit.");
+    }
+
+    public async Task<object> InstallAsync(Window owner, JsonElement payload)
+    {
+        var item = Get(payload);
+        var file = RequireDownloaded(item);
+        if (Path.GetExtension(file).ToLowerInvariant() is not (".exe" or ".msi" or ".msix" or ".msixbundle"))
+            throw new InvalidOperationException("This download is not a supported Windows installer.");
+        var restore = payload.TryGetProperty("restore", out var choice) && choice.GetBoolean();
+        var description = "Open " + Path.GetFileName(file) + " on this PC? The installer can make changes to Windows.";
+        if (restore) description += "\nWindows will request administrator approval for a system restore point first.";
+        if (MessageBox.Show(owner, description, "Open Windows installer", MessageBoxButton.OKCancel,
+                            MessageBoxImage.Question) != MessageBoxResult.OK)
+            return new { opened = false };
+
+        if (restore)
+        {
+            var name = "Clover Store " + Guid.NewGuid().ToString("N");
+            var powershell = Path.Combine(Environment.SystemDirectory, "WindowsPowerShell", "v1.0", "powershell.exe");
+            var start = new ProcessStartInfo(powershell) { UseShellExecute = true, Verb = "runas" };
+            var command = "$ErrorActionPreference='Stop'; " +
+                          $"Checkpoint-Computer -Description '{name}' -RestorePointType APPLICATION_INSTALL; " +
+                          $"if (-not (Get-ComputerRestorePoint | Where-Object Description -eq '{name}')) {{ exit 1 }}";
+            start.Arguments = "-NoLogo -NoProfile -EncodedCommand " +
+                              Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes(command));
+            using var process = Process.Start(start) ?? throw new IOException("Windows did not start System Restore.");
+            await process.WaitForExitAsync();
+            if (process.ExitCode != 0)
+                throw new InvalidOperationException("Windows did not confirm a restore point. Check System Protection or try without a restore point.");
+        }
+
+        if (!string.IsNullOrEmpty(item.Hash))
+        {
+            await using var stream = File.OpenRead(file);
+            var digest = Convert.ToHexString(await SHA256.HashDataAsync(stream));
+            if (!digest.Equals(item.Hash, StringComparison.OrdinalIgnoreCase))
+                throw new IOException("The installer no longer matches its published SHA-256.");
+        }
+        Process.Start(new ProcessStartInfo(file) { UseShellExecute = true })?.Dispose();
+        return new { opened = true };
     }
 
     public object Reveal(JsonElement payload)
@@ -271,10 +331,10 @@ internal sealed class DesktopActions : IDisposable
         }
     }
 
-    public static IEnumerable<string> InstalledApps()
+    public static object[] InstalledApps()
     {
         const string uninstall = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
-        var entries = new SortedSet<string>(StringComparer.CurrentCultureIgnoreCase);
+        var entries = new List<(string Name, object Record)>();
         foreach (var hive in new[] { RegistryHive.LocalMachine, RegistryHive.CurrentUser })
         foreach (var view in new[] { RegistryView.Registry64, RegistryView.Registry32 })
         {
@@ -285,10 +345,16 @@ internal sealed class DesktopActions : IDisposable
             {
                 using var key = registry.OpenSubKey(id);
                 if (key?.GetValue("DisplayName") is not string name || key.GetValue("SystemComponent") is 1) continue;
-                entries.Add(name + (key.GetValue("DisplayVersion") is string version ? " · " + version : ""));
+                entries.Add((name, new
+                {
+                    id = $"{hive}/{view}/{id}",
+                    name,
+                    version = key.GetValue("DisplayVersion") as string ?? "",
+                    publisher = key.GetValue("Publisher") as string ?? ""
+                }));
             }
         }
-        return entries;
+        return entries.OrderBy(row => row.Name, StringComparer.CurrentCultureIgnoreCase).Select(row => row.Record).ToArray();
     }
 
     public static object Hardware()

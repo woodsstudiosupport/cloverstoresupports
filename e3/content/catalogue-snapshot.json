@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "a48cc01bd30bae4e70b1eb59e4333bef73ea9de2",
-  "generatedAt": "2026-11-22T10:29:15.170616+00:00",
+  "sourceRevision": "c89df69e58ae3ff53ce94578f8fa75ed609f16af",
+  "generatedAt": "2026-11-22T10:39:34.901Z",
   "data": {
     "registry": [
       {
@@ -422,7 +422,7 @@
       {
         "displayName": "Clover Productions",
         "description": "Welcome to Clover Productions, where the world comes to you. You can contact us if you would like to publish your own app, or visit https://developers.store.woodsstudio.dev/ to make your own.",
-        "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
+        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/4d789649-8cf3-48b8-a4ff-50c582570a92/com.woodsstudio.games.png",
         "banner": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
         "website": "https://developers.store.woodsstudio.dev/",
         "supportUrl": "https://legal.woodsstudio.dev/",

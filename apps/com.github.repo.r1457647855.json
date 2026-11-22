@@ -1,0 +1,17 @@
+{
+  "id": "com.github.repo.r1457647855",
+  "name": "Store E3.UI64",
+  "developer": "Clover Productions",
+  "developerId": "clover-account-1",
+  "category": "Splash Desktop",
+  "version": "release2.0E3.UI64",
+  "description": "Clover Store E3 is Woods Studio’s app marketplace for discovering, downloading, and keeping up with apps across Windows, Android, and the web. Browse curated collections, explore developer profiles, compare apps, and save favourites to your library. Before downloading, check release notes and see what developers disclose about permissions, trackers, and data collection. All three versions share the same Clover Store catalogue, with download and installation options suited to each platform.",
+  "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
+  "downloads": {
+    "windows": "https://github.com/woodsstudiosupport/cloverstoresupports/releases/download/release2.0E3.UI64/CloverStoreE3.2.0.exe"
+  },
+  "isBuiltin": false,
+  "devsuiteSource": {
+    "repositoryId": 1457647855
+  }
+}

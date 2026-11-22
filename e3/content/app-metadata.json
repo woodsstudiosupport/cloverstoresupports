@@ -186,6 +186,33 @@
         "collectionSummary": "Collects: Device Information, Internet Status",
         "source": "publisher"
       }
+    },
+    "com.github.repo.r1457647855": {
+      "declarations": {
+        "ads": "no",
+        "account": "no",
+        "offline": "yes",
+        "subscriptions": "no",
+        "openSource": "yes"
+      },
+      "partialDeclarations": [],
+      "privacy": {
+        "trackers": false,
+        "trackerIds": [],
+        "permissions": [
+          "- Internet access to browse the catalogue, check updates, and download apps.",
+          "- Network status to check connectivity.",
+          "- App discovery to identify installed apps where the platform supports it.",
+          "- File access to save downloads and export your library.",
+          "- App installation to ask Android to install a downloaded APK.",
+          "- Notifications to show Store alerts on Android when enabled.",
+          "- Sharing and clipboard to share links or copy information when requested.",
+          "- Windows Sandbox to test an installer when you choose to and Sandbox is available.",
+          "Availability varies across Windows, Android, and the web."
+        ],
+        "collectionSummary": "Data collection: Clover Store E3’s Windows listing declares that it collects device information and internet connection status. It also lists a tracker for downloaded apps. The catalogue does not specify whether this information is stored locally or sent to Woods Studio. Android and web do not have separate data collection disclosures listed.",
+        "source": "publisher"
+      }
     }
   }
 }

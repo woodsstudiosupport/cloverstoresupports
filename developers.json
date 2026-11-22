@@ -115,6 +115,6 @@
       "status": "unverified",
       "verifiedAt": null
     },
-    "storeReadiness": "not-store-ready"
+    "storeReadiness": "store-ready"
   }
 ]

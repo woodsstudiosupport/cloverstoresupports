@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "github-release-1457647855-453604063",
+    "appId": "com.github.repo.r1457647855",
+    "platform": "windows",
+    "channel": "stable",
+    "version": "release2.0E3.UI64",
+    "url": "https://github.com/woodsstudiosupport/cloverstoresupports/releases/download/release2.0E3.UI64/CloverStoreE3.2.0.exe",
+    "sha256": "8185366a26cfb495e6cced2da857c8efaaab0a1cb07c33d7d1b9583bdc3c1ced",
+    "sizeBytes": 50819636,
+    "publishedAt": "2026-11-21T10:47:32Z",
+    "changelog": "## Clover Store E3.UI64 for Windows x64\nClover Store Experience 3 brings a personalised app feed, a bottom navigation dock, and an Installed apps view to Windows. Browse the catalogue, manage downloads, use WinGet, Scoop, or Chocolatey, and try supported installers in Windows Sandbox.\n\nA bottom navigation dock connects Discover, Library, Installed, Updates, and Downloads. During fullscreen setup, choose your favourite categories and publishers to personalise your Discover feed.\n\nLink installed apps to their Store listings, pin versions, or skip updates. Manage packages through WinGet, Scoop, or Chocolatey, keep an eye on transfers with the floating download widget, and export selected downloads as an offline ZIP. For supported installers, you can try them in Windows Sandbox or request a system restore point before installing on your PC.\n\n## What's Changed\n* Restore workflows and fix catalogue consistency by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/1\n* Repair developers.json without changing profile content by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/3\n* Store the web interface in GitHub and add two-stage loading by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/4\n* Restore favicon and replace settings panels with browser controls by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/6\n* Add gradient and Splash Obsidian light and dark themes by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/7\n* Build Clover Store on E3 Core with a new UI and Android host by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/8\n* Prepare E3 web production deployment by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/10\n* Show the fullscreen Clover Store upgrade notice by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/11\n* E3/ui64 preview by @woodsstudiosupport in https://github.com/woodsstudiosupport/cloverstoresupports/pull/12\n\n## New Contributors\n* @woodsstudiosupport made their first contribution in https://github.com/woodsstudiosupport/cloverstoresupports/pull/1\n\n**Full Changelog**: https://github.com/woodsstudiosupport/cloverstoresupports/commits/release2.0E3.UI64\n\n**Clover Key for Store:**"
+  }
+]

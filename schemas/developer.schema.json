@@ -119,6 +119,12 @@
         "verifiedAt"
       ],
       "additionalProperties": false
+    },
+    "storeReadiness": {
+      "enum": [
+        "not-store-ready",
+        "store-ready"
+      ]
     }
   },
   "required": [

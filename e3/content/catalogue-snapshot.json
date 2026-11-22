@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "c477e7138921d2b04e1da72a1654efa71dcf33de",
-  "generatedAt": "2026-11-21T12:30:24.874611+00:00",
+  "sourceRevision": "fc51c0a0e2f68f20dfb641341b045c07b0178eeb",
+  "generatedAt": "2026-11-22T09:57:36.078Z",
   "data": {
     "registry": [
       {
@@ -401,6 +401,22 @@
           "status": "verified",
           "verifiedAt": "2026-11-14T12:00:00Z"
         }
+      },
+      {
+        "displayName": "Clover Productions",
+        "description": "Welcome to Clover Productions, where the world comes to you. You can contact us if you would like to publish your own app, or visit https://developers.store.woodsstudio.dev/ to make your own.",
+        "icon": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
+        "banner": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
+        "website": "https://productions.woodsstudio.dev/",
+        "supportUrl": "https://legal.woodsstudio.dev/",
+        "privacyPolicy": "https://legal.woodsstudio.dev/",
+        "id": "clover-account-1",
+        "legacyNames": [],
+        "verification": {
+          "status": "unverified",
+          "verifiedAt": null
+        },
+        "storeReadiness": "not-store-ready"
       }
     ],
     "reviews": {

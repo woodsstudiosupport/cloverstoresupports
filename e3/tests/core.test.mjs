@@ -7,7 +7,7 @@ import{E3Platform}from'../runtime/platform.mjs';
 const read=name=>JSON.parse(fs.readFileSync(new URL('../content/'+name,import.meta.url))),snapshot=read('catalogue-snapshot.json');
 const store=()=>{const m=new Map();return {m,getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v)}};
 const manifest=(files)=>({format:'woods-e3-content',schemaVersion:1,version:'0.1.1',minimumRuntime:'0.1.0',revision:'a'.repeat(40),files});
-test('the complete published catalogue is preserved',()=>{assert.equal(validateSnapshot(snapshot.data).registry.length,17);assert.equal(matchApps(snapshot.data.registry).length,17)});
+test('the complete published catalogue is preserved',()=>{assert.ok(snapshot.data.registry.length>=17);assert.deepEqual(validateSnapshot(snapshot.data).registry.map(a=>a.id),snapshot.data.registry.map(a=>a.id));assert.equal(matchApps(snapshot.data.registry).length,snapshot.data.registry.length)});
 test('unknown facts never satisfy anti-filters',()=>{const app={id:'a',name:'A'};assert.equal(fact(app,'noAds'),null);assert.equal(matchApps([app],{filters:['noAds']}).length,0);app.e3={facts:{noAds:{value:true,source:'publisher'}}};assert.equal(matchApps([app],{filters:['noAds']}).length,1);app.e3.facts.noAds.source='guessed';assert.equal(fact(app,'noAds'),null)});
 test('metadata validates evidence sources instead of accepting invented certifications',()=>{assert.throws(()=>validateContent('metadata',{schemaVersion:1,apps:{a:{facts:{noAds:{value:true,source:'guessed'}}}}}));validateContent('metadata',{schemaVersion:1,apps:{}})});
 test('pricing and RAM remain unknown without metadata',()=>{const a=snapshot.data.registry[0],r=comparison(a,[],{});assert.equal(r.ram,'Not provided');assert.equal(r.price,'Not provided');assert.equal(r.offline,null)});
@@ -63,4 +63,17 @@ test('E3.UI64 uses the Windows bridge only on the packaged storefront origin', a
  const web = new E3Platform({chrome: {webview},location: {origin: 'https://example.com'}});
  assert.equal(web.kind,'web');
  await assert.rejects(web.request('sandbox.test'), /Android host/);
+});
+
+test('Android reconnect replaces the stale channel and rejects interrupted requests', async()=>{
+ const listeners={};
+ const scope={location:{origin:'https://appassets.androidplatform.net'},addEventListener:(t,f)=>listeners[t]=f,dispatchEvent(){}};
+ const p=new E3Platform(scope);
+ const makePort=()=>({closed:false,close(){this.closed=true},postMessage(raw){const m=JSON.parse(raw);if(m.action==='capabilities'||m.action==='downloads.list')queueMicrotask(()=>this.onmessage({data:JSON.stringify({id:m.id,ok:true,result:m.action==='capabilities'?{capabilities:['downloads.request']}:[]})}))}});
+ const connect=port=>listeners.message({data:{type:'e3:connect'},origin:'https://appassets.androidplatform.net',source:null,ports:[port]});
+ const first=makePort();connect(first);await p.request('downloads.list');
+ const interrupted=p.request('downloads.enqueue',{url:'https://example.com/file.apk'});
+ const second=makePort();connect(second);await assert.rejects(interrupted,/connection changed/);
+ assert(first.closed);assert.deepEqual(await p.request('downloads.list'),[]);
+ assert.equal(p.pending.size,0);
 });

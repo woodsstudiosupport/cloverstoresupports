@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.Wpf;
 
@@ -37,11 +36,13 @@ internal sealed class StoreWindow : Window
     private readonly WebView2 view = new();
     private readonly DesktopActions desktop = new();
     private readonly string route;
+    private Window? downloadWidget;
 
     public StoreWindow(string route)
     {
         this.route = route;
-        Title = "Clover Store · E3.UI64";
+        Title = "Clover Store 2.1 · E3.UI64";
+        Icon = System.Windows.Media.Imaging.BitmapFrame.Create(new Uri("pack://application:,,,/Assets/Store.ico"));
         Width = 1200;
         Height = 800;
         MinWidth = 450;
@@ -49,14 +50,7 @@ internal sealed class StoreWindow : Window
         Content = view;
         Loaded += async (_, _) => await StartAsync();
         Closed += (_, _) => { desktop.Dispose(); view.Dispose(); };
-        PreviewKeyDown += (_, e) =>
-        {
-            if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
-            {
-                e.Handled = true;
-                ShowTools();
-            }
-        };
+
     }
 
     private async Task StartAsync()
@@ -76,8 +70,7 @@ internal sealed class StoreWindow : Window
             core.NewWindowRequested += (_, e) => e.Handled = true;
             core.PermissionRequested += (_, e) => e.State = CoreWebView2PermissionState.Deny;
             core.WebMessageReceived += OnMessage;
-            core.Navigate(Entry + "#/" + (route == "installed" ? "discover" : route));
-            if (route == "installed") ShowTools();
+            core.Navigate(Entry + "#/" + route);
             AddJumpList();
         }
         catch (Exception error)
@@ -111,15 +104,24 @@ internal sealed class StoreWindow : Window
             var payload = message.GetProperty("payload");
             object? result = action switch
             {
-                "capabilities" => new { kind = "windows", capabilities = new[] { "catalogue.read", "library.local", "downloads.request", "sandbox.test" } },
+                "capabilities" => new { kind = "windows", version = "2.1", build = 1276471, capabilities = new[] { "catalogue.read", "library.local", "downloads.request", "sandbox.test" } },
                 "downloads.list" => desktop.Snapshot(),
                 "downloads.enqueue" => desktop.Enqueue(payload),
                 "downloads.cancel" => desktop.Cancel(payload),
                 "downloads.retry" => desktop.Retry(payload),
                 "website.open" => DesktopActions.OpenWebsite(payload),
                 "files.open" => desktop.Reveal(payload),
+                "windows.install" => await desktop.InstallAsync(this, payload),
                 "sandbox.test" => await desktop.TestInSandboxAsync(this, payload),
-                "windows.tools" => ShowTools(),
+                "windows.widget" => ShowDownloadWidget(),
+                "windows.package-manager" => await PackageManagers.RunAsync(this, payload),
+                "windows.pick-folder" => PickFolder(),
+                "windows.summary" => DesktopActions.SystemSummary().ToArray(),
+                "windows.transfer-settings" => TransferSettings(payload),
+                "windows.completed" => desktop.CompletedDownloads().Select(item => new { id = item.Id, name = item.Name }).ToArray(),
+                "windows.bundle-export" => await ExportBundleAsync(payload),
+                "windows.hardware" => DesktopActions.Hardware(),
+                "windows.inventory" => await Task.Run(() => DesktopActions.InstalledApps().ToArray()),
                 _ => throw new InvalidOperationException("This Windows action is unavailable.")
             };
             Reply(new { id, ok = true, result });
@@ -136,68 +138,80 @@ internal sealed class StoreWindow : Window
             view.CoreWebView2.PostWebMessageAsJson(JsonSerializer.Serialize(message));
     }
 
-    private object ShowTools()
+    private object ShowDownloadWidget()
     {
-        var panel = new StackPanel { Margin = new Thickness(18) };
-        var dialog = new Window
+        if (downloadWidget is not null)
         {
-            Owner = this, Title = "Clover Store · Windows tools",
-            Width = 680, Height = 570, Content = panel, WindowStartupLocation = WindowStartupLocation.CenterOwner
+            downloadWidget.Activate();
+            return new { opened = true };
+        }
+
+        var label = new TextBlock { Margin = new Thickness(20), FontSize = 16, TextWrapping = TextWrapping.Wrap,
+            Foreground = System.Windows.Media.Brushes.White };
+        var window = new Window
+        {
+            Owner = this, Title = "Clover Store · Downloads", Width = 320, Height = 145,
+            ResizeMode = ResizeMode.NoResize, Topmost = true, Content = label,
+            Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(18, 27, 37))
         };
-        var inventory = new TextBox
-        {
-            IsReadOnly = true, Height = 270, VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
-            Text = string.Join(Environment.NewLine, DesktopActions.InstalledApps())
-        };
-        panel.Children.Add(new TextBlock
-        {
-            Text = string.Join(Environment.NewLine, DesktopActions.SystemSummary()),
-            Margin = new Thickness(0, 0, 0, 12), TextWrapping = TextWrapping.Wrap
-        });
-        panel.Children.Add(new TextBlock { Text = "Installed Windows programs", Margin = new Thickness(0, 0, 0, 8) });
-        panel.Children.Add(inventory);
-        var actions = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 12, 0, 0) };
-        panel.Children.Add(actions);
-        AddButton("Open Windows downloads", () => Navigate("downloads"));
-        AddButton("Open updates", () => Navigate("updates"));
-        AddButton("Copy installed list", () => Clipboard.SetText(inventory.Text));
-        var export = new Button { Content = "Export downloaded packages as ZIP", Padding = new Thickness(8), Margin = new Thickness(0, 8, 0, 0) };
-        export.Click += async (_, _) =>
-        {
-            var picker = new Microsoft.Win32.SaveFileDialog
-            {
-                FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
-                AddExtension = true, OverwritePrompt = true
-            };
-            if (picker.ShowDialog(dialog) != true) return;
-            export.IsEnabled = false;
-            try
-            {
-                var count = await desktop.ExportOfflineBundleAsync(picker.FileName);
-                MessageBox.Show(dialog, $"Exported {count} packages.", "Offline bundle");
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(dialog, error.Message, "Offline bundle");
-            }
-            finally { export.IsEnabled = true; }
-        };
-        panel.Children.Add(export);
-        dialog.Show();
+        downloadWidget = window;
+        var previous = desktop.WidgetStats().Bytes;
+        var previousAt = System.Diagnostics.Stopwatch.GetTimestamp();
+        var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        timer.Tick += (_, _) => Refresh();
+        window.Closed += (_, _) => { timer.Stop(); downloadWidget = null; };
+        Refresh();
+        timer.Start();
+        window.Show();
         return new { opened = true };
 
-        void AddButton(string title, Action action)
+        void Refresh()
         {
-            var button = new Button { Content = title, Padding = new Thickness(8), Margin = new Thickness(0, 0, 8, 0) };
-            button.Click += (_, _) => action();
-            actions.Children.Add(button);
+            var stats = desktop.WidgetStats();
+            var seconds = System.Diagnostics.Stopwatch.GetElapsedTime(previousAt).TotalSeconds;
+            var throughput = Math.Max(0, stats.Bytes - previous) / Math.Max(1, seconds) / 1024d;
+            label.Text = $"E3.UI64 · Downloads\n{stats.Active} active · {stats.Complete} complete\n{throughput:0} KiB/s";
+            previous = stats.Bytes;
+            previousAt = System.Diagnostics.Stopwatch.GetTimestamp();
         }
+    }
 
-        void Navigate(string page)
+    private object PickFolder()
+    {
+        var picker = new Microsoft.Win32.OpenFolderDialog { Title = "Choose a Windows install directory" };
+        return new { path = picker.ShowDialog(this) == true ? picker.FolderName : "" };
+    }
+
+    private object TransferSettings(JsonElement payload)
+    {
+        if (payload.TryGetProperty("limit", out var limit))
         {
-            view.CoreWebView2?.Navigate(Entry + "#/" + page);
-            dialog.Close();
+            var value = limit.GetInt32();
+            if (value is not (0 or 256 or 1024 or 5120 or 10240))
+                throw new ArgumentException("Unsupported transfer limit.");
+            var pause = payload.GetProperty("pause").GetBoolean();
+            var focus = payload.GetProperty("focus").GetBoolean();
+            desktop.DownloadLimitKiB = value;
+            desktop.PauseOnLowBattery = pause;
+            desktop.PauseInFocusMode = focus;
         }
+        return new { limit = desktop.DownloadLimitKiB, pause = desktop.PauseOnLowBattery, focus = desktop.PauseInFocusMode };
+    }
+
+    private async Task<object> ExportBundleAsync(JsonElement payload)
+    {
+        var ids = payload.GetProperty("ids").EnumerateArray()
+            .Select(item => item.GetString() ?? "").ToHashSet();
+        var available = desktop.CompletedDownloads().Select(item => item.Id).ToHashSet();
+        if (ids.Count == 0 || !ids.IsSubsetOf(available))
+            throw new InvalidOperationException("Select completed downloads.");
+        var picker = new Microsoft.Win32.SaveFileDialog
+        {
+            FileName = "CloverStore-Offline.zip", Filter = "ZIP archive (*.zip)|*.zip",
+            AddExtension = true, OverwritePrompt = true
+        };
+        if (picker.ShowDialog(this) != true) return new { cancelled = true, count = 0 };
+        return new { cancelled = false, count = await desktop.ExportOfflineBundleAsync(picker.FileName, ids) };
     }
 
     private static void AddJumpList()

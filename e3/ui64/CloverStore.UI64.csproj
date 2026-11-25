@@ -7,13 +7,21 @@
     <PlatformTarget>x64</PlatformTarget>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Version>2.1.0</Version>
+    <FileVersion>2.1.0.12764</FileVersion>
+    <InformationalVersion>2.1 E3.UI64 Build 1276471</InformationalVersion>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <AssemblyName>CloverStore.UI64</AssemblyName>
+    <ApplicationIcon>Assets/Store.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Resource Include="Assets/Store.ico" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
     <Content Include="../index.html" Link="store/index.html" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-    <Content Include="../runtime/**/*" Link="store/runtime/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Client/**/*" Link="store/desktop/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="../runtime/**/*" Exclude="../runtime/app.mjs;../runtime/platform.mjs;../runtime/catalogue.mjs" Link="store/runtime/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="../ui/**/*" Link="store/ui/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="Runtime/*.mjs" Link="store/runtime/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
     <Content Include="../content/**/*" Link="store/content/%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

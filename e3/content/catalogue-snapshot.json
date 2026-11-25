@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "06efc2c14d3477392f7b8fb876a61b916bff5f20",
-  "generatedAt": "2026-11-22T10:40:33.319Z",
+  "sourceRevision": "0c1b5df45ce12af953d2fa2e5f0dd5a2ad921e1f",
+  "generatedAt": "2026-11-25T13:06:16.358Z",
   "data": {
     "registry": [
       {
@@ -422,7 +422,7 @@
       {
         "displayName": "Clover Productions",
         "description": "Welcome to Clover Productions, where the world comes to you. You can contact us if you would like to publish your own app, or visit https://developers.store.woodsstudio.dev/ to make your own.",
-        "icon": "https://images.squarespace-cdn.com/content/6ab52351cfb6e609df15be60/4d789649-8cf3-48b8-a4ff-50c582570a92/com.woodsstudio.games.png",
+        "icon": "https://ci3.googleusercontent.com/meips/ADKq_NZ931---SgVQ2YzVq1UCLIQifuyi9GgCm2BiBMeX8jAqxYTkPsxrgffRXXzELnm-wIb_Yzn_6pelPpJcHWJrThmOOOBAvtWn0XXzu1NnfDeUsKYK90kXz-527r0l0RydDWE=s0-d-e1-ft#https://clover-development-suite.store-woodsstudio.workers.dev/gard-logo.png",
         "banner": "https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png",
         "website": "https://developers.store.woodsstudio.dev/",
         "supportUrl": "https://legal.woodsstudio.dev/",

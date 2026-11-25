@@ -13,3 +13,23 @@
 /* Editorial artwork retains its dark palette in both interface modes. */
 .collection{color:#edf5ef}.filter-chip{min-height:44px}.theme-choice{min-height:44px}
 @media(max-width:640px){.hero-copy h1{font-size:clamp(44px,12vw,52px);margin:22px 0 18px}}
+
+/* E3.HTML 2.2: responsive floating navigation, independent of native hosts. */
+html[data-client="html"] .e3-shell {display:grid;grid-template:"head" auto "main" minmax(0,1fr) "dock" auto / minmax(0,1fr);height:100dvh;gap:0;padding:0}
+html[data-client="html"] .e3-rail {display:none}
+html[data-client="html"] .e3-topbar {grid-area:head;display:flex;align-items:center;gap:clamp(10px,2vw,24px);padding:clamp(12px,2vw,24px) clamp(14px,4vw,48px);border-bottom:1px solid var(--border)}
+html[data-client="html"] .mobile-brand {display:flex;align-items:center;gap:10px;white-space:nowrap;font-weight:700}
+html[data-client="html"] .mobile-brand img {width:34px;height:34px;border-radius:10px}
+html[data-client="html"] #e3-main {grid-area:main;overflow:auto;min-height:0;padding:clamp(14px,3vw,42px)}
+html[data-client="html"] .e3-mobile-nav {grid-area:dock;display:flex;align-items:center;justify-content:space-around;gap:4px;width:min(720px,calc(100% - 20px));margin:4px auto max(12px,env(safe-area-inset-bottom));padding:7px;border:1px solid var(--border);border-radius:24px;background:var(--surface);box-shadow:0 14px 44px #0004;backdrop-filter:blur(24px)}
+html[data-client="html"] .e3-mobile-nav a {flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px 4px;border-radius:16px;font-size:clamp(10px,1.4vw,13px);color:var(--muted)}
+html[data-client="html"] .e3-mobile-nav a[aria-current="page"] {background:var(--raised);color:var(--accent);box-shadow:inset 0 -2px var(--accent)}
+html[data-client="html"] .e3-mobile-nav svg {width:20px;height:20px}
+html[data-client="html"] .compare-dock {bottom:100px}
+.platform-filter {display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 0}
+.platform-filter>span{font-size:.82rem;color:var(--muted);font-weight:600}
+html[data-client="html"] .app-card footer>span {overflow-wrap:anywhere;max-width:66%}
+html[data-client="html"] .app-card {transition:transform .2s,border-color .2s}
+html[data-client="html"] .app-card:hover {transform:translateY(-2px)}
+@media(max-width:560px){html[data-client="html"] .e3-topbar {padding:10px 12px}html[data-client="html"] .platform-label,html[data-client="html"] .top-search kbd{display:none}html[data-client="html"] .e3-mobile-nav {width:calc(100% - 12px);gap:2px;padding:5px}html[data-client="html"] .e3-mobile-nav a{font-size:10px;padding:8px 2px}html[data-client="html"] .e3-mobile-nav svg{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){html[data-client="html"] .app-card {transition:none;transform:none}}

@@ -77,3 +77,18 @@ test('Android reconnect replaces the stale channel and rejects interrupted reque
  assert(first.closed);assert.deepEqual(await p.request('downloads.list'),[]);
  assert.equal(p.pending.size,0);
 });
+
+test('browser platform preference uses actual published downloads',async()=>{
+ const {browserPlatform,preferredDownload,platformName,comparison}=await import('../runtime/catalogue.mjs');
+ assert.equal(browserPlatform({userAgent:'Mozilla Windows NT 10.0'}),'windows');
+ assert.equal(browserPlatform({userAgent:'Mozilla Linux Android 15'}),'android');
+ assert.equal(browserPlatform({userAgent:'Mozilla Macintosh',maxTouchPoints:5}),'ios');
+ assert.equal(browserPlatform({userAgentData:{platform:'Linux'}}),'linux');
+ const app={id:'test',name:'Example',downloads:{windows:{url:'https://example.com/app.exe',sizeBytes:2048},android:{url:'https://example.com/app.apk',sizeBytes:1024},linux:'https://example.com/app.deb'}};
+ assert.equal(preferredDownload(downloadsFor(app),'windows').platform,'windows');
+ assert.equal(preferredDownload(downloadsFor(app),'android').platform,'android');
+ assert.equal(preferredDownload(downloadsFor(app),'ios').platform,'windows');
+ assert.equal(preferredDownload([],'windows'),null);
+ assert.equal(platformName('linux'),'Linux');
+ assert.equal(comparison(app,[],{},'windows').size,'Windows · 2 KB');
+});

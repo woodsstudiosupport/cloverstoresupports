@@ -18,8 +18,23 @@ export function sizeLabel(bytes){if(!Number.isFinite(Number(bytes))||Number(byte
 export function packageId(app){return String(app.androidPackageName||app.packageName||app.id||'')}
 export const validPackage=id=>/^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)+$/.test(id||'');
 export function downloadsFor(app,releases=[],channel='stable'){const out=[];for(const [platform,value]of Object.entries(app.downloads||{})){const raw=typeof value==='string'?{url:value}:value;if(!raw||!safeURL(raw.url))continue;out.push({platform,url:safeURL(raw.url),version:raw.version||app.version||'',versionCode:raw.versionCode||app.androidVersionCode||null,sizeBytes:raw.sizeBytes||app.sizeBytes||null,sha256:raw.sha256||(platform==='android'?app.androidSha256:null)||null,channel:'stable'})}for(const release of releases.filter(r=>r.appId===app.id&&(r.channel||'stable')===channel)){const url=safeURL(release.downloadUrl||release.url);if(url){const platform=release.platform||'android';const index=out.findIndex(x=>x.platform===platform);if(index>=0)out.splice(index,1);out.push({platform,url,version:release.version||release.versionName||app.version,versionCode:release.versionCode||null,sizeBytes:release.sizeBytes||null,sha256:release.sha256||null,channel,notes:release.changelog||release.notes||'',publishedAt:release.publishedAt||null})}}return channel==='stable'?out:out.filter(r=>r.channel===channel)}
-export function comparison(app,releases,metadata={}){return {size:sizeLabel(downloadsFor(app,releases).find(d=>d.platform==='android')?.sizeBytes),ram:metadata.ramBytes?sizeLabel(metadata.ramBytes):'Not provided',offline:fact({...app,e3:metadata},'offline'),price:metadata.cost?.label||'Not provided',permissions:Array.isArray(metadata.privacy?.permissions)?metadata.privacy.permissions.join(', ')||'None declared':'Not provided'}}
+export function comparison(app,releases,metadata={},preferred='android'){const file=preferredDownload(downloadsFor(app,releases),preferred);return {size:file?platformName(file.platform)+' · '+sizeLabel(file.sizeBytes):'Not provided',ram:metadata.ramBytes?sizeLabel(metadata.ramBytes):'Not provided',offline:fact({...app,e3:metadata},'offline'),price:metadata.cost?.label||'Not provided',permissions:Array.isArray(metadata.privacy?.permissions)?metadata.privacy.permissions.join(', ')||'None declared':'Not provided'}}
 export function relatedApps(app,apps){const explicit=app.e3?.alternatives;if(Array.isArray(explicit)&&explicit.length)return {label:'Alternatives',apps:explicit.map(id=>apps.find(a=>a.id===id)).filter(Boolean)};return {label:'Related apps',apps:apps.filter(a=>a.id!==app.id&&a.category===app.category).slice(0,3)}}
 export function freshApps(apps,releases){return apps.map(app=>({app,date:Math.max(0,...releases.filter(r=>r.appId===app.id).map(r=>Date.parse(r.publishedAt)||0),Date.parse(app.e3?.lastReleaseAt)||0)})).filter(x=>x.date>0).sort((a,b)=>b.date-a.date).map(x=>x.app)}
 export function exportStack(ids,apps){const unique=[...new Set(ids)];return {format:'e3-stack',version:1,appIds:unique.filter(id=>apps.some(a=>a.id===id))}}
 export function importStack(value){if(value?.format!=='e3-stack'||value.version!==1||!Array.isArray(value.appIds)||value.appIds.length>500||value.appIds.some(x=>typeof x!=='string'||!x||x.length>256))throw Error('Invalid E3 app list');return [...new Set(value.appIds)]}
+
+// Browser platform is a preference, never a compatibility guarantee.
+export const platformName=key=>({android:'Android',windows:'Windows',linux:'Linux',macos:'macOS',ios:'iOS',web:'Web',html:'Web'}[key]||String(key||'Unknown platform'));
+export function browserPlatform(nav={}){
+ const value=String(nav.userAgentData?.platform||nav.userAgent||nav.platform||'').toLowerCase();
+ if(/android/.test(value))return 'android';
+ if(/iphone|ipad|ipod|ios/.test(value)||(/mac/.test(value)&&nav.maxTouchPoints>1))return 'ios';
+ if(/windows|win32|win64/.test(value))return 'windows';
+ if(/mac/.test(value))return 'macos';
+ if(/linux/.test(value)&&!/cros/.test(value))return 'linux';
+ return null;
+}
+export function preferredDownload(files,preferred){
+ return files.find(d=>d.platform===preferred)||files.find(d=>['web','html'].includes(d.platform))||files[0]||null;
+}

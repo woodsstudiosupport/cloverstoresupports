@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080c0b">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; object-src 'none'; base-uri 'none'; frame-src https:; form-action 'none'">
-  <title>Clover Store</title>
+  <title>Clover Store · E3.HTML 2.2</title>
   <link rel="icon" href="https://raw.githubusercontent.com/woodsstudiosupport/cloverstoresupports/f92eae8caa64faa12867fc6f21973a58fb3a96de/web/assets/store-icon.png">
   <style>
     html, body { margin: 0; background: #080c0b; color: #edf5ef; font: 1rem/1.5 system-ui, sans-serif; }
@@ -14,6 +14,8 @@
     #store-launch h1 { margin: 0; font-size: clamp(1.65rem, 5vw, 3rem); line-height: 1.1; }
     #store-launch p { margin: 1rem 0 0; color: #bce8a5; white-space: pre-wrap; }
     #store-launch p:empty { display: none; }
+    #launch-retry {margin-top:1.4rem;padding:.8rem 1.4rem;border:1px solid #55735f;background:#203c2f;color:#edf5ef;border-radius:1rem;font:inherit;cursor:pointer}
+    #store-launch[data-state="notice"] {position:fixed;inset:0;z-index:2147483647;overflow:auto;}
 
     #store-launch[data-state="opening"] { position: fixed; inset: 0; z-index: 2147483647; background: #000; overflow: auto; }
     #store-launch[data-state="opening"] article { display: none; }
@@ -46,6 +48,7 @@
       <article>
         <h1 id="launch-title">Opening Clover Store</h1>
         <p id="launch-message"></p>
+        <button id="launch-retry" type="button" hidden>Try again</button>
       </article>
     </main>
   <div id="e3-toast" role="status" hidden></div>
@@ -70,12 +73,21 @@
     const startup = document.getElementById('store-launch');
     const storefront = document.getElementById('e3-root');
     const progress = document.getElementById('startup-progress');
+    const retry = document.getElementById('launch-retry');
+    retry.addEventListener('click', () => location.reload());
+    let activeMode = null, checking = false;
+    const maintenance = config => config?.tag === 'under-upgrades' || config?.storefront !== 'e3';
     const intro = matchMedia('(prefers-reduced-motion: reduce)').matches
       ? Promise.resolve()
       : new Promise(resolve => setTimeout(resolve, 2000));
 
     async function showMaintenance() {
       startup.dataset.state = 'notice';
+      storefront.inert = true;
+      const dialog = document.getElementById('e3-dialog');
+      if (dialog.open) dialog.close();
+      if (!startup.isConnected) document.body.append(startup);
+      retry.hidden = true;
       try {
         const notice = await requestJSON(configBase + 'maintenance-notice.json?_=' + Date.now());
         if (typeof notice?.title !== 'string' || !notice.title.trim() ||
@@ -89,13 +101,15 @@
     }
 
     async function launch() {
+      await intro;
+      progress.textContent = 'Checking store availability…';
       const config = await requestJSON(configBase + 'deployment.json?_=' + Date.now());
-      if (config?.tag === 'under-upgrades' || config?.storefront !== 'e3') {
+      activeMode = maintenance(config) ? 'notice' : 'store';
+      if (activeMode === 'notice') {
         await showMaintenance();
         return;
       }
 
-      await intro;
       progress.textContent = 'Finding the latest store version…';
       const ref = typeof config.tag === 'string' && config.tag.trim() ? config.tag.trim() : 'main';
       const {sha} = await requestJSON('https://api.github.com/repos/' + repository + '/commits/' + encodeURIComponent(ref));
@@ -107,14 +121,16 @@
       stylesheet.rel = 'stylesheet';
       stylesheet.href = base + 'ui/design.css';
       await new Promise((resolve, reject) => {
-        stylesheet.onload = resolve;
-        stylesheet.onerror = reject;
+        const timer = setTimeout(() => reject(Error('Stylesheet timed out')), 12000);
+        stylesheet.onload = () => {clearTimeout(timer); resolve();};
+        stylesheet.onerror = () => {clearTimeout(timer); reject(Error('Stylesheet unavailable'));};
         document.head.append(stylesheet);
       });
       progress.textContent = 'Loading storefront files…';
       await import(base + 'runtime/app.mjs');
       progress.textContent = 'Initialising the catalogue…';
       await waitForStorefront();
+      if (activeMode === 'notice') return;
       storefront.inert = false;
       startup.remove();
     }
@@ -138,10 +154,24 @@
       });
     }
 
+    // Recheck the GitHub deployment state without a new EdgeOne deployment.
+    setInterval(async () => {
+      if (checking || activeMode === null || document.hidden) return;
+      checking = true;
+      try {
+        const config = await requestJSON(configBase + 'deployment.json?_=' + Date.now());
+        const locked = maintenance(config);
+        if (locked) {activeMode = 'notice'; await showMaintenance();}
+        else if (activeMode === 'notice') location.reload();
+      } catch { /* Keep the last confirmed state; transient network failure is not a maintenance command. */ }
+      finally { checking = false; }
+    }, 30000);
     launch().catch(() => {
+      if (activeMode === 'notice') return;
       startup.dataset.state = 'notice';
       noticeHeading.textContent = 'Store temporarily unavailable';
-      noticeMessage.textContent = 'Please check back soon.';
+      noticeMessage.textContent = 'Check your connection and try again.';
+      retry.hidden = false;
     });
   </script>
 </body>

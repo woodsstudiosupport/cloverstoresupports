@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.woodsstudio.clover.apps" android:versionCode="3614613" android:versionName="2.2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.woodsstudio.clover.apps" android:versionCode="3614614" android:versionName="2.2">
 <uses-feature android:name="android.software.leanback" android:required="false"/>
 <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
 <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="36"/>

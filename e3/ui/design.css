@@ -59,3 +59,21 @@ html[data-form-factor="tv"] .demo-frame {display:none}
   from {opacity:0;transform:translateY(10px)}
   to {opacity:1;transform:translateY(0)}
 }
+
+html[data-form-factor="tv"] .tv-shell {grid-template:"head" auto "main" minmax(0,1fr) / minmax(0,1fr);background:radial-gradient(ellipse at 70% 0%,#274c41,transparent 55%),#101918;color:#f2faf7}
+.tv-header {grid-area:head;display:flex;gap:3vw;align-items:center;padding:2vh 5vw}
+.tv-header img {width:42px;height:42px;border-radius:12px}
+.tv-header nav {display:flex;flex-wrap:wrap;gap:.6rem}
+.tv-header nav a {padding:.55rem .95rem;border-radius:999px;font-weight:650}
+.tv-header a[aria-current="page"] {background:#345e51;color:#fff}
+.tv-feature {display:grid;grid-template-columns:minmax(0,1fr) minmax(100px,24%);gap:5vw;align-items:center;min-height:37vh;padding:3vh 4vw;border-radius:26px;background:linear-gradient(120deg,#28483f,#151e29)}
+.tv-feature h1 {font-size:clamp(2rem,5vw,4.8rem);line-height:1.06;margin:.3em 0}
+.tv-feature p {max-width:62ch}
+.tv-feature .app-art {width:100%;height:auto;aspect-ratio:1}
+.tv-shelf h2 {margin:1.2rem 0 .35rem}
+.tv-shelf-track {display:grid;grid-auto-flow:column;grid-auto-columns:clamp(160px,19vw,320px);gap:14px;overflow-x:auto;padding:9px;scroll-padding:9px}
+.tv-card {display:grid;justify-items:start;gap:.5rem;padding:.9rem;text-align:left;background:#243932;border:1px solid #ffffff20;border-radius:16px}
+.tv-card .app-art {width:58px;height:58px}
+.tv-card small {color:#c0e1d4}
+.tv-card:focus {background:#31594b}
+.tv-qr {display:block;width:min(220px,36vw);height:auto;image-rendering:pixelated;margin:16px 0}
